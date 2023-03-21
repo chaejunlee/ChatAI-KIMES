@@ -1,8 +1,7 @@
 import { styled, css } from "@mui/system";
 
 const BasicMessage = styled("div")`
-	border-radius: 20px;
-	padding: 8px 15px;
+	padding: 8px 8px;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	display: inline-block;
