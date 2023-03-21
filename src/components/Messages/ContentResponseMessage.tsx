@@ -3,6 +3,7 @@ import React from "react";
 import { ContentResponseMessageType } from "../../Interface/Message/ResponseMessageType";
 
 import { makeStyles } from "@mui/styles";
+import { Typography } from "@mui/material";
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -16,7 +17,7 @@ interface ContentResponseMessageTypeProps {
 }
 
 const BasicMessage = styled("div")`
-	padding: 8px 8px;
+	padding: 8px 16px;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	display: inline-block;
@@ -34,5 +35,9 @@ export default function ContentResponseMessage({
 }: ContentResponseMessageTypeProps) {
 	const classes = useStyles();
 
-	return <BasicMessage>{message.content}</BasicMessage>;
+	return (
+		<BasicMessage>
+			<Typography sx={{ textAlign: "left" }}>{message.content}</Typography>
+		</BasicMessage>
+	);
 }

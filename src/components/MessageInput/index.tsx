@@ -1,5 +1,11 @@
 import React, { useEffect, useRef } from "react";
-import { IconButton, InputAdornment, Paper, TextField } from "@mui/material";
+import {
+	Box,
+	IconButton,
+	InputAdornment,
+	Paper,
+	TextField,
+} from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SendIcon from "@mui/icons-material/Send";
 import RefreshIcon from "@mui/icons-material/Refresh";
@@ -11,8 +17,9 @@ interface MessageInputProps {
 }
 const useStyles = makeStyles({
 	root: {
-		"& .MuiInputBase-root": {
-			border: "none",
+		backgroundColor: "#F0F3F4",
+		"& .MuiInputBase-input": {
+			padding: "10px",
 		},
 	},
 });
@@ -41,37 +48,34 @@ export default function MessageInput({ onClick, loading }: MessageInputProps) {
 	}, []);
 
 	return (
-		<>
-			<TextField
-				onKeyDown={handleTextFieldKeyDown}
-				// disabled={loading}
-				inputRef={ref}
-				value={text}
-				autoComplete="off"
-				classes={{
-					root: classes.root,
-				}}
-				// TODO: enter 누를때 메시지 전송로직 & input clear
-				onChange={(v) => setText(v.target.value)}
-				placeholder="Message..."
-				label={""}
-				InputProps={{
-					disableUnderline: true,
-					startAdornment: (
-						<InputAdornment position="start">
-							<AddCircleIcon />
-						</InputAdornment>
-					),
-					endAdornment: (
-						<InputAdornment position="end">
-							<IconButton onClick={handleOnclick}>
-								{loading ? <RefreshIcon /> : <SendIcon />}
-							</IconButton>
-						</InputAdornment>
-					),
-				}}
-			/>
-		</>
+		<TextField
+			sx={{ width: "100%", borderRadius: "200px" }}
+			variant="standard"
+			onKeyDown={handleTextFieldKeyDown}
+			inputRef={ref}
+			value={text}
+			autoComplete="off"
+			onChange={(v) => setText(v.target.value)}
+			placeholder="Message..."
+			classes={{
+				root: classes.root,
+			}}
+			InputProps={{
+				disableUnderline: true,
+				startAdornment: (
+					<InputAdornment sx={{ paddingLeft: "1rem" }} position="start">
+						<AddCircleIcon />
+					</InputAdornment>
+				),
+				endAdornment: (
+					<InputAdornment sx={{ paddingRight: "0.5rem" }} position="end">
+						<IconButton onClick={handleOnclick}>
+							{loading ? <RefreshIcon /> : <SendIcon />}
+						</IconButton>
+					</InputAdornment>
+				),
+			}}
+		/>
 	);
 }
 
