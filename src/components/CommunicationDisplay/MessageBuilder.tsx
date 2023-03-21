@@ -1,58 +1,63 @@
 import Message from "../../Interface/Message/Message";
-import React from "react";
 import RequestMessageType from "../../Interface/Message/RequestMessageType";
 import {
-    BasicResponseMessageType,
-    ContentResponseMessageType, ImageResponseCardType,
-    ResponseMessageType
+	BasicResponseMessageType,
+	ContentResponseMessageType,
+	ImageResponseCardType,
+	ResponseMessageType,
 } from "../../Interface/Message/ResponseMessageType";
-import {Paper, Stack} from "@mui/material";
+import { Grid, Paper, Stack } from "@mui/material";
 import RequestMessage from "../Messages/RequestMessage";
 import ContentResponseMessage from "../Messages/ContentResponseMessage";
 import CardResponseMessage from "../Messages/CardResponseMessage";
 
 function RequestMessageBuilder(message: RequestMessageType) {
-    return (
-        <Paper style={{marginBottom:20,marginLeft:120}}>
-            <RequestMessage message={message}/>
-        </Paper>
-    );
+	return <RequestMessage message={message} />;
 }
 
-
-function ResponseMessageBuilder(message: ResponseMessageType,onButtonClick: (text: string) => void) {
-    const renderMessage=(message: ResponseMessageType)=>{
-        console.log('ResponseMessageBuilder',message)
-        if(message.content===null){
-            return <ContentResponseMessage message={{
-                contentType: 'PlainText',
-                content: 'Please request valid message'
-            } as ContentResponseMessageType}/>
-        }
-        return message.content.map((content: BasicResponseMessageType) => {
-            switch (content.contentType) {
-                case 'PlainText':
-                    return <ContentResponseMessage message={content as ContentResponseMessageType}/>
-                case 'ImageResponseCard':
-                    return <CardResponseMessage data={content as ImageResponseCardType} onButtonClick={onButtonClick}/>
-            }
-        })
-    }
-    return(
-        <Paper style={{marginBottom:20,marginRight:120}}>
-            <Stack>
-                {renderMessage(message)}
-            </Stack>
-        </Paper>
-    )
+function ResponseMessageBuilder(message: ResponseMessageType) {
+	return (
+		<Stack>
+			{message.content.map((content: BasicResponseMessageType) => {
+				switch (content.contentType) {
+					case "PlainText":
+						return (
+							<ContentResponseMessage
+								message={content as ContentResponseMessageType}
+							/>
+						);
+					case "ImageResponseCard":
+						return (
+							<CardResponseMessage data={content as ImageResponseCardType} />
+						);
+				}
+			})}
+		</Stack>
+	);
 }
 
-export default function MessageBuilder(message: Message,onButtonClick:(text:string)=>void): JSX.Element{
-    switch(message.type){
-        case 'request':
-            return RequestMessageBuilder(message as RequestMessageType);
-        case 'response':
-            return ResponseMessageBuilder(message as ResponseMessageType,onButtonClick);
-    }
-
+export default function MessageBuilder(message: Message): JSX.Element {
+	const setSubBuilder = (message: Message) => {
+		switch (message.type) {
+			case "request":
+				return (
+					<Grid container spacing={1} justifyContent="flex-end">
+						{RequestMessageBuilder(message as RequestMessageType)}
+					</Grid>
+				);
+			case "response":
+				return (
+					<Grid container spacing={1} justifyContent="flex-start">
+						{ResponseMessageBuilder(message as ResponseMessageType)}
+					</Grid>
+				);
+		}
+	};
+	return (
+		<Grid item xs={12}>
+			<Stack spacing={1.25} direction="row">
+				{setSubBuilder(message)}
+			</Stack>
+		</Grid>
+	);
 }
