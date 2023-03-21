@@ -34,7 +34,6 @@ export default function ChatPage() {
 					type: "response",
 					content: response.data,
 				};
-				console.log("response", data);
 				setMessages([...messages, createRequestMessage(message), data]);
 			})
 			.catch((error) => {

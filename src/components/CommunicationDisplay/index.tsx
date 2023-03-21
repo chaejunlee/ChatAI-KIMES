@@ -28,7 +28,6 @@ export default function CommunicationDisplay({
 	const boxRef = useRef(null);
 
 	useEffect(() => {
-		console.log("gihgighi");
 		if (boxRef.current) {
 			boxRef.current.scrollTop = boxRef.current.scrollHeight; // 스크롤바를 가장 밑으로 내리기
 		}

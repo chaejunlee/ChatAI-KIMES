@@ -31,7 +31,7 @@ export default function MessageInput({ onClick, loading }: MessageInputProps) {
 	};
 
 	const handleTextFieldKeyDown = (e: React.KeyboardEvent) => {
-		if (e.key === "Enter") {
+		if (e.key === "Enter" && e.keyCode === 13) {
 			handleOnclick();
 		}
 	};
@@ -52,10 +52,7 @@ export default function MessageInput({ onClick, loading }: MessageInputProps) {
 					root: classes.root,
 				}}
 				// TODO: enter 누를때 메시지 전송로직 & input clear
-				onChange={(v) => {
-					setText(v.target.value);
-					console.log(v.target.value);
-				}}
+				onChange={(v) => setText(v.target.value)}
 				placeholder="Message..."
 				label={""}
 				InputProps={{

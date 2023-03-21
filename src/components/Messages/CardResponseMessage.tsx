@@ -31,7 +31,6 @@ export default function CardResponseMessage({
 	return (
 		<div>
 			{message.buttons.map((button) => {
-				console.log(button.value);
 				return clicked_list.includes(button.value) ? (
 					<ClickedStyledButton disabled key={button.text}>
 						{button.text}
