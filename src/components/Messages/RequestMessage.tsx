@@ -1,8 +1,6 @@
 import React from "react";
 import RequestMessageType from "../../Interface/Message/RequestMessageType";
-
-import MessageStyle from "./RequestMessage.style";
-
+import MessageStyle from "./RequestMessageStyle";
 interface RequestMessageTypeProps {
 	message: RequestMessageType;
 }

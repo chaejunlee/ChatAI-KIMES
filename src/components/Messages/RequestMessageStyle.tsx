@@ -28,5 +28,5 @@ export default function Wrapper({
 	children: any;
 	props: any;
 }) {
-	return <StyledMessage {...props}>{children}</StyledMessage>;
+	return <BasicMessage {...props}>{children}</BasicMessage>;
 }
