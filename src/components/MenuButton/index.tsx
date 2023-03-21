@@ -1,0 +1,12 @@
+import React from "react";
+import MenuIcon from '@mui/icons-material/Menu';
+import {IconButton} from "@mui/material";
+
+
+export default function MenuButton(){
+    return(
+        <IconButton>
+            <MenuIcon/>
+        </IconButton>
+    )
+}
