@@ -10,14 +10,6 @@ const BasicMessage = styled("div")`
 	border-radius: 150px 0px 80px 150px;
 
 	color: white;
-
-	/* ${(props: any) =>
-		props.primary &&
-		css`
-			color: white;
-			background: navy;
-			border-color: navy;
-		`} */
 `;
 
 export default function Wrapper({

@@ -10,6 +10,7 @@ import {
 	ContentResponseMessageType,
 	ResponseMessageType,
 } from "../../Interface/Message/ResponseMessageType";
+import { Grid, Stack } from "@mui/material";
 
 export default function ChatPage() {
 	const [messages, setMessages] = React.useState<Message[]>([introMessage]);
@@ -56,11 +57,14 @@ export default function ChatPage() {
 			});
 	};
 	return (
-		<div>
-			<h1>ChatAI</h1>
-			<CommunicationDisplay messages={messages} />
-			{loading && <div>Loading...</div>}
-			<MessageInput onClick={addMessage} />
-		</div>
+		<Grid container direction="column">
+			<Stack>
+				<Grid direction="row" item>
+					<h1>ChatAI</h1>
+				</Grid>
+			</Stack>
+			<CommunicationDisplay loading={loading} messages={messages} />
+			<MessageInput loading={loading} onClick={addMessage} />
+		</Grid>
 	);
 }

@@ -21,6 +21,7 @@ const UnClickedStyledButton = styled(Button)`
 	border: 1px solid #bed1d1;
 `;
 
+// TODO: clicked_list를 따로 state로 관리해야할듯!
 const clicked_list = ["균질한 배경"];
 
 export default function CardResponseMessage({
