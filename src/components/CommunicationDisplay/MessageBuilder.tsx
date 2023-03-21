@@ -27,7 +27,7 @@ function ResponseMessageBuilder(message: ResponseMessageType) {
                         case 'PlainText':
                             return <ContentResponseMessage message={content as ContentResponseMessageType}/>
                         case 'ImageResponseCard':
-                            return <CardResponseMessage message={content as ImageResponseCardType}/>
+                            return <CardResponseMessage data={content as ImageResponseCardType}/>
                     }
                 })
             }

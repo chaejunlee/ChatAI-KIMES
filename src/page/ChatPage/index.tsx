@@ -14,16 +14,22 @@ import {
 export default function ChatPage() {
     const [messages, setMessages] = React.useState<Message[]>([introMessage]);
     const [loading, setLoading] = React.useState<boolean>(false);
+
     const createRequestMessage = (message: string) => {
         return {message: message, type: 'request', userId: window.navigator.userAgent} as RequestMessageType
     }
+
     const addMessage = (message: string) => {
-        setMessages([...messages, createRequestMessage(message)])
         setLoading(true)
+        setMessages([...messages, createRequestMessage(message)])
         requestLexResponse(message)
             .then((response) => {
                 setLoading(false)
-                setMessages([...messages, response.data])
+                const data: ResponseMessageType = {
+                    type: 'response',
+                    content: response.data
+                }
+                setMessages([...messages, createRequestMessage(message),data])
             })
             .catch((error) => {
                 setLoading(false)
@@ -34,7 +40,7 @@ export default function ChatPage() {
                         content: 'Sorry, I am not able to understand you. Please try again.'
                     } as ContentResponseMessageType]
                 }
-                setMessages([...messages, errorResponseMessage])
+                setMessages([...messages, createRequestMessage(message),errorResponseMessage])
             })
 
     }

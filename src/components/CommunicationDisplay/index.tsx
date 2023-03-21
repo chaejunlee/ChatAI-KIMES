@@ -11,7 +11,6 @@ interface CommunicationDisplayProps {
 }
 
 export default function CommunicationDisplay({messages}: CommunicationDisplayProps) {
-    console.log(messages)
     return (
         <Stack>
             {messages.map((message) => MessageBuilder(message))}

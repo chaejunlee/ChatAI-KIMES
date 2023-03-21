@@ -18,10 +18,12 @@ export interface ContentResponseMessageType extends BasicResponseMessageType{
 
 export interface ImageResponseCardType extends BasicResponseMessageType{
     contentType: 'ImageResponseCard';
-    buttons: ButtonResponseType[]
-    imageUrl? : string ;
-    subtitle?: string;
-    title?: string;
+    imageResponseCard:{
+        buttons: ButtonResponseType[]
+        imageUrl? : string ;
+        subtitle?: string;
+        title?: string;
+    }
 }
 
 export interface ButtonResponseType{
