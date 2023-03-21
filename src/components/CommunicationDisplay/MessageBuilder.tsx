@@ -18,7 +18,7 @@ function RequestMessageBuilder(message: RequestMessageType) {
 }
 
 
-function ResponseMessageBuilder(message: ResponseMessageType) {
+function ResponseMessageBuilder(message: ResponseMessageType,onButtonClick: (text: string) => void) {
     return(
         <Stack>
             {
@@ -27,7 +27,7 @@ function ResponseMessageBuilder(message: ResponseMessageType) {
                         case 'PlainText':
                             return <ContentResponseMessage message={content as ContentResponseMessageType}/>
                         case 'ImageResponseCard':
-                            return <CardResponseMessage data={content as ImageResponseCardType}/>
+                            return <CardResponseMessage data={content as ImageResponseCardType} onButtonClick={onButtonClick}/>
                     }
                 })
             }
@@ -35,13 +35,13 @@ function ResponseMessageBuilder(message: ResponseMessageType) {
     )
 }
 
-export default function MessageBuilder(message: Message): JSX.Element{
+export default function MessageBuilder(message: Message,onButtonClick:(text:string)=>void): JSX.Element{
     const setSubBuilder = (message: Message) => {
         switch(message.type){
             case 'request':
                 return RequestMessageBuilder(message as RequestMessageType);
             case 'response':
-                return ResponseMessageBuilder(message as ResponseMessageType);
+                return ResponseMessageBuilder(message as ResponseMessageType,onButtonClick);
         }
     }
     return(

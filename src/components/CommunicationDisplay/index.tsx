@@ -8,12 +8,13 @@ import MessageBuilder from "./MessageBuilder";
 
 interface CommunicationDisplayProps {
     messages: Message[]
+    onButtonClick: (text: string) => void
 }
 
-export default function CommunicationDisplay({messages}: CommunicationDisplayProps) {
+export default function CommunicationDisplay({messages,onButtonClick}: CommunicationDisplayProps) {
     return (
         <Stack>
-            {messages.map((message) => MessageBuilder(message))}
+            {messages.map((message) => MessageBuilder(message,onButtonClick))}
         </Stack>
     )
 }
