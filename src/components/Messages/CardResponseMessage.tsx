@@ -13,8 +13,8 @@ export default function CardResponseMessage(
     return (
         <div>
             {message.imageUrl ? <img src={message.imageUrl} alt={message.title}/> : null}
-            {message.title ? <h3>{message.title}</h3> : null}
-            {message.subtitle? <p>{message.subtitle}</p> : null}
+            {message.imageUrl && message.title ? <h3>{message.title}</h3> : null}
+            {message.imageUrl && message.subtitle? <p>{message.subtitle}</p> : null}
             {message.buttons.map((button) =>
                 <Button key={button.text}
                         onClick={()=>onButtonClick(button.value)}

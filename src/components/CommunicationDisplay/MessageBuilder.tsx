@@ -21,19 +21,27 @@ function RequestMessageBuilder(message: RequestMessageType) {
 
 
 function ResponseMessageBuilder(message: ResponseMessageType,onButtonClick: (text: string) => void) {
+    const renderMessage=(message: ResponseMessageType)=>{
+        console.log('ResponseMessageBuilder',message)
+        if(message.content===null){
+            return <ContentResponseMessage message={{
+                contentType: 'PlainText',
+                content: 'Please request valid message'
+            } as ContentResponseMessageType}/>
+        }
+        return message.content.map((content: BasicResponseMessageType) => {
+            switch (content.contentType) {
+                case 'PlainText':
+                    return <ContentResponseMessage message={content as ContentResponseMessageType}/>
+                case 'ImageResponseCard':
+                    return <CardResponseMessage data={content as ImageResponseCardType} onButtonClick={onButtonClick}/>
+            }
+        })
+    }
     return(
         <Paper style={{marginBottom:20,marginRight:120}}>
             <Stack>
-                {
-                    message.content.map((content: BasicResponseMessageType) => {
-                        switch (content.contentType) {
-                            case 'PlainText':
-                                return <ContentResponseMessage message={content as ContentResponseMessageType}/>
-                            case 'ImageResponseCard':
-                                return <CardResponseMessage data={content as ImageResponseCardType} onButtonClick={onButtonClick}/>
-                        }
-                    })
-                }
+                {renderMessage(message)}
             </Stack>
         </Paper>
     )
