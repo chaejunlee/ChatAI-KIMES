@@ -7,7 +7,7 @@ const BasicMessage = styled("div")`
 	display: inline-block;
 
 	background: #32b6ae;
-	border-radius: 150px 0px 80px 150px;
+	border-radius: 9.375em 0em 5em 9.375em;
 
 	color: white;
 `;

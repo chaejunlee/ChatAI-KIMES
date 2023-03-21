@@ -23,7 +23,7 @@ const BasicMessage = styled("div")`
 	display: inline-block;
 
 	background: #eaefef;
-	border-radius: 0px 150px 150px 80px;
+	border-radius: 0px 9.375em 9.375em 5em;
 
 	color: black;
 	border: none;

@@ -57,11 +57,6 @@ export default function ChatPage() {
 	};
 	return (
 		<Grid container direction="column">
-			<Stack>
-				<Grid direction="row" item>
-					<h1>ChatAI</h1>
-				</Grid>
-			</Stack>
 			<CommunicationDisplay loading={loading} messages={messages} />
 			<MessageInput loading={loading} onClick={addMessage} />
 		</Grid>

@@ -1,11 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import {
-	Box,
-	IconButton,
-	InputAdornment,
-	Paper,
-	TextField,
-} from "@mui/material";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SendIcon from "@mui/icons-material/Send";
 import RefreshIcon from "@mui/icons-material/Refresh";
@@ -19,7 +13,7 @@ const useStyles = makeStyles({
 	root: {
 		backgroundColor: "#F0F3F4",
 		"& .MuiInputBase-input": {
-			padding: "10px",
+			padding: "0.75rem 0.3rem",
 		},
 	},
 });
@@ -63,8 +57,8 @@ export default function MessageInput({ onClick, loading }: MessageInputProps) {
 			InputProps={{
 				disableUnderline: true,
 				startAdornment: (
-					<InputAdornment sx={{ paddingLeft: "1rem" }} position="start">
-						<AddCircleIcon />
+					<InputAdornment sx={{ paddingLeft: "0.5rem" }} position="start">
+						<AddCircleIcon fontSize="large" sx={{ color: "#32B6AE" }} />
 					</InputAdornment>
 				),
 				endAdornment: (
