@@ -13,7 +13,7 @@ export default function MessageInput({ onClick }: MessageInputProps) {
 	return (
 		<Paper>
 			<TextField
-				// TODO: enter 누를때 메시지 전송로직
+				// TODO: enter 누를때 메시지 전송로직 & input clear
 				onChange={(v) => setText(v.target.value)}
 				placeholder="Message..."
 				label={""}
