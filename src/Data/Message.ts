@@ -27,19 +27,21 @@ export const sampleTextResponse: ContentResponseMessageType={
 
 export const sampleImageResponse: ImageResponseCardType={
     'contentType': 'ImageResponseCard',
-    "buttons": [
-        {
-            "text": "균질한 배경(Homogeneous background echotexture)",
-            "value": "균질한 배경에 대해 알려줘"
-        },
-        {
-            "text": "불균질한 배경(Heterogeneous background echotexture)",
-            "value": "불균질한 배경에 대해 알려줘"
-        }
-    ],
-    "imageUrl": "https://beamworks-platform-backend-dev.s3.ap-northeast-2.amazonaws.com/%ED%99%94%EB%A9%B4+%EC%BA%A1%EC%B2%98+2023-03-20+105909.png",
-    "subtitle": "자세한 설명과 예시에 대해 알고싶으면 아래의 버튼을 클릭하세요.",
-    "title": "조직 구성(Tissue Composition)"
+    imageResponseCard:{
+        "buttons": [
+            {
+                "text": "균질한 배경(Homogeneous background echotexture)",
+                "value": "균질한 배경에 대해 알려줘"
+            },
+            {
+                "text": "불균질한 배경(Heterogeneous background echotexture)",
+                "value": "불균질한 배경에 대해 알려줘"
+            }
+        ],
+        "imageUrl": "https://beamworks-platform-backend-dev.s3.ap-northeast-2.amazonaws.com/%ED%99%94%EB%A9%B4+%EC%BA%A1%EC%B2%98+2023-03-20+105909.png",
+        "subtitle": "자세한 설명과 예시에 대해 알고싶으면 아래의 버튼을 클릭하세요.",
+        "title": "조직 구성(Tissue Composition)"
+    }
 }
 
 export const sampleCardResponse: ResponseMessageType={
