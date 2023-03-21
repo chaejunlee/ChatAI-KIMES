@@ -55,10 +55,6 @@ export default function CardResponseMessage({
 	data,
 }: CardResponseMessageTypeProps) {
 	const message = data.imageResponseCard;
-	message.imageUrl =
-		// "https://cdn4.buysellads.net/uu/1/127419/1670532337-Stock2.jpg";
-		// "https://beamworks-platform-backend-dev.s3.ap-northeast-2.amazonaws.com/homogenous-fat.png";
-		"https://beamworks-platform-backend-dev.s3.ap-northeast-2.amazonaws.com/%ED%99%94%EB%A9%B4+%EC%BA%A1%EC%B2%98+2023-03-20+105909.png";
 	console.log("message", message);
 	return (
 		<Stack direction="column" spacing={2} alignItems="flex-start">

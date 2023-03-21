@@ -29,6 +29,7 @@ export default function CommunicationDisplay({
 
 	useEffect(() => {
 		if (boxRef.current) {
+			// @ts-ignore
 			boxRef.current.scrollTop = boxRef.current.scrollHeight; // 스크롤바를 가장 밑으로 내리기
 		}
 	}, [loading]);
