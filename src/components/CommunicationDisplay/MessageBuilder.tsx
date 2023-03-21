@@ -13,41 +13,38 @@ import CardResponseMessage from "../Messages/CardResponseMessage";
 
 function RequestMessageBuilder(message: RequestMessageType) {
     return (
-        <RequestMessage message={message}/>
+        <Paper style={{marginBottom:20,marginLeft:120}}>
+            <RequestMessage message={message}/>
+        </Paper>
     );
 }
 
 
 function ResponseMessageBuilder(message: ResponseMessageType,onButtonClick: (text: string) => void) {
     return(
-        <Stack>
-            {
-                message.content.map((content: BasicResponseMessageType) => {
-                    switch (content.contentType) {
-                        case 'PlainText':
-                            return <ContentResponseMessage message={content as ContentResponseMessageType}/>
-                        case 'ImageResponseCard':
-                            return <CardResponseMessage data={content as ImageResponseCardType} onButtonClick={onButtonClick}/>
-                    }
-                })
-            }
-        </Stack>
+        <Paper style={{marginBottom:20,marginRight:120}}>
+            <Stack>
+                {
+                    message.content.map((content: BasicResponseMessageType) => {
+                        switch (content.contentType) {
+                            case 'PlainText':
+                                return <ContentResponseMessage message={content as ContentResponseMessageType}/>
+                            case 'ImageResponseCard':
+                                return <CardResponseMessage data={content as ImageResponseCardType} onButtonClick={onButtonClick}/>
+                        }
+                    })
+                }
+            </Stack>
+        </Paper>
     )
 }
 
 export default function MessageBuilder(message: Message,onButtonClick:(text:string)=>void): JSX.Element{
-    const setSubBuilder = (message: Message) => {
-        switch(message.type){
-            case 'request':
-                return RequestMessageBuilder(message as RequestMessageType);
-            case 'response':
-                return ResponseMessageBuilder(message as ResponseMessageType,onButtonClick);
-        }
+    switch(message.type){
+        case 'request':
+            return RequestMessageBuilder(message as RequestMessageType);
+        case 'response':
+            return ResponseMessageBuilder(message as ResponseMessageType,onButtonClick);
     }
-    return(
-        <Paper style={{margin: 10}}>
-            {setSubBuilder(message)}
-        </Paper>
-    )
 
 }
