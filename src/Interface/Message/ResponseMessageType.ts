@@ -1,25 +1,27 @@
-export interface BasicResponseMessageType {
+import Message from "./Message";
+
+export interface BasicResponseMessageType{
     //aws lex response message content type
     contentType: string;
 }
 
 
-export interface ResponseMessageType{
-    [key: string]: BasicResponseMessageType;
+export interface ResponseMessageType extends Message{
+    content: BasicResponseMessageType[];
+    type: 'response';
 }
 
 export interface ContentResponseMessageType extends BasicResponseMessageType{
+    contentType: 'PlainText'
     content: string;
 }
 
 export interface ImageResponseCardType extends BasicResponseMessageType{
-    imageResponseCard:{
-
-    }
-}
-
-export interface ImageResponseCardType{
+    contentType: 'ImageResponseCard';
     buttons: ButtonResponseType[]
+    imageUrl? : string ;
+    subtitle?: string;
+    title?: string;
 }
 
 export interface ButtonResponseType{
