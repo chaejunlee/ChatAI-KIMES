@@ -1,5 +1,4 @@
 import Message from "../../Interface/Message/Message";
-import React from "react";
 import RequestMessageType from "../../Interface/Message/RequestMessageType";
 import {
 	BasicResponseMessageType,
@@ -7,7 +6,7 @@ import {
 	ImageResponseCardType,
 	ResponseMessageType,
 } from "../../Interface/Message/ResponseMessageType";
-import { Box, Grid, Paper, Stack } from "@mui/material";
+import { Grid, Paper, Stack } from "@mui/material";
 import RequestMessage from "../Messages/RequestMessage";
 import ContentResponseMessage from "../Messages/ContentResponseMessage";
 import CardResponseMessage from "../Messages/CardResponseMessage";
@@ -18,7 +17,7 @@ function RequestMessageBuilder(message: RequestMessageType) {
 
 function ResponseMessageBuilder(message: ResponseMessageType) {
 	return (
-		<>
+		<Stack>
 			{message.content.map((content: BasicResponseMessageType) => {
 				switch (content.contentType) {
 					case "PlainText":
@@ -33,7 +32,7 @@ function ResponseMessageBuilder(message: ResponseMessageType) {
 						);
 				}
 			})}
-		</>
+		</Stack>
 	);
 }
 
@@ -54,7 +53,6 @@ export default function MessageBuilder(message: Message): JSX.Element {
 				);
 		}
 	};
-	// return <Paper style={{ margin: 10 }}>{}</Paper>;
 	return (
 		<Grid item xs={12}>
 			<Stack spacing={1.25} direction="row">

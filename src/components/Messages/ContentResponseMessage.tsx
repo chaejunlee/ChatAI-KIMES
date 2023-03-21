@@ -1,9 +1,8 @@
-import { styled } from "@mui/system";
 import React from "react";
 import { ContentResponseMessageType } from "../../Interface/Message/ResponseMessageType";
 
 import { makeStyles } from "@mui/styles";
-import { Typography } from "@mui/material";
+import { styled, Typography } from "@mui/material";
 
 const useStyles = makeStyles(() => ({
 	root: {
