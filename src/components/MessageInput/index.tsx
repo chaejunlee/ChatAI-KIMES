@@ -10,7 +10,7 @@ export default function MessageInput({onClick}: MessageInputProps) {
 
     return(
         <Paper>
-            <TextField onChange={v=>setText(v.target.value)}/>
+            <TextField onChange={v=>setText(v.target.value)} label={"Message..."}/>
             <IconButton onClick={(e)=>onClick(text)}><InsertEmoticonIcon/></IconButton>
         </Paper>
     )
