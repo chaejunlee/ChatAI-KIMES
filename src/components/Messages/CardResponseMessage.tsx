@@ -5,6 +5,7 @@ import styled from "@mui/system/styled";
 
 export interface CardResponseMessageTypeProps {
 	data: ImageResponseCardType;
+	onButtonClick: (text: string) => void;
 }
 
 const ClickedStyledButton = styled(Button)`
@@ -53,6 +54,7 @@ const StyledImg = styled("img")`
 
 export default function CardResponseMessage({
 	data,
+	onButtonClick,
 }: CardResponseMessageTypeProps) {
 	const message = data.imageResponseCard;
 	console.log("message", message);
@@ -62,13 +64,20 @@ export default function CardResponseMessage({
 				{message.buttons.map((button) => {
 					return clicked_list.includes(button.value) ? (
 						<Grid item xs={12} md={6} key={button.text}>
-							<ClickedStyledButton disabled key={button.text}>
+							<ClickedStyledButton
+								disabled
+								key={button.text}
+								onClick={() => onButtonClick(button.value)}
+							>
 								{button.text}
 							</ClickedStyledButton>
 						</Grid>
 					) : (
 						<Grid item xs={12} md={6} key={button.text}>
-							<UnClickedStyledButton key={button.text}>
+							<UnClickedStyledButton
+								key={button.text}
+								onClick={() => onButtonClick(button.value)}
+							>
 								{button.text}
 							</UnClickedStyledButton>
 						</Grid>

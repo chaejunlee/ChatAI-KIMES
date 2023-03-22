@@ -87,6 +87,11 @@ export default function ChatPage() {
 	const [messages, setMessages] = React.useState<Message[]>([introMessage]);
 	const [loading, setLoading] = React.useState<boolean>(false);
 
+	const onResponseCardButtonClick = (text: string) => {
+		setLoading(true);
+		appendResponseOnly(text, setLoading, setMessages, messages);
+	};
+
 	const createRequestMessage = (message: string) => {
 		return {
 			message: message,
@@ -98,37 +103,21 @@ export default function ChatPage() {
 	const addMessage = (message: string) => {
 		setLoading(true);
 		setMessages([...messages, createRequestMessage(message)]);
-		requestLexResponse(message)
-			.then((response) => {
-				setLoading(false);
-				const data: ResponseMessageType = {
-					type: "response",
-					content: response.data,
-				};
-				setMessages([...messages, createRequestMessage(message), data]);
-			})
-			.catch((error) => {
-				setLoading(false);
-				const errorResponseMessage: ResponseMessageType = {
-					type: "response",
-					content: [
-						{
-							contentType: "PlainText",
-							content:
-								"Sorry, I am not able to understand you. Please try again.",
-						} as ContentResponseMessageType,
-					],
-				};
-				setMessages([
-					...messages,
-					createRequestMessage(message),
-					errorResponseMessage,
-				]);
-			});
+		appendRequestOnly(
+			message,
+			setLoading,
+			setMessages,
+			messages,
+			createRequestMessage
+		);
 	};
 	return (
 		<Grid container direction="column">
-			<CommunicationDisplay loading={loading} messages={messages} />
+			<CommunicationDisplay
+				loading={loading}
+				messages={messages}
+				onButtonClick={onResponseCardButtonClick}
+			/>
 			<MessageInput loading={loading} onClick={addMessage} />
 		</Grid>
 	);

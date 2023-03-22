@@ -15,7 +15,10 @@ function RequestMessageBuilder(message: RequestMessageType) {
 	return <RequestMessage message={message} />;
 }
 
-function ResponseMessageBuilder(message: ResponseMessageType) {
+function ResponseMessageBuilder(
+	message: ResponseMessageType,
+	onButtonClick: (text: string) => void
+) {
 	return (
 		<Stack>
 			{message.content.map((content: BasicResponseMessageType) => {
@@ -28,7 +31,10 @@ function ResponseMessageBuilder(message: ResponseMessageType) {
 						);
 					case "ImageResponseCard":
 						return (
-							<CardResponseMessage data={content as ImageResponseCardType} />
+							<CardResponseMessage
+								data={content as ImageResponseCardType}
+								onButtonClick={onButtonClick}
+							/>
 						);
 				}
 			})}
@@ -36,7 +42,10 @@ function ResponseMessageBuilder(message: ResponseMessageType) {
 	);
 }
 
-export default function MessageBuilder(message: Message): JSX.Element {
+export default function MessageBuilder(
+	message: Message,
+	onButtonClick: (text: string) => void
+): JSX.Element {
 	const setSubBuilder = (message: Message) => {
 		switch (message.type) {
 			case "request":
@@ -48,7 +57,10 @@ export default function MessageBuilder(message: Message): JSX.Element {
 			case "response":
 				return (
 					<Grid container spacing={1} justifyContent="flex-start">
-						{ResponseMessageBuilder(message as ResponseMessageType)}
+						{ResponseMessageBuilder(
+							message as ResponseMessageType,
+							onButtonClick
+						)}
 					</Grid>
 				);
 		}

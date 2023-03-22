@@ -18,11 +18,13 @@ const useStyles = makeStyles(() => ({
 interface CommunicationDisplayProps {
 	messages: Message[];
 	loading: boolean;
+	onButtonClick: (text: string) => void;
 }
 
 export default function CommunicationDisplay({
 	messages,
 	loading,
+	onButtonClick,
 }: CommunicationDisplayProps) {
 	const classes = useStyles();
 	const boxRef = useRef(null);
@@ -47,7 +49,7 @@ export default function CommunicationDisplay({
 				}}
 			>
 				<Grid container spacing={2.5}>
-					{messages.map((message) => MessageBuilder(message))}
+					{messages.map((message) => MessageBuilder(message, onButtonClick))}
 				</Grid>
 			</Box>
 		</Grid>
