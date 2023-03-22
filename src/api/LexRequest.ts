@@ -4,7 +4,7 @@ import {BasicResponseMessageType, ResponseMessageType} from "../Interface/Messag
 export default function requestLexResponse(
     message: string
 ): Promise<AxiosResponse<BasicResponseMessageType[],any>> {
-    return axios.post<BasicResponseMessageType[]>('/api', {
+    return axios.post<BasicResponseMessageType[]>('/test/api', {
         message: message,
         userId: "user1"
     })
