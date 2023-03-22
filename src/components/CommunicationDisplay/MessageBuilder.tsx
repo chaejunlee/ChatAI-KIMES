@@ -6,7 +6,7 @@ import {
 	ImageResponseCardType,
 	ResponseMessageType,
 } from "../../Interface/Message/ResponseMessageType";
-import { Grid, Paper, Stack } from "@mui/material";
+import { Box, Grid, Paper, Stack } from "@mui/material";
 import RequestMessage from "../Messages/RequestMessage";
 import ContentResponseMessage from "../Messages/ContentResponseMessage";
 import CardResponseMessage from "../Messages/CardResponseMessage";
@@ -20,7 +20,13 @@ function ResponseMessageBuilder(
 	onButtonClick: (text: string) => void
 ) {
 	return (
-		<Stack>
+		<Box
+			sx={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "flex-start",
+			}}
+		>
 			{!message.content ? (
 				<ContentResponseMessage
 					message={{
@@ -47,7 +53,7 @@ function ResponseMessageBuilder(
 					}
 				})
 			)}
-		</Stack>
+		</Box>
 	);
 }
 

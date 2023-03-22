@@ -62,10 +62,10 @@ export default function CardResponseMessage({
 	console.log("message", message);
 	return (
 		<Stack direction="column" spacing={2} alignItems="flex-start">
-			<Grid container spacing={0.5} direction="column">
+			<Grid container spacing={0.5} direction="row">
 				{message.buttons.map((button) => {
 					return clicked_list.includes(button.value) ? (
-						<Grid item xs={12} md={6} key={button.text}>
+						<Grid item xs="auto" key={button.text}>
 							<ClickedStyledButton
 								disabled
 								key={button.text}
@@ -75,7 +75,7 @@ export default function CardResponseMessage({
 							</ClickedStyledButton>
 						</Grid>
 					) : (
-						<Grid item xs={12} md={6} key={button.text}>
+						<Grid item xs="auto" key={button.text}>
 							<UnClickedStyledButton
 								key={button.text}
 								onClick={() => onButtonClick(button.value)}
