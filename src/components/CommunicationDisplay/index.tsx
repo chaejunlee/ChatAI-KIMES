@@ -51,7 +51,7 @@ export default function CommunicationDisplay({
 	}, [loading]);
 
 	return (
-		<Grid item>
+		<Grid item id={"123123"}>
 			<StyledBox ref={boxRef}>
 				<Grid container rowSpacing={1}>
 					{messages.map((message, idx) =>

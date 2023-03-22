@@ -30,12 +30,31 @@ function ResponseMessageBuilder(
 			}}
 		>
 			{!message.content ? (
-				<ContentResponseMessage
-					message={{
-						contentType: "PlainText",
-						content: "아직 미지원 질문입니다. 다른 질문은 어떠신가요?",
-					}}
-				/>
+				<>
+					<ContentResponseMessage
+						message={{
+							contentType: "PlainText",
+							content:
+								"질문을 제대로 알아듣지 못했어요. 준비된 답변을 보시겠어요? ",
+						}}
+					/>
+					<CardResponseMessage
+						data={{
+							contentType: "ImageResponseCard",
+							imageResponseCard: {
+								buttons: [
+									{
+										text: "메뉴 보기",
+										value: "메인 메뉴",
+									},
+								],
+							},
+						}}
+						onButtonClick={onButtonClick}
+						messageIndex={messageIndex}
+						contentIndex={-1}
+					/>
+				</>
 			) : (
 				message.content.map(
 					(content: BasicResponseMessageType, idx: number) => {
@@ -51,6 +70,7 @@ function ResponseMessageBuilder(
 									<CardResponseMessage
 										data={content as ImageResponseCardType}
 										onButtonClick={onButtonClick}
+										messageIndex={messageIndex}
 										contentIndex={idx}
 									/>
 								);
