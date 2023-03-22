@@ -59,7 +59,7 @@ export default function MessageInput({ onClick, loading }: MessageInputProps) {
 	return (
 		<TextField
 			sx={{
-				width: "90%",
+				width: "95%",
 				borderRadius: "200px",
 				position: "absolute",
 				bottom: "1.5rem",

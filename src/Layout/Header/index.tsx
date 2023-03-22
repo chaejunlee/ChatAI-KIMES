@@ -6,13 +6,12 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import BeamworksLogo from "../../assets/BeamworksLogo.png";
 
 import UnionIcon from "../../assets/Union.png";
-import { boxSizing } from "@mui/system";
 
 // to the header
 const StyledHeaderImg = styled("img")`
 	position: absolute;
-	top: 0;
-	width: 520px;
+	top: -40px;
+	width: 100%;
 	background-color: transparent;
 	z-index: 1;
 `;
