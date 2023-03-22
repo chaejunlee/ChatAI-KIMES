@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import Message from "../../Interface/Message/Message";
 import { ContentResponseMessageType } from "../../Interface/Message/ResponseMessageType";
 import sampleMessages from "../../Data/Message";
-import { Box, Grid, Stack } from "@mui/material";
+import { Box, Grid, Stack, styled } from "@mui/material";
 import MessageBuilder from "./MessageBuilder";
 import { Container } from "@mui/system";
 
@@ -21,6 +21,18 @@ interface CommunicationDisplayProps {
 	onButtonClick: (text: string) => void;
 }
 
+const StyledBox = styled("div")({
+	position: "absolute",
+	margin: "0 auto",
+	boxSizing: "border-box",
+	width: "100%",
+	padding: "10px",
+	paddingTop: "4rem",
+	height: "80vh",
+	maxHeight: "80vh",
+	overflow: "auto",
+});
+
 export default function CommunicationDisplay({
 	messages,
 	loading,
@@ -38,21 +50,11 @@ export default function CommunicationDisplay({
 
 	return (
 		<Grid item>
-			<Box
-				ref={boxRef} // ref 추가
-				sx={{
-					width: 500, // 너비
-					padding: "10px",
-					paddingTop: "4rem",
-					height: 500, // 높이
-					maxHeight: "80vh", // 최대 높이
-					overflow: "auto", // 스크롤 가능하도록
-				}}
-			>
-				<Grid container spacing={2.5}>
+			<StyledBox ref={boxRef}>
+				<Grid container>
 					{messages.map((message) => MessageBuilder(message, onButtonClick))}
 				</Grid>
-			</Box>
+			</StyledBox>
 		</Grid>
 	);
 }

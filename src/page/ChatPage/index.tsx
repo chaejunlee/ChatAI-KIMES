@@ -112,7 +112,7 @@ export default function ChatPage() {
 		);
 	};
 	return (
-		<Grid container direction="column">
+		<Grid container direction="column" width={"100%"}>
 			<CommunicationDisplay
 				loading={loading}
 				messages={messages}

@@ -31,16 +31,10 @@ export default function MessageInput({ onClick, loading }: MessageInputProps) {
 	const ref = useRef<HTMLInputElement>(null);
 
 	const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  `;
 
-  to {
-    transform: rotate(360deg);
-  }
-`;
-
-	// 애니메이션을 CircularProgress에 적용
 	const RotatingRefreshIcon = styled(RefreshIcon)`
 		animation: ${rotate} 1s linear infinite;
 	`;
@@ -64,7 +58,15 @@ export default function MessageInput({ onClick, loading }: MessageInputProps) {
 
 	return (
 		<TextField
-			sx={{ width: "100%", borderRadius: "200px" }}
+			sx={{
+				width: "90%",
+				borderRadius: "200px",
+				position: "absolute",
+				bottom: "1.5rem",
+				left: "50vw",
+				transform: "translate(-50%, 0%)",
+				boxSizing: "border-box",
+			}}
 			variant="standard"
 			onKeyDown={handleTextFieldKeyDown}
 			inputRef={ref}

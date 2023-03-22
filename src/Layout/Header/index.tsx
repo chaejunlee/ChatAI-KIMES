@@ -24,14 +24,15 @@ export default function Header() {
 				m={"1rem"}
 				direction={"row"}
 				width="100%"
-				height={"50px"}
+				height={"8vh"}
 				justifyContent={"space-between"}
+				alignItems={"center"}
 				zIndex={2}
 			>
 				<MenuButton />
 				<IconButton disabled>
 					<img
-						style={{ width: "200px", height: "auto", zIndex: 2 }}
+						style={{ width: "12.5rem", height: "auto", zIndex: 2 }}
 						src={BeamworksLogo}
 						alt="Beamworks"
 					/>
@@ -48,7 +49,7 @@ export default function Header() {
 				fontSize={"1.5rem"}
 				sx={{
 					position: "absolute",
-					top: "7.5%",
+					top: "7vh",
 					left: "50%",
 					transform: "translate(-50%, 50%)",
 				}}

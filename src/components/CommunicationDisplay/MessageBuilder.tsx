@@ -66,13 +66,13 @@ export default function MessageBuilder(
 		switch (message.type) {
 			case "request":
 				return (
-					<Grid container spacing={1} justifyContent="flex-end">
+					<Grid container justifyContent="flex-end">
 						{RequestMessageBuilder(message as RequestMessageType)}
 					</Grid>
 				);
 			case "response":
 				return (
-					<Grid container spacing={1} justifyContent="flex-start">
+					<Grid container justifyContent="flex-start">
 						{ResponseMessageBuilder(
 							message as ResponseMessageType,
 							onButtonClick
