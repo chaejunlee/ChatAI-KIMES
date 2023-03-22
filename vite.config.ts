@@ -7,10 +7,10 @@ export default defineConfig({
     plugins: [react()],
     server:{
         proxy:{
-            '^/test/.*':{
+            '^/test':{
                 target: TEST_URL,
                 changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/test\/api/, ''),
+                rewrite: (path) => path.replace(/^\/test/, ''),
                 secure: false
             }
         }
