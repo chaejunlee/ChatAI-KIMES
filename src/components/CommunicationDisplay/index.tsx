@@ -43,6 +43,7 @@ export default function CommunicationDisplay({
 				sx={{
 					width: 500, // 너비
 					padding: "10px",
+					paddingTop: "4rem",
 					height: 500, // 높이
 					maxHeight: "80vh", // 최대 높이
 					overflow: "auto", // 스크롤 가능하도록
