@@ -1,4 +1,4 @@
-import React from "react";
+import ReactDOM from "react-dom";
 import MenuButton from "../../components/MenuButton";
 import { Icon, IconButton, Stack, styled, Typography } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
@@ -14,10 +14,11 @@ const StyledHeaderImg = styled("img")`
 	top: 0;
 	width: 520px;
 	background-color: transparent;
+	z-index: 1;
 `;
 
 export default function Header() {
-	return (
+	return ReactDOM.createPortal(
 		<Stack width={"100%"} direction={"row"}>
 			<Stack
 				m={"1rem"}
@@ -25,22 +26,23 @@ export default function Header() {
 				width="100%"
 				height={"50px"}
 				justifyContent={"space-between"}
-				zIndex={1}
+				zIndex={2}
 			>
 				<MenuButton />
-				<IconButton disabled sx={{ zIndex: 1 }}>
+				<IconButton disabled>
 					<img
-						style={{ width: "200px", height: "auto", zIndex: 1 }}
+						style={{ width: "200px", height: "auto", zIndex: 2 }}
 						src={BeamworksLogo}
 						alt="Beamworks"
 					/>
 				</IconButton>
-				<IconButton sx={{ zIndex: 1 }}>
+				<IconButton>
 					<HelpOutlineIcon />
 				</IconButton>
 			</Stack>
 			<StyledHeaderImg src={UnionIcon} alt="Union" />
 			<Typography
+				zIndex={1}
 				color={"#32B6AE"}
 				fontWeight={"bold"}
 				fontSize={"1.5rem"}
@@ -53,6 +55,7 @@ export default function Header() {
 			>
 				ChatAI
 			</Typography>
-		</Stack>
+		</Stack>,
+		document.getElementById("root") as HTMLElement
 	);
 }

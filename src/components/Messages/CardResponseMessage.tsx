@@ -1,4 +1,6 @@
 import React from "react";
+import ReactDOM from "react-dom";
+
 import { ImageResponseCardType } from "../../Interface/Message/ResponseMessageType";
 import { Button, Grid, Stack, Typography } from "@mui/material";
 import styled from "@mui/system/styled";

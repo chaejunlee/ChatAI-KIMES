@@ -21,23 +21,32 @@ function ResponseMessageBuilder(
 ) {
 	return (
 		<Stack>
-			{message.content.map((content: BasicResponseMessageType) => {
-				switch (content.contentType) {
-					case "PlainText":
-						return (
-							<ContentResponseMessage
-								message={content as ContentResponseMessageType}
-							/>
-						);
-					case "ImageResponseCard":
-						return (
-							<CardResponseMessage
-								data={content as ImageResponseCardType}
-								onButtonClick={onButtonClick}
-							/>
-						);
-				}
-			})}
+			{!message.content ? (
+				<ContentResponseMessage
+					message={{
+						contentType: "PlainText",
+						content: "아직 미지원 질문입니다. 다른 질문은 어떠신가요?",
+					}}
+				/>
+			) : (
+				message.content.map((content: BasicResponseMessageType) => {
+					switch (content.contentType) {
+						case "PlainText":
+							return (
+								<ContentResponseMessage
+									message={content as ContentResponseMessageType}
+								/>
+							);
+						case "ImageResponseCard":
+							return (
+								<CardResponseMessage
+									data={content as ImageResponseCardType}
+									onButtonClick={onButtonClick}
+								/>
+							);
+					}
+				})
+			)}
 		</Stack>
 	);
 }

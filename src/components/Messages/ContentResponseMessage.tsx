@@ -16,6 +16,7 @@ interface ContentResponseMessageTypeProps {
 }
 
 const BasicMessage = styled("div")`
+	z-index: -1;
 	padding: 8px 16px;
 	margin-top: 5px;
 	margin-bottom: 5px;
