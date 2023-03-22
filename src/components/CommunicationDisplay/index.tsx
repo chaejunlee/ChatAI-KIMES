@@ -53,7 +53,7 @@ export default function CommunicationDisplay({
 	return (
 		<Grid item>
 			<StyledBox ref={boxRef}>
-				<Grid container>
+				<Grid container rowSpacing={1}>
 					{messages.map((message, idx) =>
 						MessageBuilder(message, onButtonClick, idx)
 					)}

@@ -69,7 +69,12 @@ export default function CardResponseMessage({
 	};
 
 	return (
-		<Stack direction="column" spacing={2} alignItems="flex-start">
+		<Stack
+			marginBottom={1}
+			direction="column"
+			spacing={2}
+			alignItems="flex-start"
+		>
 			<Grid container spacing={0.5} direction="row">
 				{message.buttons.map((button, idx) => {
 					const buttonIndentifier = `${messageIndex}-${contentIndex}-${idx}`;
