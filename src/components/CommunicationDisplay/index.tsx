@@ -54,7 +54,9 @@ export default function CommunicationDisplay({
 		<Grid item>
 			<StyledBox ref={boxRef}>
 				<Grid container>
-					{messages.map((message) => MessageBuilder(message, onButtonClick))}
+					{messages.map((message, idx) =>
+						MessageBuilder(message, onButtonClick, idx)
+					)}
 				</Grid>
 			</StyledBox>
 		</Grid>

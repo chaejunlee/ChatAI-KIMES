@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import ReactDOM from "react-dom";
 
 import { ImageResponseCardType } from "../../Interface/Message/ResponseMessageType";
@@ -8,6 +8,8 @@ import styled from "@mui/system/styled";
 export interface CardResponseMessageTypeProps {
 	data: ImageResponseCardType;
 	onButtonClick: (text: string) => void;
+	messageIndex: number;
+	contentIndex: number;
 }
 
 const ClickedStyledButton = styled(Button)`
@@ -25,9 +27,6 @@ const UnClickedStyledButton = styled(Button)`
 	border-radius: 8em;
 	border: 1px solid #bed1d1;
 `;
-
-// TODO: clicked_list를 따로 state로 관리해야할듯!
-const clicked_list = ["균질한 배경", "타원형"];
 
 const BasicMessage = styled("div")`
 	width: 75%;
@@ -57,19 +56,30 @@ const StyledImg = styled("img")`
 export default function CardResponseMessage({
 	data,
 	onButtonClick,
+	messageIndex,
+	contentIndex,
 }: CardResponseMessageTypeProps) {
 	const message = data.imageResponseCard;
-	console.log("message", message);
+
+	const clickedBtnListRef = useRef([] as string[]);
+
+	const handleButtonClick = (button: any, buttonIndentifier: string) => {
+		clickedBtnListRef.current.push(buttonIndentifier);
+		onButtonClick(button.value);
+	};
+
 	return (
 		<Stack direction="column" spacing={2} alignItems="flex-start">
 			<Grid container spacing={0.5} direction="row">
-				{message.buttons.map((button) => {
-					return clicked_list.includes(button.value) ? (
+				{message.buttons.map((button, idx) => {
+					const buttonIndentifier = `${messageIndex}-${contentIndex}-${idx}`;
+					return clickedBtnListRef.current.includes(buttonIndentifier) ? (
 						<Grid item xs="auto" key={button.text}>
 							<ClickedStyledButton
+								id={buttonIndentifier}
 								disabled
 								key={button.text}
-								onClick={() => onButtonClick(button.value)}
+								onClick={() => handleButtonClick(button, buttonIndentifier)}
 							>
 								{button.text}
 							</ClickedStyledButton>
@@ -77,8 +87,9 @@ export default function CardResponseMessage({
 					) : (
 						<Grid item xs="auto" key={button.text}>
 							<UnClickedStyledButton
+								id={buttonIndentifier}
 								key={button.text}
-								onClick={() => onButtonClick(button.value)}
+								onClick={() => handleButtonClick(button, buttonIndentifier)}
 							>
 								{button.text}
 							</UnClickedStyledButton>

@@ -17,7 +17,8 @@ function RequestMessageBuilder(message: RequestMessageType) {
 
 function ResponseMessageBuilder(
 	message: ResponseMessageType,
-	onButtonClick: (text: string) => void
+	onButtonClick: (text: string) => void,
+	messageIndex: number
 ) {
 	return (
 		<Box
@@ -36,23 +37,26 @@ function ResponseMessageBuilder(
 					}}
 				/>
 			) : (
-				message.content.map((content: BasicResponseMessageType) => {
-					switch (content.contentType) {
-						case "PlainText":
-							return (
-								<ContentResponseMessage
-									message={content as ContentResponseMessageType}
-								/>
-							);
-						case "ImageResponseCard":
-							return (
-								<CardResponseMessage
-									data={content as ImageResponseCardType}
-									onButtonClick={onButtonClick}
-								/>
-							);
+				message.content.map(
+					(content: BasicResponseMessageType, idx: number) => {
+						switch (content.contentType) {
+							case "PlainText":
+								return (
+									<ContentResponseMessage
+										message={content as ContentResponseMessageType}
+									/>
+								);
+							case "ImageResponseCard":
+								return (
+									<CardResponseMessage
+										data={content as ImageResponseCardType}
+										onButtonClick={onButtonClick}
+										contentIndex={idx}
+									/>
+								);
+						}
 					}
-				})
+				)
 			)}
 		</Box>
 	);
@@ -60,7 +64,8 @@ function ResponseMessageBuilder(
 
 export default function MessageBuilder(
 	message: Message,
-	onButtonClick: (text: string) => void
+	onButtonClick: (text: string) => void,
+	messageIndex: number
 ): JSX.Element {
 	const setSubBuilder = (message: Message) => {
 		switch (message.type) {
@@ -75,7 +80,8 @@ export default function MessageBuilder(
 					<Grid container justifyContent="flex-start">
 						{ResponseMessageBuilder(
 							message as ResponseMessageType,
-							onButtonClick
+							onButtonClick,
+							messageIndex
 						)}
 					</Grid>
 				);
