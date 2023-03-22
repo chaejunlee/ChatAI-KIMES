@@ -6,6 +6,6 @@ export default function requestLexResponse(
 ): Promise<AxiosResponse<BasicResponseMessageType[],any>> {
     return axios.post<BasicResponseMessageType[]>('/test/api', {
         message: message,
-        userId: "user1"
+        userId: btoa(window.navigator.userAgent).slice(0, 30)
     })
 }
