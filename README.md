@@ -9,6 +9,7 @@ git clone https://github.com/Beamworks-Inc/ChatAI-KIMES.git
 ```
 ## 3. 패키지 설치 및 실행
 ```
+cd ChatAI-KIMES
 npm install --global yarn
 yarn && yarn dev
 ```
