@@ -22,15 +22,15 @@ interface CommunicationDisplayProps {
 }
 
 const StyledBox = styled("div")({
-	position: "absolute",
+	position: "relative",
 	margin: "0 auto",
 	boxSizing: "border-box",
 	width: "100%",
 	paddingTop: "4rem",
 	paddingLeft: "2.5%",
 	paddingRight: "2.5%",
-	paddingBottom: "0",
-	height: "80vh",
+	paddingBottom: "2.5rem",
+	height: "100%",
 	maxHeight: "80vh",
 	overflow: "auto",
 });
