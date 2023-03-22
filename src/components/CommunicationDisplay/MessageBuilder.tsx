@@ -25,6 +25,7 @@ function ResponseMessageBuilder(
 				display: "flex",
 				flexDirection: "column",
 				alignItems: "flex-start",
+				marginTop: "0.5rem",
 			}}
 		>
 			{!message.content ? (
