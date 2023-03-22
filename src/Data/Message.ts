@@ -9,7 +9,7 @@ import Message from "../Interface/Message/Message";
 export const introMessage: ResponseMessageType={
     content: [{
         contentType: 'PlainText',
-        content: '안녕하세요! Chat AI입니다.\n' +'저는 유방암과 관련된 질문에 답을 할 수 있어요.'
+        content: '안녕하세요! ChatAI입니다.'
     } as ContentResponseMessageType],
     type: 'response'
 }
