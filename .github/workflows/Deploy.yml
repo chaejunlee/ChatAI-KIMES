@@ -7,12 +7,12 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
         uses: actions/checkout@master
 
-      - name: Cache node modules  # node modules 캐싱
+      - name: Cache node modules # node modules 캐싱
         uses: actions/cache@v1
         with:
           path: node_modules
