@@ -18,6 +18,7 @@ const StyledHeader = styled("div")`
 	background: white;
 	filter: drop-shadow(0px 10px 30px rgba(0, 0, 0, 0.1));
 	overflow-x: clip;
+	z-index: 1;
 `;
 
 export default function Header() {
