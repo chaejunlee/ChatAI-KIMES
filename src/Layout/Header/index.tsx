@@ -1,29 +1,41 @@
 import ReactDOM from "react-dom";
 import MenuButton from "../../components/MenuButton";
-import { Icon, IconButton, Stack, styled, Typography } from "@mui/material";
+import { IconButton, Stack, styled, Typography } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 import BeamworksLogo from "../../assets/BeamworksLogo.png";
 
-import UnionIcon from "../../assets/Union.png";
+import HeaderSVG from "../../assets/HeaderSVG";
 
 // to the header
-const StyledHeaderImg = styled("img")`
+const StyledHeader = styled("div")`
 	position: absolute;
-	top: -40px;
+	display: flex;
+	top: 0;
 	width: 100%;
-	background-color: transparent;
-	z-index: 1;
+	height: 5.8rem;
+	justify-content: center;
+	background: white;
+	filter: drop-shadow(0px 10px 30px rgba(0, 0, 0, 0.1));
+	overflow-x: clip;
 `;
 
 export default function Header() {
 	return ReactDOM.createPortal(
 		<Stack width={"100%"} direction={"row"}>
+			<StyledHeader>
+				<HeaderSVG
+					style={{
+						height: "11rem",
+						marginInline: "auto",
+						flexShrink: 0,
+					}}
+				/>
+			</StyledHeader>
 			<Stack
 				m={"1rem"}
 				direction={"row"}
 				width="100%"
-				height={"8vh"}
 				justifyContent={"space-between"}
 				alignItems={"center"}
 				zIndex={2}
@@ -40,7 +52,7 @@ export default function Header() {
 					<HelpOutlineIcon />
 				</IconButton>
 			</Stack>
-			<StyledHeaderImg src={UnionIcon} alt="Union" />
+
 			<Typography
 				zIndex={1}
 				color={"#32B6AE"}
@@ -48,7 +60,7 @@ export default function Header() {
 				fontSize={"1.5rem"}
 				sx={{
 					position: "absolute",
-					top: "7vh",
+					top: "3.5rem",
 					left: "50%",
 					transform: "translate(-50%, 50%)",
 				}}
