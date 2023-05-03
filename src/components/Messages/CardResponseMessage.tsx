@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import ReactDOM from "react-dom";
+import { useRef } from "react";
 
 import { ImageResponseCardType } from "../../Interface/Message/ResponseMessageType";
 import { Button, Grid, Stack, Typography } from "@mui/material";
@@ -12,20 +11,24 @@ export interface CardResponseMessageTypeProps {
 	contentIndex: number;
 }
 
-const ClickedStyledButton = styled(Button)`
-	margin: 0 auto;
-	background: #eaefef;
-	color: #32b6ae;
-	border-radius: 8em;
-	border: 1px solid #32b6ae;
-`;
+interface IsClickedInterface {
+	isClicked: boolean;
+}
 
-const UnClickedStyledButton = styled(Button)`
+const Style =
+	(trueProp: string, falseProp: string) => (props: IsClickedInterface) => {
+		return props.isClicked ? trueProp : falseProp;
+	};
+
+const StyledButton = styled(Button)<IsClickedInterface>`
 	margin: 0 auto;
-	background: white;
-	color: black;
+	padding-inline: 0.75rem;
+
+	background: ${Style("#eaefef", "white")};
+	color: ${Style("#32b6ae", "black")};
+
 	border-radius: 8em;
-	border: 1px solid #bed1d1;
+	border: 1px solid ${Style("#32b6ae", "#bed1d1")};
 `;
 
 const BasicMessage = styled("div")`
@@ -78,26 +81,18 @@ export default function CardResponseMessage({
 			<Grid container spacing={0.5} direction="row">
 				{message.buttons.map((button, idx) => {
 					const buttonIndentifier = `${messageIndex}-${contentIndex}-${idx}`;
-					return clickedBtnListRef.current.includes(buttonIndentifier) ? (
+					const isClicked =
+						clickedBtnListRef.current.includes(buttonIndentifier);
+					return (
 						<Grid item xs="auto" key={button.text}>
-							<ClickedStyledButton
+							<StyledButton
+								isClicked={isClicked}
+								disabled={isClicked}
 								id={buttonIndentifier}
-								disabled
-								key={button.text}
 								onClick={() => handleButtonClick(button, buttonIndentifier)}
 							>
 								{button.text}
-							</ClickedStyledButton>
-						</Grid>
-					) : (
-						<Grid item xs="auto" key={button.text}>
-							<UnClickedStyledButton
-								id={buttonIndentifier}
-								key={button.text}
-								onClick={() => handleButtonClick(button, buttonIndentifier)}
-							>
-								{button.text}
-							</UnClickedStyledButton>
+							</StyledButton>
 						</Grid>
 					);
 				})}
