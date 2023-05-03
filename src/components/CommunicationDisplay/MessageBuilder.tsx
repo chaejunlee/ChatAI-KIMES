@@ -6,7 +6,7 @@ import {
 	ImageResponseCardType,
 	ResponseMessageType,
 } from "../../Interface/Message/ResponseMessageType";
-import {Avatar, Box, Grid, Paper, Stack, Typography} from "@mui/material";
+import { Avatar, Box, Grid, Paper, Stack, Typography } from "@mui/material";
 import RequestMessage from "../Messages/RequestMessage";
 import ContentResponseMessage from "../Messages/ContentResponseMessage";
 import CardResponseMessage from "../Messages/CardResponseMessage";
@@ -30,7 +30,7 @@ function ResponseMessageBuilder(
 				marginTop: "0.5rem",
 			}}
 		>
-			<Avatar alt={"ChatAI"} src={Logo}/>
+			<Avatar alt={"ChatAI"} src={Logo} />
 			{!message.content ? (
 				<>
 					<ContentResponseMessage
