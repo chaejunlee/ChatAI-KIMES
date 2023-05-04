@@ -12,12 +12,12 @@ export const introMessage: ResponseMessageType = {
 			contentType: "PlainText",
 			content:
 				"안녕하세요! ChatAI입니다. 저에게 응급 관련 질문을 하면 대답해줄 수 있어요.",
-		} as ContentResponseMessageType,
+		},
 		{
 			contentType: "PlainText",
 			content: "궁금하신 부분을 저에게 질문해주세요!",
-		} as ContentResponseMessageType,
-	],
+		},
+	] as ContentResponseMessageType[],
 	type: "response",
 };
 

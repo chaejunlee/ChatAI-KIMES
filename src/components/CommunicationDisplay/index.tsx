@@ -30,7 +30,6 @@ const StyledBox = styled("div")({
 	paddingRight: "1rem",
 	paddingBottom: "2.5rem",
 	height: "100%",
-	maxHeight: "80vh",
 	overflow: "auto",
 });
 
