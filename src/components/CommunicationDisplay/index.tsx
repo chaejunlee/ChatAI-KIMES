@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { ForwardedRef, forwardRef, useEffect, useRef } from "react";
 import Message from "../../Interface/Message/Message";
 import sampleMessages from "../../Data/Message";
 import { Avatar, Box, Grid, Skeleton, styled } from "@mui/material";
@@ -33,9 +33,9 @@ const StyledBox = styled("div")({
 	overflow: "auto",
 });
 
-const LoadingResponseMessage = () => {
+const LoadingResponseMessage = forwardRef<HTMLDivElement>((_, ref) => {
 	return (
-		<Grid container justifyContent="flex-start">
+		<Grid ref={ref} container justifyContent="flex-start">
 			<Box
 				sx={{
 					display: "flex",
@@ -54,7 +54,7 @@ const LoadingResponseMessage = () => {
 			</Box>
 		</Grid>
 	);
-};
+});
 
 export default function CommunicationDisplay({
 	messages,
@@ -62,23 +62,29 @@ export default function CommunicationDisplay({
 	onButtonClick,
 }: CommunicationDisplayProps) {
 	const classes = useStyles();
-	const boxRef = useRef(null);
+	const boxRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
 		if (boxRef.current) {
-			// @ts-ignore
-			boxRef.current.scrollTop = boxRef.current.scrollHeight; // 스크롤바를 가장 밑으로 내리기
+			boxRef.current.scrollIntoView({
+				behavior: "smooth",
+			});
 		}
 	}, [loading]);
 
 	return (
 		<Grid item id={"123123"}>
-			<StyledBox ref={boxRef}>
+			<StyledBox>
 				<Grid container rowSpacing={1}>
-					{messages.map((message, idx) =>
-						MessageBuilder(message, onButtonClick, idx)
-					)}
-					{loading ? <LoadingResponseMessage /> : null}
+					{messages.map((message, idx) => (
+						<MessageBuilder
+							key={message.type + idx}
+							message={message}
+							onButtonClick={onButtonClick}
+							messageIndex={idx}
+						/>
+					))}
+					{loading ? <LoadingResponseMessage ref={boxRef} /> : null}
 				</Grid>
 			</StyledBox>
 		</Grid>

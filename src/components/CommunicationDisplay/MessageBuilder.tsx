@@ -11,6 +11,7 @@ import RequestMessage from "../Messages/RequestMessage";
 import ContentResponseMessage from "../Messages/ContentResponseMessage";
 import CardResponseMessage from "../Messages/CardResponseMessage";
 import Logo from "../../assets/logo.png";
+import { useEffect, useRef } from "react";
 
 function RequestMessageBuilder(message: RequestMessageType) {
 	return <RequestMessage message={message} />;
@@ -64,12 +65,14 @@ function ResponseMessageBuilder(
 							case "PlainText":
 								return (
 									<ContentResponseMessage
+										key={content.contentType + idx}
 										message={content as ContentResponseMessageType}
 									/>
 								);
 							case "ImageResponseCard":
 								return (
 									<CardResponseMessage
+										key={content.contentType + idx}
 										data={content as ImageResponseCardType}
 										onButtonClick={onButtonClick}
 										messageIndex={messageIndex}
@@ -84,22 +87,36 @@ function ResponseMessageBuilder(
 	);
 }
 
-export default function MessageBuilder(
-	message: Message,
-	onButtonClick: (text: string) => void,
-	messageIndex: number
-): JSX.Element {
+export default function MessageBuilder({
+	message,
+	onButtonClick,
+	messageIndex,
+}: {
+	message: Message;
+	onButtonClick: (text: string) => void;
+	messageIndex: number;
+}): JSX.Element {
+	const divRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (divRef.current) {
+			divRef.current.scrollIntoView({
+				behavior: "smooth",
+			});
+		}
+	}, [divRef]);
+
 	const setSubBuilder = (message: Message) => {
 		switch (message.type) {
 			case "request":
 				return (
-					<Grid container justifyContent="flex-end">
+					<Grid ref={divRef} container justifyContent="flex-end">
 						{RequestMessageBuilder(message as RequestMessageType)}
 					</Grid>
 				);
 			case "response":
 				return (
-					<Grid container justifyContent="flex-start">
+					<Grid ref={divRef} container justifyContent="flex-start">
 						{ResponseMessageBuilder(
 							message as ResponseMessageType,
 							onButtonClick,
@@ -110,7 +127,7 @@ export default function MessageBuilder(
 		}
 	};
 	return (
-		<Grid item xs={12}>
+		<Grid ref={divRef} item xs={12}>
 			<Stack spacing={1.25} direction="row">
 				{setSubBuilder(message)}
 			</Stack>
