@@ -38,6 +38,7 @@ export default function Header() {
 						height: "11rem",
 						marginInline: "auto",
 						flexShrink: 0,
+						pointerEvents: "none",
 					}}
 				/>
 			</StyledHeader>
