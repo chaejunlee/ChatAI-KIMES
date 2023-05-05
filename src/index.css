@@ -13,7 +13,7 @@
 	flex-direction: column;
 	overflow-y: auto;
 
-	transition: bottom 100ms ease-in-out;
+	/* transition: bottom 100ms ease-in-out; */
 }
 
 body {
