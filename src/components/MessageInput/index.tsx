@@ -29,10 +29,10 @@ const TextFiledWrapper = styled("div")`
 	left: 0rem;
 	right: 0rem;
 	bottom: 0rem;
-	padding-block: 1rem;
+	padding-block: 0.5rem;
 	background: white;
 	border-top: #eee 2px solid;
-	padding-inline: 1rem;
+	padding-inline: 0.5rem;
 `;
 
 export default function MessageInput({ onClick, loading }: MessageInputProps) {
@@ -64,7 +64,7 @@ export default function MessageInput({ onClick, loading }: MessageInputProps) {
 	};
 
 	useEffect(() => {
-		ref.current?.focus();
+		// ref.current?.focus();
 	}, []);
 
 	return (

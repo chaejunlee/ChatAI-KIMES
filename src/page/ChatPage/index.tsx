@@ -113,7 +113,13 @@ export default function ChatPage() {
 	};
 	return (
 		<>
-			<Grid container direction="column" flexGrow={"1"}>
+			<Grid
+				container
+				direction="column"
+				flexGrow={"1"}
+				overflow={"scroll"}
+				style={{ WebkitOverflowScrolling: "touch" }}
+			>
 				<CommunicationDisplay
 					loading={loading}
 					messages={messages}

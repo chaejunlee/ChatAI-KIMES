@@ -1,9 +1,9 @@
-import { ForwardedRef, forwardRef, useEffect, useRef } from "react";
-import Message from "../../Interface/Message/Message";
-import sampleMessages from "../../Data/Message";
 import { Avatar, Box, Grid, Skeleton, styled } from "@mui/material";
-import MessageBuilder from "./MessageBuilder";
+import { forwardRef, useEffect, useRef } from "react";
+import sampleMessages from "../../Data/Message";
+import Message from "../../Interface/Message/Message";
 import Logo from "../../assets/logo.png";
+import MessageBuilder from "./MessageBuilder";
 
 import { makeStyles } from "@mui/styles";
 
@@ -28,9 +28,7 @@ const StyledBox = styled("div")({
 	paddingTop: "4rem",
 	paddingLeft: "1rem",
 	paddingRight: "1rem",
-	paddingBottom: "2.5rem",
-	height: "100%",
-	overflow: "auto",
+	paddingBottom: "1rem",
 });
 
 const LoadingResponseMessage = forwardRef<HTMLDivElement>((_, ref) => {
@@ -65,7 +63,9 @@ export default function CommunicationDisplay({
 	const boxRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		if (boxRef.current) {
+			boxRef.current.style.scrollMarginBottom = "10rem";
 			boxRef.current.scrollIntoView({
 				behavior: "smooth",
 			});
