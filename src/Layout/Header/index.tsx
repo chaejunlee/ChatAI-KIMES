@@ -1,9 +1,9 @@
-import ReactDOM from "react-dom";
 import MenuButton from "../../components/MenuButton";
-import { IconButton, Stack, styled, Typography } from "@mui/material";
+import { IconButton, Stack, styled } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 import BeamworksLogo from "../../assets/BeamworksLogo.png";
+import ChatAIDE from "../../assets/Chat-AIDE.png";
 
 import HeaderSVG from "../../assets/HeaderSVG";
 
@@ -54,10 +54,10 @@ export default function Header() {
 				<IconButton disabled>
 					<img
 						style={{
-							width: "10rem",
+							display: "block",
+							width: "12rem",
 							height: "auto",
 							zIndex: 2,
-							transform: "translate(0.5rem, 0.5rem)",
 						}}
 						src={BeamworksLogo}
 						alt="Beamworks"
@@ -67,6 +67,20 @@ export default function Header() {
 					<HelpOutlineIcon />
 				</IconButton>
 			</Stack>
+			<img
+				style={{
+					position: "absolute",
+					top: "4.75rem",
+					left: "calc(50% + 0.5rem)",
+					right: 0,
+					width: "8rem",
+					height: "auto",
+					zIndex: 2,
+					transform: "translate(-50%, -50%)",
+				}}
+				src={ChatAIDE}
+				alt="Beamworks"
+			/>
 		</Stack>
 	);
 }
