@@ -30,6 +30,7 @@ function ResponseMessageBuilder(
 				alignItems: "flex-start",
 				marginTop: "0.5rem",
 			}}
+			width={"100%"}
 		>
 			<Avatar
 				imgProps={{ style: { objectFit: "contain" } }}
