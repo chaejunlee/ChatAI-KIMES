@@ -1,3 +1,5 @@
+import { Avatar, Box, Grid, Stack } from "@mui/material";
+import { useEffect, useRef } from "react";
 import Message from "../../Interface/Message/Message";
 import RequestMessageType from "../../Interface/Message/RequestMessageType";
 import {
@@ -6,12 +8,10 @@ import {
 	ImageResponseCardType,
 	ResponseMessageType,
 } from "../../Interface/Message/ResponseMessageType";
-import { Avatar, Box, Grid, Paper, Stack, Typography } from "@mui/material";
-import RequestMessage from "../Messages/RequestMessage";
-import ContentResponseMessage from "../Messages/ContentResponseMessage";
-import CardResponseMessage from "../Messages/CardResponseMessage";
 import Logo from "../../assets/logo.png";
-import { useEffect, useRef } from "react";
+import CardResponseMessage from "../Messages/CardResponseMessage";
+import ContentResponseMessage from "../Messages/ContentResponseMessage";
+import RequestMessage from "../Messages/RequestMessage";
 
 function RequestMessageBuilder(message: RequestMessageType) {
 	return <RequestMessage message={message} />;
@@ -99,9 +99,12 @@ export default function MessageBuilder({
 	const divRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		if (divRef.current) {
+			divRef.current.style.scrollMarginBottom = "10rem";
 			divRef.current.scrollIntoView({
 				behavior: "smooth",
+				block: "end",
 			});
 		}
 	}, [divRef]);
@@ -110,7 +113,7 @@ export default function MessageBuilder({
 		switch (message.type) {
 			case "request":
 				return (
-					<Grid ref={divRef} container justifyContent="flex-end">
+					<Grid container justifyContent="flex-end">
 						{RequestMessageBuilder(message as RequestMessageType)}
 					</Grid>
 				);
@@ -127,7 +130,7 @@ export default function MessageBuilder({
 		}
 	};
 	return (
-		<Grid ref={divRef} item xs={12}>
+		<Grid item xs={12}>
 			<Stack spacing={1.25} direction="row">
 				{setSubBuilder(message)}
 			</Stack>

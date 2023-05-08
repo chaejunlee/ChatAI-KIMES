@@ -1,7 +1,6 @@
 import "./App.css";
-import ChatPage from "./page/ChatPage";
 import Header from "./Layout/Header";
-import { Box } from "@mui/material";
+import ChatPage from "./page/ChatPage";
 
 function App() {
 	return (

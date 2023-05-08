@@ -5,9 +5,10 @@ const BasicMessage = styled("div")`
 	margin-top: 5px;
 	margin-bottom: 5px;
 	display: inline-block;
+	max-width: 80%;
 
 	background: #32b6ae;
-	border-radius: 9.375em 0em 5em 9.375em;
+	border-radius: 20px 0px 20px 20px;
 
 	color: white;
 `;

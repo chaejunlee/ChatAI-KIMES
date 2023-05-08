@@ -26,8 +26,9 @@ const StyledButton = styled(Button)<IsClickedInterface>`
 
 	background: ${Style("#eaefef", "white")};
 	color: ${Style("#32b6ae", "black")};
+	text-align: start;
 
-	border-radius: 8em;
+	border-radius: 20px;
 	border: 1px solid ${Style("#32b6ae", "#bed1d1")};
 `;
 
@@ -39,7 +40,7 @@ const BasicMessage = styled("div")`
 	display: inline-block;
 
 	background: #eaefef;
-	border-radius: 0px 1.5em 1.5em 1.5em;
+	border-radius: 0px 20px 20px 20px;
 
 	color: black;
 	border: none;
@@ -83,7 +84,7 @@ export default function CardResponseMessage({
 					const isClicked =
 						clickedBtnListRef.current.includes(buttonIndentifier);
 					return (
-						<Grid item xs="auto" key={button.text}>
+						<Grid item xs="auto" key={button.text} maxWidth={"100%"}>
 							<StyledButton
 								isClicked={isClicked}
 								disabled={isClicked}
