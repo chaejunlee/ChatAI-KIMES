@@ -40,7 +40,6 @@ export default function mobileKeyboardHandler() {
 		const viewportHeight = visualViewportEvent.height;
 		const keyboardHeight = windowHeight - viewportHeight;
 
-		scrollToTop();
 		if (keyboardHeight > minimumKeyboardHeight) {
 			addScrollEventListener();
 			getRoot().style.bottom = `${keyboardHeight}px`;
