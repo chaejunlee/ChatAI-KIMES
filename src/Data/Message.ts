@@ -11,7 +11,7 @@ export const introMessage: ResponseMessageType = {
 		{
 			contentType: "PlainText",
 			content:
-				"안녕하세요! ChatAI입니다. 저에게 응급 관련 질문이나 상황에 대해 말씀해주시면 정보를 드릴 수 있어요.",
+				"안녕하세요! Chat-AIDE입니다. 저에게 응급 관련 질문이나 상황에 대해 말씀해주시면 정보를 드릴 수 있어요.",
 		},
 		{
 			contentType: "PlainText",
