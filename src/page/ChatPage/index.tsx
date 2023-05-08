@@ -112,13 +112,15 @@ export default function ChatPage() {
 		);
 	};
 	return (
-		<Grid container direction="column" width={"100%"}>
-			<CommunicationDisplay
-				loading={loading}
-				messages={messages}
-				onButtonClick={onResponseCardButtonClick}
-			/>
+		<>
+			<Grid container direction="column" flexGrow={"1"}>
+				<CommunicationDisplay
+					loading={loading}
+					messages={messages}
+					onButtonClick={onResponseCardButtonClick}
+				/>
+			</Grid>
 			<MessageInput loading={loading} onClick={addMessage} />
-		</Grid>
+		</>
 	);
 }

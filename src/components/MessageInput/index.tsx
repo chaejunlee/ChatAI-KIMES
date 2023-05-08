@@ -24,6 +24,17 @@ const useStyles = makeStyles({
 	},
 });
 
+const TextFiledWrapper = styled("div")`
+	position: sticky;
+	left: 0rem;
+	right: 0rem;
+	bottom: 0rem;
+	padding-block: 1rem;
+	background: white;
+	border-top: #eee 2px solid;
+	padding-inline: 1rem;
+`;
+
 export default function MessageInput({ onClick, loading }: MessageInputProps) {
 	const [text, setText] = React.useState<string>("");
 	const classes = useStyles();
@@ -57,42 +68,40 @@ export default function MessageInput({ onClick, loading }: MessageInputProps) {
 	}, []);
 
 	return (
-		<TextField
-			sx={{
-				width: "calc(100% - 2rem)",
-				borderRadius: "200px",
-				position: "absolute",
-				bottom: "1.5rem",
-				left: "50vw",
-				transform: "translate(-50%, 0%)",
-				boxSizing: "border-box",
-			}}
-			variant="standard"
-			onKeyDown={handleTextFieldKeyDown}
-			inputRef={ref}
-			value={text}
-			autoComplete="off"
-			onChange={(v) => setText(v.target.value)}
-			placeholder="Message..."
-			classes={{
-				root: classes.root,
-			}}
-			InputProps={{
-				disableUnderline: true,
-				startAdornment: (
-					<InputAdornment sx={{ paddingLeft: "0.5rem" }} position="start">
-						<AddCircleIcon fontSize="large" sx={{ color: "#32B6AE" }} />
-					</InputAdornment>
-				),
-				endAdornment: (
-					<InputAdornment sx={{ paddingRight: "0.5rem" }} position="end">
-						<IconButton onClick={handleOnclick}>
-							{loading ? <RotatingRefreshIcon /> : <SendIcon />}
-						</IconButton>
-					</InputAdornment>
-				),
-			}}
-		/>
+		<TextFiledWrapper>
+			<TextField
+				sx={{
+					width: "100%",
+					borderRadius: "200px",
+					boxSizing: "border-box",
+				}}
+				variant="standard"
+				onKeyDown={handleTextFieldKeyDown}
+				inputRef={ref}
+				value={text}
+				autoComplete="off"
+				onChange={(v) => setText(v.target.value)}
+				placeholder="Message..."
+				classes={{
+					root: classes.root,
+				}}
+				InputProps={{
+					disableUnderline: true,
+					startAdornment: (
+						<InputAdornment sx={{ paddingLeft: "0.5rem" }} position="start">
+							<AddCircleIcon fontSize="large" sx={{ color: "#32B6AE" }} />
+						</InputAdornment>
+					),
+					endAdornment: (
+						<InputAdornment sx={{ paddingRight: "0.5rem" }} position="end">
+							<IconButton onClick={handleOnclick}>
+								{loading ? <RotatingRefreshIcon /> : <SendIcon />}
+							</IconButton>
+						</InputAdornment>
+					),
+				}}
+			/>
+		</TextFiledWrapper>
 	);
 }
 

@@ -22,8 +22,16 @@ const StyledHeader = styled("div")`
 `;
 
 export default function Header() {
-	return ReactDOM.createPortal(
-		<Stack width={"100%"} direction={"row"}>
+	return (
+		<Stack
+			width={"100%"}
+			direction={"row"}
+			position={"sticky"}
+			top={"0"}
+			left="0"
+			right="0"
+			zIndex="10"
+		>
 			<StyledHeader>
 				<HeaderSVG
 					style={{
@@ -68,7 +76,6 @@ export default function Header() {
 			>
 				ChatAI
 			</Typography>
-		</Stack>,
-		document.getElementById("root") as HTMLElement
+		</Stack>
 	);
 }
