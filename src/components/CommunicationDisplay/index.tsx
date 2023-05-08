@@ -1,10 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Message from "../../Interface/Message/Message";
-import { ContentResponseMessageType } from "../../Interface/Message/ResponseMessageType";
 import sampleMessages from "../../Data/Message";
-import {Avatar, Box, CircularProgress, Grid, Skeleton, Stack, styled} from "@mui/material";
+import { Avatar, Box, Grid, Skeleton, styled } from "@mui/material";
 import MessageBuilder from "./MessageBuilder";
-import { Container } from "@mui/system";
 import Logo from "../../assets/logo.png";
 
 import { makeStyles } from "@mui/styles";
@@ -28,16 +26,16 @@ const StyledBox = styled("div")({
 	boxSizing: "border-box",
 	width: "100%",
 	paddingTop: "4rem",
-	paddingLeft: "2.5%",
-	paddingRight: "2.5%",
+	paddingLeft: "1rem",
+	paddingRight: "1rem",
 	paddingBottom: "2.5rem",
 	height: "100%",
 	maxHeight: "80vh",
 	overflow: "auto",
 });
 
-const LoadingResponseMessage=()=>{
-	return(
+const LoadingResponseMessage = () => {
+	return (
 		<Grid container justifyContent="flex-start">
 			<Box
 				sx={{
@@ -48,11 +46,16 @@ const LoadingResponseMessage=()=>{
 				}}
 			>
 				<Avatar alt={"ChatAI Logo"} src={Logo} />
-				<Skeleton variant={"text"} sx={{fontSize: "2.5rem"}} width={100} animation="wave"/>
+				<Skeleton
+					variant={"text"}
+					sx={{ fontSize: "2.5rem" }}
+					width={100}
+					animation="wave"
+				/>
 			</Box>
 		</Grid>
-	)
-}
+	);
+};
 
 export default function CommunicationDisplay({
 	messages,
@@ -69,7 +72,6 @@ export default function CommunicationDisplay({
 		}
 	}, [loading]);
 
-
 	return (
 		<Grid item id={"123123"}>
 			<StyledBox ref={boxRef}>
@@ -77,7 +79,7 @@ export default function CommunicationDisplay({
 					{messages.map((message, idx) =>
 						MessageBuilder(message, onButtonClick, idx)
 					)}
-					{loading ? <LoadingResponseMessage/>: null}
+					{loading ? <LoadingResponseMessage /> : null}
 				</Grid>
 			</StyledBox>
 		</Grid>

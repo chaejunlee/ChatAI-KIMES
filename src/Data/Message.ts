@@ -15,9 +15,8 @@ export const introMessage: ResponseMessageType = {
 		} as ContentResponseMessageType,
 		{
 			contentType: "PlainText",
-			content:
-				"궁금하신 부분을 저에게 질문해주세요!"
-		} as ContentResponseMessageType
+			content: "궁금하신 부분을 저에게 질문해주세요!",
+		} as ContentResponseMessageType,
 	],
 	type: "response",
 };
