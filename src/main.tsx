@@ -2,7 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import mobileKeyboardHandler from "./utils/mobileKeyboardHandler";
+import mobileKeyboardHandler, {
+	setWindowHeight,
+} from "./utils/mobileKeyboardHandler";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
@@ -10,4 +12,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	</React.StrictMode>
 );
 
+setWindowHeight();
 mobileKeyboardHandler();
