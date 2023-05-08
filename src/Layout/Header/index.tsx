@@ -13,7 +13,7 @@ const StyledHeader = styled("div")`
 	display: flex;
 	top: 0;
 	width: 100%;
-	height: 5.8rem;
+	height: 5.3rem;
 	justify-content: center;
 	background: white;
 	filter: drop-shadow(0px 10px 30px rgba(0, 0, 0, 0.1));
@@ -35,7 +35,7 @@ export default function Header() {
 			<StyledHeader>
 				<HeaderSVG
 					style={{
-						height: "11rem",
+						height: "10rem",
 						marginInline: "auto",
 						flexShrink: 0,
 						pointerEvents: "none",
@@ -53,7 +53,12 @@ export default function Header() {
 				<MenuButton />
 				<IconButton disabled>
 					<img
-						style={{ width: "12.5rem", height: "auto", zIndex: 2 }}
+						style={{
+							width: "10rem",
+							height: "auto",
+							zIndex: 2,
+							transform: "translate(0.5rem, 0.5rem)",
+						}}
 						src={BeamworksLogo}
 						alt="Beamworks"
 					/>
@@ -62,21 +67,6 @@ export default function Header() {
 					<HelpOutlineIcon />
 				</IconButton>
 			</Stack>
-
-			<Typography
-				zIndex={1}
-				color={"#32B6AE"}
-				fontWeight={"bold"}
-				fontSize={"1.5rem"}
-				sx={{
-					position: "absolute",
-					top: "3.5rem",
-					left: "50%",
-					transform: "translate(-50%, 50%)",
-				}}
-			>
-				ChatAI
-			</Typography>
 		</Stack>
 	);
 }

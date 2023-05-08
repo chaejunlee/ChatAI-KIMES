@@ -89,7 +89,7 @@ export default function MessageInput({ onClick, loading }: MessageInputProps) {
 					disableUnderline: true,
 					startAdornment: (
 						<InputAdornment sx={{ paddingLeft: "0.5rem" }} position="start">
-							<AddCircleIcon fontSize="large" sx={{ color: "#32B6AE" }} />
+							<AddCircleIcon fontSize="large" sx={{ color: "#12C670" }} />
 						</InputAdornment>
 					),
 					endAdornment: (

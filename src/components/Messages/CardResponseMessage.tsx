@@ -25,11 +25,11 @@ const StyledButton = styled(Button)<IsClickedInterface>`
 	padding-inline: 0.75rem;
 
 	background: ${Style("#eaefef", "white")};
-	color: ${Style("#32b6ae", "black")};
+	color: ${Style("#12C670", "black")};
 	text-align: start;
 
 	border-radius: 20px;
-	border: 1px solid ${Style("#32b6ae", "#bed1d1")};
+	border: 1px solid ${Style("#12C670", "#bed1d1")};
 `;
 
 const BasicMessage = styled("div")`

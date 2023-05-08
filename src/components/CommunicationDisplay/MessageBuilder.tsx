@@ -31,7 +31,11 @@ function ResponseMessageBuilder(
 				marginTop: "0.5rem",
 			}}
 		>
-			<Avatar alt={"ChatAI"} src={Logo} />
+			<Avatar
+				imgProps={{ style: { objectFit: "contain" } }}
+				alt={"ChatAI"}
+				src={Logo}
+			/>
 			{!message.content ? (
 				<>
 					<ContentResponseMessage
