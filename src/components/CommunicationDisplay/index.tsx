@@ -41,6 +41,7 @@ const LoadingResponseMessage = forwardRef<HTMLDivElement>((_, ref) => {
 					alignItems: "flex-start",
 					marginTop: "0.5rem",
 				}}
+				width={"100%"}
 			>
 				<Avatar alt={"ChatAI Logo"} src={Logo} />
 				<Skeleton
