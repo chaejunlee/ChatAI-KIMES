@@ -6,6 +6,7 @@ import Logo from "../../assets/logo.png";
 import MessageBuilder from "./MessageBuilder";
 
 import { makeStyles } from "@mui/styles";
+import { smoothScrollToBottom } from "../../utils/Chat";
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -64,13 +65,7 @@ export default function CommunicationDisplay({
 	const boxRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
-		window.scrollTo(0, 0);
-		if (boxRef.current) {
-			boxRef.current.style.scrollMarginBottom = "10rem";
-			boxRef.current.scrollIntoView({
-				behavior: "smooth",
-			});
-		}
+		smoothScrollToBottom(boxRef);
 	}, [loading]);
 
 	return (

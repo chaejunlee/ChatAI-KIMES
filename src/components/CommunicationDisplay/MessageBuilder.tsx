@@ -12,6 +12,7 @@ import Logo from "../../assets/logo.png";
 import CardResponseMessage from "../Messages/CardResponseMessage";
 import ContentResponseMessage from "../Messages/ContentResponseMessage";
 import RequestMessage from "../Messages/RequestMessage";
+import { smoothScrollToBottom } from "../../utils/Chat";
 
 function RequestMessageBuilder(message: RequestMessageType) {
 	return <RequestMessage message={message} />;
@@ -104,14 +105,7 @@ export default function MessageBuilder({
 	const divRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		window.scrollTo(0, 0);
-		if (divRef.current) {
-			divRef.current.style.scrollMarginBottom = "10rem";
-			divRef.current.scrollIntoView({
-				behavior: "smooth",
-				block: "end",
-			});
-		}
+		smoothScrollToBottom(divRef);
 	}, [divRef]);
 
 	const setSubBuilder = (message: Message) => {
