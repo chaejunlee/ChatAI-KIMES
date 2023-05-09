@@ -40,7 +40,7 @@ export default function mobileKeyboardHandler() {
 		if (keyboardHeight > minimumKeyboardHeight) {
 			scrollToTop();
 			addScrollEventListener();
-			if (detectIOS()) root.style.bottom = `${keyboardHeight}px`;
+			root.style.bottom = `${keyboardHeight}px`;
 		} else {
 			root.style.transition = "bottom 0.5s ease-in-out";
 			root.style.bottom = "0px";
