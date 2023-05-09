@@ -19,35 +19,43 @@ const removeScrollEventListener = () => {
 const minimumKeyboardHeight = 100;
 const windowHeight = window.innerHeight;
 const root = document.getElementById("root");
+const visualViewport = window.visualViewport;
 
 export function setWindowHeight() {
 	document.body.style.height = `${windowHeight}px`;
 	if (root) root.style.bottom = "0px";
 }
 
-export default function mobileKeyboardHandler() {
-	const visualViewport = window.visualViewport;
+const mobileKeyboardHandler = (e: Event) => {
+	const visualViewportEvent = e.target as VisualViewport;
+	const viewportHeight = visualViewportEvent.height;
+	const keyboardHeight = windowHeight - viewportHeight;
 
+	if (!root) return;
+
+	if (keyboardHeight > minimumKeyboardHeight) {
+		addScrollEventListener();
+		root.style.bottom = `${keyboardHeight}px`;
+	} else {
+		root.style.transition = "bottom 0.5s ease-in-out";
+		root.style.bottom = "0px";
+		removeScrollEventListener();
+		root.style.transition = "none";
+	}
+};
+
+export function addKeyboardPopupListener() {
 	if (!visualViewport) return;
 
-	visualViewport.addEventListener("resize", (e) => {
-		const visualViewportEvent = e.target as VisualViewport;
-		const viewportHeight = visualViewportEvent.height;
-		const keyboardHeight = windowHeight - viewportHeight;
+	visualViewport.addEventListener("resize", mobileKeyboardHandler);
+}
 
-		if (!root) return;
+export function removeKeyboardPopupListener() {
+	if (!visualViewport) return;
 
-		if (keyboardHeight > minimumKeyboardHeight) {
-			scrollToTop();
-			addScrollEventListener();
-			root.style.bottom = `${keyboardHeight}px`;
-		} else {
-			root.style.transition = "bottom 0.5s ease-in-out";
-			root.style.bottom = "0px";
-			removeScrollEventListener();
-			root.style.transition = "none";
-		}
-	});
+	setTimeout(() => {
+		visualViewport.removeEventListener("resize", mobileKeyboardHandler);
+	}, 1000);
 }
 
 export function detectIOS() {
