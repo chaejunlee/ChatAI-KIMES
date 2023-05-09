@@ -21,7 +21,7 @@ const windowHeight = window.innerHeight;
 const root = document.getElementById("root");
 const visualViewport = window.visualViewport;
 
-export function setWindowHeight() {
+export default function setWindowHeight() {
 	document.body.style.height = `${windowHeight}px`;
 	if (root) root.style.bottom = "0px";
 }
