@@ -1,8 +1,8 @@
-import { useRef } from "react";
-
 import { ImageResponseCardType } from "../../Interface/Message/ResponseMessageType";
-import { Button, Grid, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import styled from "@mui/system/styled";
+import { primaryColor } from "../../utils/color";
+import { MessageButtons } from "./MessageButtons";
 
 export interface CardResponseMessageTypeProps {
 	data: ImageResponseCardType;
@@ -20,16 +20,16 @@ const Style =
 		return props.isClicked ? trueProp : falseProp;
 	};
 
-const StyledButton = styled(Button)<IsClickedInterface>`
+export const StyledButton = styled(Button)<IsClickedInterface>`
 	margin: 0 auto;
 	padding-inline: 0.75rem;
 
 	background: ${Style("#eaefef", "white")};
-	color: ${Style("#12C670", "black")};
+	color: ${Style(primaryColor, "black")};
 	text-align: start;
 
 	border-radius: 20px;
-	border: 1px solid ${Style("#12C670", "#bed1d1")};
+	border: 1px solid ${Style(primaryColor, "#bed1d1")};
 `;
 
 const BasicMessage = styled("div")`
@@ -64,13 +64,6 @@ export default function CardResponseMessage({
 }: CardResponseMessageTypeProps) {
 	const message = data.imageResponseCard;
 
-	const clickedBtnListRef = useRef([] as string[]);
-
-	const handleButtonClick = (button: any, buttonIndentifier: string) => {
-		clickedBtnListRef.current.push(buttonIndentifier);
-		onButtonClick(button.value);
-	};
-
 	return (
 		<Stack
 			marginBottom={1}
@@ -78,25 +71,13 @@ export default function CardResponseMessage({
 			spacing={2}
 			alignItems="flex-start"
 		>
-			<Grid container spacing={0.5} direction="row">
-				{message.buttons.map((button, idx) => {
-					const buttonIndentifier = `${messageIndex}-${contentIndex}-${idx}`;
-					const isClicked =
-						clickedBtnListRef.current.includes(buttonIndentifier);
-					return (
-						<Grid item xs="auto" key={button.text} maxWidth={"100%"}>
-							<StyledButton
-								isClicked={isClicked}
-								disabled={isClicked}
-								id={buttonIndentifier}
-								onClick={() => handleButtonClick(button, buttonIndentifier)}
-							>
-								{button.text}
-							</StyledButton>
-						</Grid>
-					);
-				})}
-			</Grid>
+			<MessageButtons
+				message={message}
+				messageIndex={messageIndex}
+				contentIndex={contentIndex}
+				onButtonClick={onButtonClick}
+			/>
+
 			{message.imageUrl ? (
 				<BasicMessage>
 					<StyledImg src={message.imageUrl} alt={message.title} />
@@ -105,7 +86,12 @@ export default function CardResponseMessage({
 					) : null}
 				</BasicMessage>
 			) : null}
-			{message.subtitle ? <p>{message.subtitle}</p> : null}
+
+			{message.subtitle && <MessageSubtitle subtitle={message.subtitle} />}
 		</Stack>
 	);
+}
+
+function MessageSubtitle({ subtitle }: { subtitle: string }) {
+	return <p>{subtitle}</p>;
 }

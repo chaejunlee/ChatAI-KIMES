@@ -11,8 +11,6 @@
 	width: 100vw;
 	display: flex;
 	flex-direction: column;
-	overflow-y: auto;
-
 	/* transition: bottom 100ms ease-in-out; */
 }
 
