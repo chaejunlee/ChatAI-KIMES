@@ -5,10 +5,10 @@ const scrollToTop = () => {
 const scrollToTopTimeout = () => {
 	setTimeout(() => {
 		scrollToTop();
-	}, 100);
+	}, 500);
 };
 
-const addScrollEventListener = () => {
+export const addScrollEventListener = () => {
 	window.addEventListener("scroll", scrollToTopTimeout);
 };
 
@@ -20,14 +20,9 @@ const minimumKeyboardHeight = 100;
 const windowHeight = window.innerHeight;
 const root = document.getElementById("root");
 
-const getRoot = () => {
-	if (!root) throw new Error("root is null");
-	return root;
-};
-
 export function setWindowHeight() {
 	document.body.style.height = `${windowHeight}px`;
-	getRoot().style.bottom = "0px";
+	if (root) root.style.bottom = "0px";
 }
 
 export default function mobileKeyboardHandler() {
@@ -40,12 +35,17 @@ export default function mobileKeyboardHandler() {
 		const viewportHeight = visualViewportEvent.height;
 		const keyboardHeight = windowHeight - viewportHeight;
 
+		if (!root) return;
+
 		if (keyboardHeight > minimumKeyboardHeight) {
+			scrollToTop();
 			addScrollEventListener();
-			getRoot().style.bottom = `${keyboardHeight}px`;
+			if (detectIOS()) root.style.bottom = `${keyboardHeight}px`;
 		} else {
-			getRoot().style.bottom = "0px";
+			root.style.transition = "bottom 0.5s ease-in-out";
+			root.style.bottom = "0px";
 			removeScrollEventListener();
+			root.style.transition = "none";
 		}
 	});
 }
