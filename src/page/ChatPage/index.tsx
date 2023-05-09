@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import MessageInput from "../../components/MessageInput";
 import CommunicationDisplay from "../../components/CommunicationDisplay";
 import Message from "../../Interface/Message/Message";
@@ -12,105 +12,55 @@ import {
 } from "../../Interface/Message/ResponseMessageType";
 import { Grid, Stack } from "@mui/material";
 
-function appendResponseOnly(
-	text: string,
-	setLoading: (value: ((prevState: boolean) => boolean) | boolean) => void,
-	setMessages: (
-		value: ((prevState: Message[]) => Message[]) | Message[]
-	) => void,
-	messages: Message[]
-) {
-	requestLexResponse(text)
-		.then((response) => {
-			setLoading(false);
-			const data: ResponseMessageType = {
-				type: "response",
-				content: response.data,
-			};
-			setMessages([...messages, data]);
-		})
-		.catch((error) => {
-			setLoading(false);
-			const errorResponseMessage: ResponseMessageType = {
-				type: "response",
-				content: [
-					{
-						contentType: "PlainText",
-						content:
-							"Sorry, I am not able to understand you. Please try again.",
-					} as ContentResponseMessageType,
-				],
-			};
-			setMessages([...messages, errorResponseMessage]);
-		});
-}
+const createRequest = (message: string) => {
+	return {
+		message: message,
+		type: "request",
+		userId: window.navigator.userAgent,
+	} as RequestMessageType;
+};
 
-function appendRequestOnly(
-	message: string,
-	setLoading: (value: ((prevState: boolean) => boolean) | boolean) => void,
-	setMessages: (
-		value: ((prevState: Message[]) => Message[]) | Message[]
-	) => void,
-	messages: Message[],
-	createRequestMessage: (message: string) => RequestMessageType
+async function addResponse(
+	text: string,
+	setMessages: Dispatch<SetStateAction<Message[]>>
 ) {
-	requestLexResponse(message)
-		.then((response) => {
-			setLoading(false);
-			const data: ResponseMessageType = {
-				type: "response",
-				content: response.data,
-			};
-			setMessages([...messages, createRequestMessage(message), data]);
-		})
-		.catch((error) => {
-			setLoading(false);
-			const errorResponseMessage: ResponseMessageType = {
-				type: "response",
-				content: [
-					{
-						contentType: "PlainText",
-						content:
-							"Sorry, I am not able to understand you. Please try again.",
-					} as ContentResponseMessageType,
-				],
-			};
-			setMessages([
-				...messages,
-				createRequestMessage(message),
-				errorResponseMessage,
-			]);
-		});
+	const data: ResponseMessageType = {
+		type: "response",
+		content: [] as ContentResponseMessageType[],
+	};
+
+	try {
+		const response = await requestLexResponse(text);
+		data.content = response.data as ContentResponseMessageType[];
+	} catch {
+		data.content = [
+			{
+				contentType: "PlainText",
+				content: "Sorry, I am not able to understand you. Please try again.",
+			},
+		] as ContentResponseMessageType[];
+	}
+
+	setMessages((messages) => [...messages, data]);
 }
 
 export default function ChatPage() {
 	const [messages, setMessages] = React.useState<Message[]>([introMessage]);
 	const [loading, setLoading] = React.useState<boolean>(false);
 
-	const onResponseCardButtonClick = (text: string) => {
+	const onResponseCardButtonClick = async (text: string) => {
 		setLoading(true);
-		appendResponseOnly(text, setLoading, setMessages, messages);
+		await addResponse(text, setMessages);
+		setLoading(false);
 	};
 
-	const createRequestMessage = (message: string) => {
-		return {
-			message: message,
-			type: "request",
-			userId: window.navigator.userAgent,
-		} as RequestMessageType;
+	const addMessage = async (message: string) => {
+		setLoading(true);
+		setMessages([...messages, createRequest(message)]);
+		await addResponse(message, setMessages);
+		setLoading(false);
 	};
 
-	const addMessage = (message: string) => {
-		setLoading(true);
-		setMessages([...messages, createRequestMessage(message)]);
-		appendRequestOnly(
-			message,
-			setLoading,
-			setMessages,
-			messages,
-			createRequestMessage
-		);
-	};
 	return (
 		<>
 			<Grid
