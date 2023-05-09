@@ -6,7 +6,7 @@ interface RequestMessageTypeProps {
 }
 export default function RequestMessage({ message }: RequestMessageTypeProps) {
 	return (
-		<MessageStyle props={message}>
+		<MessageStyle>
 			<Typography sx={{ textAlign: "left" }}>{message.message}</Typography>
 		</MessageStyle>
 	);
