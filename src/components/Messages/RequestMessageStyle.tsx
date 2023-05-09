@@ -1,4 +1,5 @@
 import { styled } from "@mui/system";
+import { ReactNode } from "react";
 
 const BasicMessage = styled("div")`
 	padding: 8px 16px;
@@ -13,12 +14,6 @@ const BasicMessage = styled("div")`
 	color: white;
 `;
 
-export default function Wrapper({
-	children,
-	...props
-}: {
-	children: any;
-	props: any;
-}) {
-	return <BasicMessage {...props}>{children}</BasicMessage>;
+export default function Wrapper({ children }: { children: ReactNode }) {
+	return <BasicMessage>{children}</BasicMessage>;
 }

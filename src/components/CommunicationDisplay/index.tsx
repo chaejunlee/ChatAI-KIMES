@@ -1,19 +1,7 @@
-import { Avatar, Box, Grid, Skeleton, styled } from "@mui/material";
-import { forwardRef, useEffect, useRef } from "react";
+import { Box, Grid, Skeleton, styled } from "@mui/material";
 import sampleMessages from "../../Data/Message";
 import Message from "../../Interface/Message/Message";
-import Logo from "../../assets/logo.png";
 import MessageBuilder from "./MessageBuilder";
-
-import { makeStyles } from "@mui/styles";
-import { smoothScrollToBottom } from "../../utils/chat";
-
-const useStyles = makeStyles(() => ({
-	root: {
-		border: "none",
-		boxShadow: "none",
-	},
-}));
 
 interface CommunicationDisplayProps {
 	messages: Message[];
@@ -23,6 +11,9 @@ interface CommunicationDisplayProps {
 
 const StyledBox = styled("div")({
 	position: "relative",
+	display: "flex",
+	flexDirection: "column",
+	gap: "1rem",
 	margin: "0 auto",
 	boxSizing: "border-box",
 	width: "100%",
@@ -32,9 +23,9 @@ const StyledBox = styled("div")({
 	paddingBottom: "1rem",
 });
 
-const LoadingResponseMessage = forwardRef<HTMLDivElement>((_, ref) => {
+const LoadingResponseMessage = () => {
 	return (
-		<Grid ref={ref} container justifyContent="flex-start">
+		<Grid container justifyContent="flex-start">
 			<Box
 				sx={{
 					display: "flex",
@@ -44,7 +35,6 @@ const LoadingResponseMessage = forwardRef<HTMLDivElement>((_, ref) => {
 				}}
 				width={"100%"}
 			>
-				<Avatar alt={"ChatAI Logo"} src={Logo} />
 				<Skeleton
 					variant={"text"}
 					sx={{ fontSize: "2.5rem" }}
@@ -54,39 +44,24 @@ const LoadingResponseMessage = forwardRef<HTMLDivElement>((_, ref) => {
 			</Box>
 		</Grid>
 	);
-});
+};
 
 export default function CommunicationDisplay({
-	messages,
+	messages = sampleMessages,
 	loading,
 	onButtonClick,
 }: CommunicationDisplayProps) {
-	const classes = useStyles();
-	const boxRef = useRef<HTMLDivElement | null>(null);
-
-	useEffect(() => {
-		smoothScrollToBottom(boxRef);
-	}, [loading]);
-
 	return (
-		<Grid item id={"123123"}>
-			<StyledBox>
-				<Grid container rowSpacing={1}>
-					{messages.map((message, idx) => (
-						<MessageBuilder
-							key={message.type + idx}
-							message={message}
-							onButtonClick={onButtonClick}
-							messageIndex={idx}
-						/>
-					))}
-					{loading ? <LoadingResponseMessage ref={boxRef} /> : null}
-				</Grid>
-			</StyledBox>
-		</Grid>
+		<StyledBox>
+			{messages.map((message, idx) => (
+				<MessageBuilder
+					key={message.type + idx}
+					message={message}
+					onButtonClick={onButtonClick}
+					messageIndex={idx}
+				/>
+			))}
+			{loading ? <LoadingResponseMessage /> : null}
+		</StyledBox>
 	);
 }
-
-CommunicationDisplay.defaultProps = {
-	messages: sampleMessages,
-};

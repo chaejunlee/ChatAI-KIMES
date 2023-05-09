@@ -103,15 +103,13 @@ const MessageBuilder = ({
 	messageIndex: number;
 }) => {
 	return (
-		<Grid item xs={12}>
-			<Stack spacing={1.25} direction="row">
-				<SetSubBuilder
-					message={message}
-					onButtonClick={onButtonClick}
-					messageIndex={messageIndex}
-				/>
-			</Stack>
-		</Grid>
+		<Stack spacing={1.25} direction="row">
+			<SetSubBuilder
+				message={message}
+				onButtonClick={onButtonClick}
+				messageIndex={messageIndex}
+			/>
+		</Stack>
 	);
 };
 
@@ -126,7 +124,7 @@ function SetSubBuilder({
 }) {
 	const boxRef = useRef<HTMLDivElement | null>(null);
 	useEffect(() => {
-		smoothScrollToBottom(boxRef as MutableRefObject<HTMLDivElement | null>);
+		smoothScrollToBottom(boxRef);
 	}, [boxRef]);
 
 	switch (message.type) {
