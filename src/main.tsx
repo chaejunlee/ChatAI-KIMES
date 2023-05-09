@@ -3,8 +3,9 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import mobileKeyboardHandler, {
+	detectIOS,
 	setWindowHeight,
-} from "./utils/mobileKeyboardHandler";
+} from "./utils/mobile";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
@@ -13,4 +14,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 );
 
 setWindowHeight();
-mobileKeyboardHandler();
+if (detectIOS()) {
+	mobileKeyboardHandler();
+}
