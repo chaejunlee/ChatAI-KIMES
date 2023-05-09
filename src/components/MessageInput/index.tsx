@@ -11,6 +11,10 @@ import SendIcon from "@mui/icons-material/Send";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { makeStyles } from "@mui/styles";
 import { primaryColor } from "../../utils/color";
+import {
+	addKeyboardPopupListener,
+	removeKeyboardPopupListener,
+} from "../../utils/mobile";
 
 interface MessageInputProps {
 	onClick: (message: string) => void;
@@ -78,6 +82,8 @@ export default function MessageInput({ onClick, loading }: MessageInputProps) {
 				value={text}
 				autoComplete="off"
 				onChange={(v) => setText(v.target.value)}
+				onFocus={addKeyboardPopupListener}
+				onBlur={removeKeyboardPopupListener}
 				placeholder="Message..."
 				classes={{
 					root: classes.root,

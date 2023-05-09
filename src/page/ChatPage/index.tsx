@@ -5,6 +5,7 @@ import RequestMessageType from "../../Interface/Message/RequestMessageType";
 import Conversation from "../../components/Conversation";
 import MessageInput from "../../components/MessageInput";
 import { addResponse } from "./addResponse";
+import { removeKeyboardPopupListener } from "../../utils/mobile";
 
 const createRequest = (message: string) => {
 	return {
