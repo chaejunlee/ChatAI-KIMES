@@ -79,7 +79,7 @@ export default function Header() {
 					transform: "translate(-50%, -50%)",
 				}}
 				src={ChatAIDE}
-				alt="Beamworks"
+				alt="Chat AIDE"
 			/>
 		</Stack>
 	);

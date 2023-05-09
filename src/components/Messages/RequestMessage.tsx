@@ -1,5 +1,4 @@
 import { Typography } from "@mui/material";
-import React from "react";
 import RequestMessageType from "../../Interface/Message/RequestMessageType";
 import MessageStyle from "./RequestMessageStyle";
 interface RequestMessageTypeProps {

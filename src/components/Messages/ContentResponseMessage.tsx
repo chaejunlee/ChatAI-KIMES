@@ -1,4 +1,3 @@
-import React from "react";
 import { ContentResponseMessageType } from "../../Interface/Message/ResponseMessageType";
 
 import { makeStyles } from "@mui/styles";

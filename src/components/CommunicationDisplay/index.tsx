@@ -6,7 +6,7 @@ import Logo from "../../assets/logo.png";
 import MessageBuilder from "./MessageBuilder";
 
 import { makeStyles } from "@mui/styles";
-import { smoothScrollToBottom } from "../../utils/Chat";
+import { smoothScrollToBottom } from "../../utils/chat";
 
 const useStyles = makeStyles(() => ({
 	root: {

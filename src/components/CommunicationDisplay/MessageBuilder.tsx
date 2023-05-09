@@ -1,5 +1,5 @@
 import { Avatar, Box, Grid, Stack } from "@mui/material";
-import { useEffect, useRef } from "react";
+import { MutableRefObject, Ref, forwardRef, useEffect, useRef } from "react";
 import Message from "../../Interface/Message/Message";
 import RequestMessageType from "../../Interface/Message/RequestMessageType";
 import {
@@ -12,7 +12,7 @@ import Logo from "../../assets/logo.png";
 import CardResponseMessage from "../Messages/CardResponseMessage";
 import ContentResponseMessage from "../Messages/ContentResponseMessage";
 import RequestMessage from "../Messages/RequestMessage";
-import { smoothScrollToBottom } from "../../utils/Chat";
+import { smoothScrollToBottom } from "../../utils/chat";
 
 function RequestMessageBuilder(message: RequestMessageType) {
 	return <RequestMessage message={message} />;
@@ -93,7 +93,7 @@ function ResponseMessageBuilder(
 	);
 }
 
-export default function MessageBuilder({
+const MessageBuilder = ({
 	message,
 	onButtonClick,
 	messageIndex,
@@ -101,38 +101,52 @@ export default function MessageBuilder({
 	message: Message;
 	onButtonClick: (text: string) => void;
 	messageIndex: number;
-}): JSX.Element {
-	const divRef = useRef<HTMLDivElement>(null);
-
-	useEffect(() => {
-		smoothScrollToBottom(divRef);
-	}, [divRef]);
-
-	const setSubBuilder = (message: Message) => {
-		switch (message.type) {
-			case "request":
-				return (
-					<Grid container justifyContent="flex-end">
-						{RequestMessageBuilder(message as RequestMessageType)}
-					</Grid>
-				);
-			case "response":
-				return (
-					<Grid ref={divRef} container justifyContent="flex-start">
-						{ResponseMessageBuilder(
-							message as ResponseMessageType,
-							onButtonClick,
-							messageIndex
-						)}
-					</Grid>
-				);
-		}
-	};
+}) => {
 	return (
 		<Grid item xs={12}>
 			<Stack spacing={1.25} direction="row">
-				{setSubBuilder(message)}
+				<SetSubBuilder
+					message={message}
+					onButtonClick={onButtonClick}
+					messageIndex={messageIndex}
+				/>
 			</Stack>
 		</Grid>
 	);
+};
+
+function SetSubBuilder({
+	message,
+	onButtonClick,
+	messageIndex,
+}: {
+	message: Message;
+	onButtonClick: (text: string) => void;
+	messageIndex: number;
+}) {
+	const boxRef = useRef<HTMLDivElement | null>(null);
+	useEffect(() => {
+		smoothScrollToBottom(boxRef as MutableRefObject<HTMLDivElement | null>);
+	}, [boxRef]);
+
+	switch (message.type) {
+		case "request":
+			return (
+				<Grid ref={boxRef} container justifyContent="flex-end">
+					{RequestMessageBuilder(message as RequestMessageType)}
+				</Grid>
+			);
+		case "response":
+			return (
+				<Grid ref={boxRef} container justifyContent="flex-start">
+					{ResponseMessageBuilder(
+						message as ResponseMessageType,
+						onButtonClick,
+						messageIndex
+					)}
+				</Grid>
+			);
+	}
 }
+
+export default MessageBuilder;

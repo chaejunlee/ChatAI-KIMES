@@ -1,4 +1,4 @@
-import { styled, css } from "@mui/system";
+import { styled } from "@mui/system";
 
 const BasicMessage = styled("div")`
 	padding: 8px 16px;
