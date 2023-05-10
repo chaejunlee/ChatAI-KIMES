@@ -1,46 +1,76 @@
-import { useRef } from "react";
-import { imageResponseCardContentType } from "../../Interface/Message/ResponseMessageType";
-import { Grid } from "@mui/material";
-import { StyledButton } from "./CardResponseMessage";
+import { useContext, useRef } from "react";
+import {
+	ButtonResponseType,
+	imageResponseCardContentType,
+} from "../../Interface/Message/ResponseMessageType";
+import { Button, Grid, Stack } from "@mui/material";
+import styled from "@emotion/styled";
+import { primaryColor } from "../../utils/color";
+import { CardContext } from "../../page/ChatPage";
 
 interface MessageButtonsProps {
 	message: imageResponseCardContentType;
-	messageIndex: number;
-	contentIndex: number;
-	onButtonClick: (text: string) => void;
+	messageID: string;
 }
 
-export function MessageButtons({
-	message,
-	messageIndex,
-	contentIndex,
-	onButtonClick,
-}: MessageButtonsProps) {
-	const clickedBtnListRef = useRef([] as string[]);
+interface IsSelectedInterface {
+	disabled: boolean;
+}
 
-	const handleButtonClick = (button: any, buttonIndentifier: string) => {
+const Style =
+	(trueProp: string, falseProp: string) => (props: IsSelectedInterface) => {
+		return props.disabled ? trueProp : falseProp;
+	};
+
+export const StyledButton = styled(Button)<IsSelectedInterface>`
+	padding-inline: 0.75rem;
+
+	background: ${Style("#eaefef", "white")};
+	color: ${Style(primaryColor, "black")};
+	text-align: start;
+
+	border-radius: 20px;
+	border: 1px solid ${Style(primaryColor, "#bed1d1")};
+	margin: 0 !important;
+`;
+
+export function MessageButtons({ message, messageID }: MessageButtonsProps) {
+	const clickedBtnListRef = useRef([] as string[]);
+	const { onCardButtonClick } = useContext(CardContext)!;
+
+	const handleButtonClick = (
+		button: ButtonResponseType,
+		buttonIndentifier: string
+	) => {
 		clickedBtnListRef.current.push(buttonIndentifier);
-		onButtonClick(button.value);
+		onCardButtonClick(button.value);
 	};
 
 	return (
-		<Grid container spacing={0.5} direction="row">
+		<Stack
+			spacing={0.5}
+			direction={"row"}
+			flexWrap={"wrap"}
+			gap={"4px"}
+			justifyContent={"flex-start"}
+			alignItems={"flex-start"}
+		>
 			{message.buttons.map((button, idx) => {
-				const buttonIndentifier = `${messageIndex}-${contentIndex}-${idx}`;
-				const isClicked = clickedBtnListRef.current.includes(buttonIndentifier);
+				const buttonIndentifier = `${messageID}-${idx}`;
+				const isSelected =
+					clickedBtnListRef.current.includes(buttonIndentifier);
+
 				return (
-					<Grid item xs="auto" key={button.text} maxWidth={"100%"}>
-						<StyledButton
-							isClicked={isClicked}
-							disabled={isClicked}
-							id={buttonIndentifier}
-							onClick={() => handleButtonClick(button, buttonIndentifier)}
-						>
-							{button.text}
-						</StyledButton>
-					</Grid>
+					<StyledButton
+						key={buttonIndentifier}
+						disabled={isSelected}
+						id={buttonIndentifier}
+						onClick={() => handleButtonClick(button, buttonIndentifier)}
+					>
+						{button.text}
+					</StyledButton>
 				);
 			})}
-		</Grid>
+		</Stack>
 	);
 }

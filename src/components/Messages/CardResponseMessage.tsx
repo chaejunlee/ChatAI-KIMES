@@ -1,36 +1,48 @@
-import { ImageResponseCardType } from "../../Interface/Message/ResponseMessageType";
-import { Button, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import styled from "@mui/system/styled";
-import { primaryColor } from "../../utils/color";
+import {
+	ImageResponseCardType,
+	imageResponseCardContentType,
+} from "../../Interface/Message/ResponseMessageType";
 import { MessageButtons } from "./MessageButtons";
 
 export interface CardResponseMessageTypeProps {
 	data: ImageResponseCardType;
-	onButtonClick: (text: string) => void;
-	messageIndex: number;
-	contentIndex: number;
+	messageID: string;
 }
 
-interface IsClickedInterface {
-	isClicked: boolean;
+export default function CardResponseMessage({
+	data,
+	messageID,
+}: CardResponseMessageTypeProps) {
+	const message = data.imageResponseCard;
+
+	return (
+		<Stack
+			marginBottom={1}
+			direction="column"
+			spacing={2}
+			alignItems="flex-start"
+		>
+			<MessageButtons message={message} messageID={messageID} />
+
+			{message.imageUrl && <MessageImage message={message} />}
+
+			{message.subtitle && <MessageSubtitle subtitle={message.subtitle} />}
+		</Stack>
+	);
 }
 
-const Style =
-	(trueProp: string, falseProp: string) => (props: IsClickedInterface) => {
-		return props.isClicked ? trueProp : falseProp;
-	};
-
-export const StyledButton = styled(Button)<IsClickedInterface>`
-	margin: 0 auto;
-	padding-inline: 0.75rem;
-
-	background: ${Style("#eaefef", "white")};
-	color: ${Style(primaryColor, "black")};
-	text-align: start;
-
-	border-radius: 20px;
-	border: 1px solid ${Style(primaryColor, "#bed1d1")};
-`;
+function MessageImage({ message }: { message: imageResponseCardContentType }) {
+	return (
+		<BasicMessage>
+			<StyledImg src={message.imageUrl} alt={message.title} />
+			{message.title && (
+				<Typography marginTop={"0.5rem"}>{message.title}</Typography>
+			)}
+		</BasicMessage>
+	);
+}
 
 const BasicMessage = styled("div")`
 	width: 75%;
@@ -55,42 +67,6 @@ const StyledImg = styled("img")`
 	border-radius: 1rem;
 	width: 100%;
 `;
-
-export default function CardResponseMessage({
-	data,
-	onButtonClick,
-	messageIndex,
-	contentIndex,
-}: CardResponseMessageTypeProps) {
-	const message = data.imageResponseCard;
-
-	return (
-		<Stack
-			marginBottom={1}
-			direction="column"
-			spacing={2}
-			alignItems="flex-start"
-		>
-			<MessageButtons
-				message={message}
-				messageIndex={messageIndex}
-				contentIndex={contentIndex}
-				onButtonClick={onButtonClick}
-			/>
-
-			{message.imageUrl ? (
-				<BasicMessage>
-					<StyledImg src={message.imageUrl} alt={message.title} />
-					{message.title ? (
-						<Typography marginTop={"0.5rem"}>{message.title}</Typography>
-					) : null}
-				</BasicMessage>
-			) : null}
-
-			{message.subtitle && <MessageSubtitle subtitle={message.subtitle} />}
-		</Stack>
-	);
-}
 
 function MessageSubtitle({ subtitle }: { subtitle: string }) {
 	return <p>{subtitle}</p>;

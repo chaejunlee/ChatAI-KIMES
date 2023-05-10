@@ -1,14 +1,5 @@
 import { ContentResponseMessageType } from "../../Interface/Message/ResponseMessageType";
-
-import { makeStyles } from "@mui/styles";
 import { styled, Typography } from "@mui/material";
-
-const useStyles = makeStyles(() => ({
-	root: {
-		border: "none",
-		boxShadow: "none",
-	},
-}));
 
 interface ContentResponseMessageTypeProps {
 	message: ContentResponseMessageType;
@@ -33,8 +24,6 @@ const BasicMessage = styled("div")`
 export default function ContentResponseMessage({
 	message,
 }: ContentResponseMessageTypeProps) {
-	const classes = useStyles();
-
 	return (
 		<BasicMessage>
 			<Typography sx={{ textAlign: "left" }}>{message.content}</Typography>

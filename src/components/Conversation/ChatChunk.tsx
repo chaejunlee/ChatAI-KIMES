@@ -4,20 +4,14 @@ import { ChatChunkContent } from "./ChatChunkContent";
 
 const ChatChunk = ({
 	message,
-	onButtonClick,
-	messageIndex,
+	messageID,
 }: {
 	message: Message;
-	onButtonClick: (text: string) => void;
-	messageIndex: number;
+	messageID: string;
 }) => {
 	return (
 		<Stack spacing={1.25} direction="row">
-			<ChatChunkContent
-				message={message}
-				onButtonClick={onButtonClick}
-				messageIndex={messageIndex}
-			/>
+			<ChatChunkContent message={message} messageID={String(messageID)} />
 		</Stack>
 	);
 };

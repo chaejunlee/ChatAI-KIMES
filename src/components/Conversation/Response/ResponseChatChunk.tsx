@@ -11,12 +11,10 @@ import { ResponseChat } from "./ResponseChat";
 
 export function ResponseChatChunk({
 	message,
-	onButtonClick,
-	messageIndex,
+	messageID,
 }: {
 	message: ResponseMessageType;
-	onButtonClick: (text: string) => void;
-	messageIndex: number;
+	messageID: string;
 }) {
 	const receivedResponse = message.content;
 	return (
@@ -37,19 +35,14 @@ export function ResponseChatChunk({
 									<CardResponseMessage
 										key={content.contentType + idx}
 										data={content as ImageResponseCardType}
-										onButtonClick={onButtonClick}
-										messageIndex={messageIndex}
-										contentIndex={idx}
+										messageID={`${messageID}-${idx}`}
 									/>
 								);
 						}
 					}
 				)
 			) : (
-				<DefaultCardResponseMessage
-					onButtonClick={onButtonClick}
-					messageIndex={messageIndex}
-				/>
+				<DefaultCardResponseMessage messageID={messageID} />
 			)}
 		</ResponseChat>
 	);

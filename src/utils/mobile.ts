@@ -1,4 +1,9 @@
-const scrollToTop = () => {
+const minimumKeyboardHeight = 100;
+const windowHeight = window.innerHeight;
+const root = document.getElementById("root");
+const visualViewport = window.visualViewport;
+
+export const scrollToTop = () => {
 	window.scrollTo(0, 0);
 };
 
@@ -9,6 +14,7 @@ const scrollToTopTimeout = () => {
 };
 
 export const addScrollEventListener = () => {
+	scrollToTop();
 	window.addEventListener("scroll", scrollToTopTimeout);
 };
 
@@ -16,31 +22,44 @@ const removeScrollEventListener = () => {
 	window.removeEventListener("scroll", scrollToTopTimeout);
 };
 
-const minimumKeyboardHeight = 100;
-const windowHeight = window.innerHeight;
-const root = document.getElementById("root");
-const visualViewport = window.visualViewport;
+export const setBottom = (bottom: number) => {
+	if (!root) return;
+
+	root.style.bottom = bottom + "px";
+};
 
 export default function setWindowHeight() {
 	document.body.style.height = `${windowHeight}px`;
-	if (root) root.style.bottom = "0px";
+	if (root) setBottom(0);
+}
+
+export function getKeyboardHeight(e: Event | null) {
+	let visualViewport: VisualViewport;
+	if (e) {
+		visualViewport = e.target as VisualViewport;
+	} else {
+		visualViewport = window.visualViewport as VisualViewport;
+	}
+	const viewportHeight = visualViewport.height;
+	const keyboardHeight = windowHeight - viewportHeight;
+
+	return keyboardHeight;
 }
 
 const mobileKeyboardHandler = (e: Event) => {
-	const visualViewportEvent = e.target as VisualViewport;
-	const viewportHeight = visualViewportEvent.height;
-	const keyboardHeight = windowHeight - viewportHeight;
+	const keyboardHeight = getKeyboardHeight(e);
 
 	if (!root) return;
 
 	if (keyboardHeight > minimumKeyboardHeight) {
 		addScrollEventListener();
-		root.style.bottom = `${keyboardHeight}px`;
-	} else {
-		root.style.transition = "bottom 0.5s ease-in-out";
-		root.style.bottom = "0px";
-		removeScrollEventListener();
+		setBottom(keyboardHeight);
 		root.style.transition = "none";
+	} else {
+		setBottom(0);
+		root.style.transition = "bottom 200ms ease-in-out";
+		removeScrollEventListener();
+		removeKeyboardPopupListener();
 	}
 };
 

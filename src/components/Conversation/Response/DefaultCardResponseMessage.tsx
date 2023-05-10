@@ -15,11 +15,9 @@ export const defaultCardResponseMessageData: ImageResponseCardType = {
 };
 
 export const DefaultCardResponseMessage = ({
-	onButtonClick,
-	messageIndex,
+	messageID,
 }: {
-	onButtonClick: (text: string) => void;
-	messageIndex: number;
+	messageID: string;
 }) => {
 	return (
 		<>
@@ -32,9 +30,7 @@ export const DefaultCardResponseMessage = ({
 			/>
 			<CardResponseMessage
 				data={defaultCardResponseMessageData}
-				onButtonClick={onButtonClick}
-				messageIndex={messageIndex}
-				contentIndex={-1}
+				messageID={messageID}
 			/>
 		</>
 	);

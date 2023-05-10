@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import {
 	IconButton,
 	InputAdornment,
@@ -11,14 +11,11 @@ import SendIcon from "@mui/icons-material/Send";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { makeStyles } from "@mui/styles";
 import { primaryColor } from "../../utils/color";
-import {
-	addKeyboardPopupListener,
-	removeKeyboardPopupListener,
-} from "../../utils/mobile";
+import { addKeyboardPopupListener } from "../../utils/mobile";
+import { LoadingContext } from "../../page/ChatPage";
 
 interface MessageInputProps {
 	onClick: (message: string) => void;
-	loading: boolean;
 }
 const useStyles = makeStyles({
 	root: {
@@ -49,7 +46,7 @@ const RotatingRefreshIcon = styled(RefreshIcon)`
 	animation: ${rotate} 1s linear infinite;
 `;
 
-export default function MessageInput({ onClick, loading }: MessageInputProps) {
+export default function MessageInput({ onClick }: MessageInputProps) {
 	const [text, setText] = React.useState<string>("");
 	const classes = useStyles();
 
@@ -82,8 +79,9 @@ export default function MessageInput({ onClick, loading }: MessageInputProps) {
 				value={text}
 				autoComplete="off"
 				onChange={(v) => setText(v.target.value)}
-				onFocus={addKeyboardPopupListener}
-				onBlur={removeKeyboardPopupListener}
+				onFocus={() => {
+					addKeyboardPopupListener();
+				}}
 				placeholder="Message..."
 				classes={{
 					root: classes.root,
@@ -91,9 +89,7 @@ export default function MessageInput({ onClick, loading }: MessageInputProps) {
 				InputProps={{
 					disableUnderline: true,
 					startAdornment: <PlusComponent />,
-					endAdornment: (
-						<SendComponent loading={loading} handleOnClick={handleOnClick} />
-					),
+					endAdornment: <SendComponent handleOnClick={handleOnClick} />,
 				}}
 			/>
 		</TextFiledWrapper>
@@ -108,13 +104,8 @@ const PlusComponent = () => {
 	);
 };
 
-const SendComponent = ({
-	loading,
-	handleOnClick,
-}: {
-	loading: boolean;
-	handleOnClick: () => void;
-}) => {
+const SendComponent = ({ handleOnClick }: { handleOnClick: () => void }) => {
+	const { loading } = useContext(LoadingContext)!;
 	return (
 		<InputAdornment sx={{ paddingRight: "0.5rem" }} position="end">
 			<IconButton onClick={handleOnClick}>
