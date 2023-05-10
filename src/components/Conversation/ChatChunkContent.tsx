@@ -6,10 +6,10 @@ import { ResponseChatChunk } from "./Response/ResponseChatChunk";
 
 export function ChatChunkContent({
 	message,
-	messageIndex,
+	messageID,
 }: {
 	message: Message;
-	messageIndex: number;
+	messageID: string;
 }) {
 	switch (message.type) {
 		case "request":
@@ -18,7 +18,7 @@ export function ChatChunkContent({
 			return (
 				<ResponseChatChunk
 					message={message as ResponseMessageType}
-					messageIndex={messageIndex}
+					messageID={messageID}
 				/>
 			);
 	}

@@ -4,14 +4,14 @@ import { ChatChunkContent } from "./ChatChunkContent";
 
 const ChatChunk = ({
 	message,
-	messageIndex,
+	messageID,
 }: {
 	message: Message;
-	messageIndex: number;
+	messageID: string;
 }) => {
 	return (
 		<Stack spacing={1.25} direction="row">
-			<ChatChunkContent message={message} messageIndex={messageIndex} />
+			<ChatChunkContent message={message} messageID={String(messageID)} />
 		</Stack>
 	);
 };

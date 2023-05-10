@@ -11,10 +11,10 @@ import { ResponseChat } from "./ResponseChat";
 
 export function ResponseChatChunk({
 	message,
-	messageIndex,
+	messageID,
 }: {
 	message: ResponseMessageType;
-	messageIndex: number;
+	messageID: string;
 }) {
 	const receivedResponse = message.content;
 	return (
@@ -35,15 +35,14 @@ export function ResponseChatChunk({
 									<CardResponseMessage
 										key={content.contentType + idx}
 										data={content as ImageResponseCardType}
-										messageIndex={messageIndex}
-										contentIndex={idx}
+										messageID={`${messageID}-${idx}`}
 									/>
 								);
 						}
 					}
 				)
 			) : (
-				<DefaultCardResponseMessage messageIndex={messageIndex} />
+				<DefaultCardResponseMessage messageID={messageID} />
 			)}
 		</ResponseChat>
 	);

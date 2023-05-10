@@ -41,7 +41,7 @@ export default function Conversation({
 				<ChatChunk
 					key={message.type + idx}
 					message={message}
-					messageIndex={idx}
+					messageID={String(idx)}
 				/>
 			))}
 			{isLoading && (

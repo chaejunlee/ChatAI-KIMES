@@ -8,14 +8,12 @@ import { MessageButtons } from "./MessageButtons";
 
 export interface CardResponseMessageTypeProps {
 	data: ImageResponseCardType;
-	messageIndex: number;
-	contentIndex: number;
+	messageID: string;
 }
 
 export default function CardResponseMessage({
 	data,
-	messageIndex,
-	contentIndex,
+	messageID,
 }: CardResponseMessageTypeProps) {
 	const message = data.imageResponseCard;
 
@@ -26,11 +24,7 @@ export default function CardResponseMessage({
 			spacing={2}
 			alignItems="flex-start"
 		>
-			<MessageButtons
-				message={message}
-				messageIndex={messageIndex}
-				contentIndex={contentIndex}
-			/>
+			<MessageButtons message={message} messageID={messageID} />
 
 			{message.imageUrl && <MessageImage message={message} />}
 

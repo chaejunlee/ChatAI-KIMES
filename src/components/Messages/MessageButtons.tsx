@@ -10,8 +10,7 @@ import { CardContext } from "../../page/ChatPage";
 
 interface MessageButtonsProps {
 	message: imageResponseCardContentType;
-	messageIndex: number;
-	contentIndex: number;
+	messageID: string;
 }
 
 interface IsSelectedInterface {
@@ -35,11 +34,7 @@ export const StyledButton = styled(Button)<IsSelectedInterface>`
 	margin: 0 !important;
 `;
 
-export function MessageButtons({
-	message,
-	messageIndex,
-	contentIndex,
-}: MessageButtonsProps) {
+export function MessageButtons({ message, messageID }: MessageButtonsProps) {
 	const clickedBtnListRef = useRef([] as string[]);
 	const { onCardButtonClick } = useContext(CardContext)!;
 
@@ -61,12 +56,13 @@ export function MessageButtons({
 			alignItems={"flex-start"}
 		>
 			{message.buttons.map((button, idx) => {
-				const buttonIndentifier = `${messageIndex}-${contentIndex}-${idx}`;
+				const buttonIndentifier = `${messageID}-${idx}`;
 				const isSelected =
 					clickedBtnListRef.current.includes(buttonIndentifier);
 
 				return (
 					<StyledButton
+						key={buttonIndentifier}
 						disabled={isSelected}
 						id={buttonIndentifier}
 						onClick={() => handleButtonClick(button, buttonIndentifier)}
