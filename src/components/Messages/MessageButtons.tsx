@@ -1,6 +1,9 @@
 import { useContext, useRef } from "react";
-import { imageResponseCardContentType } from "../../Interface/Message/ResponseMessageType";
-import { Button, Grid } from "@mui/material";
+import {
+	ButtonResponseType,
+	imageResponseCardContentType,
+} from "../../Interface/Message/ResponseMessageType";
+import { Button, Grid, Stack } from "@mui/material";
 import styled from "@emotion/styled";
 import { primaryColor } from "../../utils/color";
 import { CardContext } from "../../page/ChatPage";
@@ -12,16 +15,15 @@ interface MessageButtonsProps {
 }
 
 interface IsSelectedInterface {
-	isSelected: boolean;
+	disabled: boolean;
 }
 
 const Style =
 	(trueProp: string, falseProp: string) => (props: IsSelectedInterface) => {
-		return props.isSelected ? trueProp : falseProp;
+		return props.disabled ? trueProp : falseProp;
 	};
 
 export const StyledButton = styled(Button)<IsSelectedInterface>`
-	margin: 0 auto;
 	padding-inline: 0.75rem;
 
 	background: ${Style("#eaefef", "white")};
@@ -30,6 +32,7 @@ export const StyledButton = styled(Button)<IsSelectedInterface>`
 
 	border-radius: 20px;
 	border: 1px solid ${Style(primaryColor, "#bed1d1")};
+	margin: 0 !important;
 `;
 
 export function MessageButtons({
@@ -40,31 +43,38 @@ export function MessageButtons({
 	const clickedBtnListRef = useRef([] as string[]);
 	const { onCardButtonClick } = useContext(CardContext)!;
 
-	const handleButtonClick = (button: any, buttonIndentifier: string) => {
+	const handleButtonClick = (
+		button: ButtonResponseType,
+		buttonIndentifier: string
+	) => {
 		clickedBtnListRef.current.push(buttonIndentifier);
 		onCardButtonClick(button.value);
 	};
 
 	return (
-		<Grid container spacing={0.5} direction="row">
+		<Stack
+			spacing={0.5}
+			direction={"row"}
+			flexWrap={"wrap"}
+			gap={"4px"}
+			justifyContent={"flex-start"}
+			alignItems={"flex-start"}
+		>
 			{message.buttons.map((button, idx) => {
 				const buttonIndentifier = `${messageIndex}-${contentIndex}-${idx}`;
 				const isSelected =
 					clickedBtnListRef.current.includes(buttonIndentifier);
 
 				return (
-					<Grid item xs="auto" key={button.text} maxWidth={"100%"}>
-						<StyledButton
-							isSelected={isSelected}
-							disabled={isSelected}
-							id={buttonIndentifier}
-							onClick={() => handleButtonClick(button, buttonIndentifier)}
-						>
-							{button.text}
-						</StyledButton>
-					</Grid>
+					<StyledButton
+						disabled={isSelected}
+						id={buttonIndentifier}
+						onClick={() => handleButtonClick(button, buttonIndentifier)}
+					>
+						{button.text}
+					</StyledButton>
 				);
 			})}
-		</Grid>
+		</Stack>
 	);
 }
