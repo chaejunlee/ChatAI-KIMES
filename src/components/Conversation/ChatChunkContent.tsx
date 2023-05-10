@@ -6,11 +6,9 @@ import { ResponseChatChunk } from "./Response/ResponseChatChunk";
 
 export function ChatChunkContent({
 	message,
-	onButtonClick,
 	messageIndex,
 }: {
 	message: Message;
-	onButtonClick: (text: string) => void;
 	messageIndex: number;
 }) {
 	switch (message.type) {
@@ -20,7 +18,6 @@ export function ChatChunkContent({
 			return (
 				<ResponseChatChunk
 					message={message as ResponseMessageType}
-					onButtonClick={onButtonClick}
 					messageIndex={messageIndex}
 				/>
 			);

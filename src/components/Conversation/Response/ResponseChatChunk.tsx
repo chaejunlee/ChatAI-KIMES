@@ -11,11 +11,9 @@ import { ResponseChat } from "./ResponseChat";
 
 export function ResponseChatChunk({
 	message,
-	onButtonClick,
 	messageIndex,
 }: {
 	message: ResponseMessageType;
-	onButtonClick: (text: string) => void;
 	messageIndex: number;
 }) {
 	const receivedResponse = message.content;
@@ -37,7 +35,6 @@ export function ResponseChatChunk({
 									<CardResponseMessage
 										key={content.contentType + idx}
 										data={content as ImageResponseCardType}
-										onButtonClick={onButtonClick}
 										messageIndex={messageIndex}
 										contentIndex={idx}
 									/>
@@ -46,10 +43,7 @@ export function ResponseChatChunk({
 					}
 				)
 			) : (
-				<DefaultCardResponseMessage
-					onButtonClick={onButtonClick}
-					messageIndex={messageIndex}
-				/>
+				<DefaultCardResponseMessage messageIndex={messageIndex} />
 			)}
 		</ResponseChat>
 	);

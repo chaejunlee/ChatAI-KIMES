@@ -1,38 +1,62 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { imageResponseCardContentType } from "../../Interface/Message/ResponseMessageType";
-import { Grid } from "@mui/material";
-import { StyledButton } from "./CardResponseMessage";
+import { Button, Grid } from "@mui/material";
+import styled from "@emotion/styled";
+import { primaryColor } from "../../utils/color";
+import { CardContext } from "../../page/ChatPage";
 
 interface MessageButtonsProps {
 	message: imageResponseCardContentType;
 	messageIndex: number;
 	contentIndex: number;
-	onButtonClick: (text: string) => void;
 }
+
+interface IsSelectedInterface {
+	isSelected: boolean;
+}
+
+const Style =
+	(trueProp: string, falseProp: string) => (props: IsSelectedInterface) => {
+		return props.isSelected ? trueProp : falseProp;
+	};
+
+export const StyledButton = styled(Button)<IsSelectedInterface>`
+	margin: 0 auto;
+	padding-inline: 0.75rem;
+
+	background: ${Style("#eaefef", "white")};
+	color: ${Style(primaryColor, "black")};
+	text-align: start;
+
+	border-radius: 20px;
+	border: 1px solid ${Style(primaryColor, "#bed1d1")};
+`;
 
 export function MessageButtons({
 	message,
 	messageIndex,
 	contentIndex,
-	onButtonClick,
 }: MessageButtonsProps) {
 	const clickedBtnListRef = useRef([] as string[]);
+	const { onCardButtonClick } = useContext(CardContext)!;
 
 	const handleButtonClick = (button: any, buttonIndentifier: string) => {
 		clickedBtnListRef.current.push(buttonIndentifier);
-		onButtonClick(button.value);
+		onCardButtonClick(button.value);
 	};
 
 	return (
 		<Grid container spacing={0.5} direction="row">
 			{message.buttons.map((button, idx) => {
 				const buttonIndentifier = `${messageIndex}-${contentIndex}-${idx}`;
-				const isClicked = clickedBtnListRef.current.includes(buttonIndentifier);
+				const isSelected =
+					clickedBtnListRef.current.includes(buttonIndentifier);
+
 				return (
 					<Grid item xs="auto" key={button.text} maxWidth={"100%"}>
 						<StyledButton
-							isClicked={isClicked}
-							disabled={isClicked}
+							isSelected={isSelected}
+							disabled={isSelected}
 							id={buttonIndentifier}
 							onClick={() => handleButtonClick(button, buttonIndentifier)}
 						>

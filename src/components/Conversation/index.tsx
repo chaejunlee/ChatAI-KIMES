@@ -7,7 +7,6 @@ import { ResponseChat } from "./Response/ResponseChat";
 interface ConversationProps {
 	messages: Message[];
 	loading: boolean;
-	onButtonClick: (text: string) => void;
 }
 
 const LoadingResponseMessage = () => {
@@ -25,7 +24,6 @@ const LoadingResponseMessage = () => {
 export default function Conversation({
 	messages = sampleMessages,
 	loading,
-	onButtonClick,
 }: ConversationProps) {
 	return (
 		<Stack
@@ -42,7 +40,6 @@ export default function Conversation({
 				<ChatChunk
 					key={message.type + idx}
 					message={message}
-					onButtonClick={onButtonClick}
 					messageIndex={idx}
 				/>
 			))}
