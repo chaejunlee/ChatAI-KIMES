@@ -3,10 +3,11 @@ import sampleMessages from "../../Data/Message";
 import Message from "../../Interface/Message/Message";
 import ChatChunk from "./ChatChunk";
 import { ResponseChat } from "./Response/ResponseChat";
+import { useContext } from "react";
+import { LoadingContext } from "../../page/ChatPage";
 
 interface ConversationProps {
 	messages: Message[];
-	loading: boolean;
 }
 
 const LoadingResponseMessage = () => {
@@ -23,8 +24,8 @@ const LoadingResponseMessage = () => {
 
 export default function Conversation({
 	messages = sampleMessages,
-	loading,
 }: ConversationProps) {
+	const { loading: isLoading } = useContext(LoadingContext)!;
 	return (
 		<Stack
 			direction="column"
@@ -43,7 +44,7 @@ export default function Conversation({
 					messageIndex={idx}
 				/>
 			))}
-			{loading && (
+			{isLoading && (
 				<ResponseChat>
 					<LoadingResponseMessage />
 				</ResponseChat>
