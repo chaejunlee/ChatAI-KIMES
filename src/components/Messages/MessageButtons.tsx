@@ -6,7 +6,7 @@ import {
 import { Button, Grid, Stack } from "@mui/material";
 import styled from "@emotion/styled";
 import { primaryColor } from "../../utils/color";
-import { CardContext } from "../../page/ChatPage";
+import { SendRequestContext } from "../../page/ChatPage/SendRequestContext";
 
 interface MessageButtonsProps {
 	message: imageResponseCardContentType;
@@ -36,14 +36,14 @@ export const StyledButton = styled(Button)<IsSelectedInterface>`
 
 export function MessageButtons({ message, messageID }: MessageButtonsProps) {
 	const clickedBtnListRef = useRef([] as string[]);
-	const { onCardButtonClick } = useContext(CardContext)!;
+	const { sendRequest } = useContext(SendRequestContext)!;
 
 	const handleButtonClick = (
 		button: ButtonResponseType,
 		buttonIndentifier: string
 	) => {
 		clickedBtnListRef.current.push(buttonIndentifier);
-		onCardButtonClick(button.value);
+		sendRequest(button.value);
 	};
 
 	return (

@@ -5,13 +5,13 @@ interface ContentResponseMessageTypeProps {
 	message: ContentResponseMessageType;
 }
 
-const BasicMessage = styled("div")`
+export const BasicMessage = styled("div")`
 	z-index: -1;
 	padding: 8px 16px;
 	margin-bottom: 5px;
 	display: inline-block;
 
-	max-width: 80%;
+	max-width: 70%;
 
 	background: #eaefef;
 	border-radius: 0px 20px 20px 20px;

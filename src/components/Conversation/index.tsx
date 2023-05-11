@@ -4,7 +4,7 @@ import Message from "../../Interface/Message/Message";
 import ChatChunk from "./ChatChunk";
 import { ResponseChat } from "./Response/ResponseChat";
 import { useContext } from "react";
-import { LoadingContext } from "../../page/ChatPage";
+import { SendRequestContext } from "../../page/ChatPage/SendRequestContext";
 
 interface ConversationProps {
 	messages: Message[];
@@ -25,7 +25,7 @@ const LoadingResponseMessage = () => {
 export default function Conversation({
 	messages = sampleMessages,
 }: ConversationProps) {
-	const { loading: isLoading } = useContext(LoadingContext)!;
+	const { loading: isLoading } = useContext(SendRequestContext)!;
 	return (
 		<Stack
 			direction="column"
@@ -39,7 +39,7 @@ export default function Conversation({
 		>
 			{messages.map((message, idx) => (
 				<ChatChunk
-					key={message.type + idx}
+					key={message.type + String(idx)}
 					message={message}
 					messageID={String(idx)}
 				/>
