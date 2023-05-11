@@ -39,7 +39,7 @@ export default function Conversation({
 		>
 			{messages.map((message, idx) => (
 				<ChatChunk
-					key={message.type + idx}
+					key={message.type + String(idx)}
 					message={message}
 					messageID={String(idx)}
 				/>

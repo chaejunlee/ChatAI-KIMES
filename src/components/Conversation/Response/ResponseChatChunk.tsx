@@ -19,27 +19,31 @@ export function ResponseChatChunk({
 	const receivedResponse = message.content;
 	return (
 		<ResponseChat>
-			{receivedResponse?.map(
-				(content: BasicResponseMessageType, idx: number) => {
-					switch (content.contentType) {
-						case "PlainText":
-							return (
-								<ContentResponseMessage
-									key={content.contentType + idx}
-									message={content as ContentResponseMessageType}
-								/>
-							);
-						case "ImageResponseCard":
-							return (
-								<CardResponseMessage
-									key={content.contentType + idx}
-									data={content as ImageResponseCardType}
-									messageID={`${messageID}-${idx}`}
-								/>
-							);
+			{receivedResponse ? (
+				receivedResponse.map(
+					(content: BasicResponseMessageType, idx: number) => {
+						switch (content.contentType) {
+							case "PlainText":
+								return (
+									<ContentResponseMessage
+										key={content.contentType + idx}
+										message={content as ContentResponseMessageType}
+									/>
+								);
+							case "ImageResponseCard":
+								return (
+									<CardResponseMessage
+										key={content.contentType + idx}
+										data={content as ImageResponseCardType}
+										messageID={`${messageID}-${idx}`}
+									/>
+								);
+						}
 					}
-				}
-			) ?? <DefaultCardResponseMessage messageID={messageID} />}
+				)
+			) : (
+				<DefaultCardResponseMessage messageID={messageID} />
+			)}
 		</ResponseChat>
 	);
 }
