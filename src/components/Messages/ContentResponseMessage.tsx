@@ -11,7 +11,7 @@ const BasicMessage = styled("div")`
 	margin-bottom: 5px;
 	display: inline-block;
 
-	max-width: 80%;
+	max-width: 70%;
 
 	background: #eaefef;
 	border-radius: 0px 20px 20px 20px;
