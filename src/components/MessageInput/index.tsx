@@ -47,12 +47,15 @@ const RotatingRefreshIcon = styled(RefreshIcon)`
 `;
 
 export default function MessageInput({ onClick }: MessageInputProps) {
+	const { loading } = useContext(SendRequestContext)!;
+
 	const [text, setText] = React.useState<string>("");
 	const classes = useStyles();
 
 	const ref = useRef<HTMLInputElement>(null);
 
 	const handleOnClick = () => {
+		if (loading) return;
 		if (text.length === 0) return;
 		onClick(text);
 		setText("");
@@ -60,6 +63,7 @@ export default function MessageInput({ onClick }: MessageInputProps) {
 	};
 
 	const handleTextFieldKeyDown = (e: React.KeyboardEvent) => {
+		if (loading) return;
 		if (e.key === "Enter" && e.keyCode === 13) {
 			handleOnClick();
 		}
@@ -82,10 +86,11 @@ export default function MessageInput({ onClick }: MessageInputProps) {
 				onFocus={() => {
 					addKeyboardPopupListener();
 				}}
-				placeholder="Message..."
+				placeholder={loading ? "요청을 답변 중입니다." : "Message..."}
 				classes={{
 					root: classes.root,
 				}}
+				disabled={loading}
 				InputProps={{
 					disableUnderline: true,
 					startAdornment: <PlusComponent />,
@@ -106,6 +111,7 @@ const PlusComponent = () => {
 
 const SendComponent = ({ handleOnClick }: { handleOnClick: () => void }) => {
 	const { loading } = useContext(SendRequestContext)!;
+
 	return (
 		<InputAdornment sx={{ paddingRight: "0.5rem" }} position="end">
 			<IconButton onClick={handleOnClick}>
