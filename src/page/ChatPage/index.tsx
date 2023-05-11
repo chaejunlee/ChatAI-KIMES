@@ -1,61 +1,25 @@
-import React, {
-	Dispatch,
-	SetStateAction,
-	createContext,
-	useState,
-} from "react";
-import { introMessage } from "../../Data/Message";
-import Message from "../../Interface/Message/Message";
-import RequestMessageType from "../../Interface/Message/RequestMessageType";
+import { useCallback, useState } from "react";
 import Conversation from "../../components/Conversation";
 import MessageInput from "../../components/MessageInput";
-import { addResponse } from "./addResponse";
-
-const createRequest = (message: string) => {
-	return {
-		message: message,
-		type: "request",
-		userId: window.navigator.userAgent,
-	} as RequestMessageType;
-};
-
-interface CardContextInterface {
-	onCardButtonClick: (text: string) => Promise<void>;
-}
-
-interface LoadingContextInterface {
-	loading: boolean;
-	setLoading: Dispatch<SetStateAction<boolean>>;
-}
-
-export const CardContext = createContext<CardContextInterface | null>(null);
-export const LoadingContext = createContext<LoadingContextInterface | null>(
-	null
-);
+import useRequest from "./useRequest";
+import { createRequest } from "./createRequest";
+import { SendRequestContext } from "./SendRequestContext";
 
 export default function ChatPage() {
-	const [messages, setMessages] = useState<Message[]>([introMessage]);
-	const [loading, setLoading] = useState<boolean>(false);
+	const { messages, setMessages, loading, sendRequest } = useRequest();
 
-	const onCardButtonClick = async (text: string) => {
-		setLoading(true);
-		await addResponse(text, setMessages);
-		setLoading(false);
-	};
-
-	const addMessage = async (message: string) => {
-		setLoading(true);
-		setMessages([...messages, createRequest(message)]);
-		await addResponse(message, setMessages);
-		setLoading(false);
-	};
+	const addResponseMessage = useCallback(
+		(message: string) => {
+			setMessages((messages) => [...messages, createRequest(message)]);
+			sendRequest(message);
+		},
+		[setMessages, sendRequest]
+	);
 
 	return (
-		<LoadingContext.Provider value={{ loading, setLoading }}>
-			<CardContext.Provider value={{ onCardButtonClick }}>
-				<Conversation messages={messages} />
-				<MessageInput onClick={addMessage} />
-			</CardContext.Provider>
-		</LoadingContext.Provider>
+		<SendRequestContext.Provider value={{ loading, sendRequest }}>
+			<Conversation messages={messages} />
+			<MessageInput onClick={addResponseMessage} />
+		</SendRequestContext.Provider>
 	);
 }

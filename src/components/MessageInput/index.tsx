@@ -12,7 +12,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import { makeStyles } from "@mui/styles";
 import { primaryColor } from "../../utils/color";
 import { addKeyboardPopupListener } from "../../utils/mobile";
-import { LoadingContext } from "../../page/ChatPage";
+import { SendRequestContext } from "../../page/ChatPage/SendRequestContext";
 
 interface MessageInputProps {
 	onClick: (message: string) => void;
@@ -105,7 +105,7 @@ const PlusComponent = () => {
 };
 
 const SendComponent = ({ handleOnClick }: { handleOnClick: () => void }) => {
-	const { loading } = useContext(LoadingContext)!;
+	const { loading } = useContext(SendRequestContext)!;
 	return (
 		<InputAdornment sx={{ paddingRight: "0.5rem" }} position="end">
 			<IconButton onClick={handleOnClick}>
