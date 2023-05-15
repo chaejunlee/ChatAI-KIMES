@@ -10,7 +10,7 @@ const ChatChunk = ({
 	messageID: string;
 }) => {
 	return (
-		<Stack spacing={1.25} direction="row">
+		<Stack spacing={1.25} direction={"row"}>
 			<ChatChunkContent message={message} messageID={String(messageID)} />
 		</Stack>
 	);

@@ -1,6 +1,6 @@
-import MenuButton from "../../components/MenuButton";
-import { IconButton, Stack, styled } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import { IconButton, Stack, styled } from "@mui/material";
+import MenuButton from "../../components/MenuButton";
 
 import BeamworksLogo from "../../assets/BeamworksLogo.png";
 import ChatAIDE from "../../assets/Chat-AIDE.png";
@@ -28,9 +28,9 @@ export default function Header() {
 			direction={"row"}
 			position={"sticky"}
 			top={"0"}
-			left="0"
-			right="0"
-			zIndex="10"
+			left={"0"}
+			right={"0"}
+			zIndex={"10"}
 		>
 			<StyledHeader>
 				<HeaderSVG

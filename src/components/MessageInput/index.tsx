@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef } from "react";
 import {
 	IconButton,
 	InputAdornment,
@@ -12,7 +12,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import { makeStyles } from "@mui/styles";
 import { primaryColor } from "../../utils/color";
 import { addKeyboardPopupListener } from "../../utils/mobile";
-import { SendRequestContext } from "../../page/ChatPage/SendRequestContext";
+import useSendRequestContext from "../../hooks/Request/useSendRequestContext";
 
 interface MessageInputProps {
 	onClick: (message: string) => void;
@@ -47,7 +47,7 @@ const RotatingRefreshIcon = styled(RefreshIcon)`
 `;
 
 export default function MessageInput({ onClick }: MessageInputProps) {
-	const { loading } = useContext(SendRequestContext)!;
+	const { loading } = useSendRequestContext()!;
 
 	const [text, setText] = React.useState<string>("");
 	const classes = useStyles();
@@ -77,11 +77,11 @@ export default function MessageInput({ onClick }: MessageInputProps) {
 					borderRadius: "200px",
 					boxSizing: "border-box",
 				}}
-				variant="standard"
+				variant={"standard"}
 				onKeyDown={handleTextFieldKeyDown}
 				inputRef={ref}
 				value={text}
-				autoComplete="off"
+				autoComplete={"off"}
 				onChange={(v) => setText(v.target.value)}
 				onFocus={() => {
 					addKeyboardPopupListener();
@@ -103,17 +103,17 @@ export default function MessageInput({ onClick }: MessageInputProps) {
 
 const PlusComponent = () => {
 	return (
-		<InputAdornment sx={{ paddingLeft: "0.5rem" }} position="start">
-			<AddCircleIcon fontSize="large" sx={{ color: primaryColor }} />
+		<InputAdornment sx={{ paddingLeft: "0.5rem" }} position={"start"}>
+			<AddCircleIcon fontSize={"large"} sx={{ color: primaryColor }} />
 		</InputAdornment>
 	);
 };
 
 const SendComponent = ({ handleOnClick }: { handleOnClick: () => void }) => {
-	const { loading } = useContext(SendRequestContext)!;
+	const { loading } = useSendRequestContext()!;
 
 	return (
-		<InputAdornment sx={{ paddingRight: "0.5rem" }} position="end">
+		<InputAdornment sx={{ paddingRight: "0.5rem" }} position={"end"}>
 			<IconButton onClick={handleOnClick}>
 				{loading ? <RotatingRefreshIcon /> : <SendIcon />}
 			</IconButton>
