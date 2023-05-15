@@ -28,9 +28,9 @@ export default function Header() {
 			direction={"row"}
 			position={"sticky"}
 			top={"0"}
-			left="0"
-			right="0"
-			zIndex="10"
+			left={"0"}
+			right={"0"}
+			zIndex={"10"}
 		>
 			<StyledHeader>
 				<HeaderSVG
