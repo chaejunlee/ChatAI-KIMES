@@ -77,11 +77,11 @@ export default function MessageInput({ onClick }: MessageInputProps) {
 					borderRadius: "200px",
 					boxSizing: "border-box",
 				}}
-				variant="standard"
+				variant={"standard"}
 				onKeyDown={handleTextFieldKeyDown}
 				inputRef={ref}
 				value={text}
-				autoComplete="off"
+				autoComplete={"off"}
 				onChange={(v) => setText(v.target.value)}
 				onFocus={() => {
 					addKeyboardPopupListener();
@@ -103,8 +103,8 @@ export default function MessageInput({ onClick }: MessageInputProps) {
 
 const PlusComponent = () => {
 	return (
-		<InputAdornment sx={{ paddingLeft: "0.5rem" }} position="start">
-			<AddCircleIcon fontSize="large" sx={{ color: primaryColor }} />
+		<InputAdornment sx={{ paddingLeft: "0.5rem" }} position={"start"}>
+			<AddCircleIcon fontSize={"large"} sx={{ color: primaryColor }} />
 		</InputAdornment>
 	);
 };
@@ -113,7 +113,7 @@ const SendComponent = ({ handleOnClick }: { handleOnClick: () => void }) => {
 	const { loading } = useSendRequestContext()!;
 
 	return (
-		<InputAdornment sx={{ paddingRight: "0.5rem" }} position="end">
+		<InputAdornment sx={{ paddingRight: "0.5rem" }} position={"end"}>
 			<IconButton onClick={handleOnClick}>
 				{loading ? <RotatingRefreshIcon /> : <SendIcon />}
 			</IconButton>

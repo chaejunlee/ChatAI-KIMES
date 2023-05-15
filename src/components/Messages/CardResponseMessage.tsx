@@ -1,11 +1,11 @@
-import { Stack, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import styled from "@mui/system/styled";
 import {
 	ImageResponseCardType,
 	imageResponseCardContentType,
 } from "../../Interface/Message/ResponseMessageType";
-import { MessageButtons } from "./MessageButtons";
 import { BasicMessage } from "./ContentResponseMessage";
+import { MessageButtons } from "./MessageButtons";
 
 export interface CardResponseMessageTypeProps {
 	data: ImageResponseCardType;

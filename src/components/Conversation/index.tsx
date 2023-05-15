@@ -15,7 +15,7 @@ export default function Conversation({
 	const { loading: isLoading } = useSendRequestContext()!;
 	return (
 		<Stack
-			direction="column"
+			direction={"column"}
 			flexGrow={"1"}
 			overflow={"scroll"}
 			style={{ WebkitOverflowScrolling: "touch" }}

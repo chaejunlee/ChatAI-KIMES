@@ -1,5 +1,5 @@
-import { ContentResponseMessageType } from "../../Interface/Message/ResponseMessageType";
 import { styled, Typography } from "@mui/material";
+import { ContentResponseMessageType } from "../../Interface/Message/ResponseMessageType";
 
 interface ContentResponseMessageTypeProps {
 	message: ContentResponseMessageType;

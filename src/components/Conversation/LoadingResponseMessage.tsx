@@ -6,7 +6,7 @@ export const LoadingResponseMessage = () => {
 			<Skeleton
 				variant={"text"}
 				sx={{ fontSize: "2.5rem", width: "clamp(100px, 30%, 400px)" }}
-				animation="wave"
+				animation={"wave"}
 			/>
 		</Stack>
 	);

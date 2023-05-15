@@ -1,12 +1,12 @@
+import styled from "@emotion/styled";
+import { Button, Stack } from "@mui/material";
 import { useRef } from "react";
 import {
 	ButtonResponseType,
 	imageResponseCardContentType,
 } from "../../Interface/Message/ResponseMessageType";
-import { Button, Grid, Stack } from "@mui/material";
-import styled from "@emotion/styled";
-import { primaryColor } from "../../utils/color";
 import useSendRequestContext from "../../hooks/Request/useSendRequestContext";
+import { primaryColor } from "../../utils/color";
 
 interface MessageButtonsProps {
 	message: imageResponseCardContentType;
