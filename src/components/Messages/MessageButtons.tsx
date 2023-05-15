@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import {
 	ButtonResponseType,
 	imageResponseCardContentType,
@@ -6,7 +6,7 @@ import {
 import { Button, Grid, Stack } from "@mui/material";
 import styled from "@emotion/styled";
 import { primaryColor } from "../../utils/color";
-import { SendRequestContext } from "../../page/ChatPage/SendRequestContext";
+import useSendRequestContext from "../../hooks/Request/useSendRequestContext";
 
 interface MessageButtonsProps {
 	message: imageResponseCardContentType;
@@ -36,7 +36,7 @@ export const StyledButton = styled(Button)<IsSelectedInterface>`
 
 export function MessageButtons({ message, messageID }: MessageButtonsProps) {
 	const clickedBtnListRef = useRef([] as string[]);
-	const { sendRequest } = useContext(SendRequestContext)!;
+	const { sendRequest } = useSendRequestContext()!;
 
 	const handleButtonClick = (
 		button: ButtonResponseType,

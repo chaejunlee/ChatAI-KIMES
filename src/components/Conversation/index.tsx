@@ -1,11 +1,9 @@
-import { Skeleton, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import sampleMessages from "../../Data/Message";
 import Message from "../../Interface/Message/Message";
 import ChatChunk from "./ChatChunk";
 import { ResponseChat } from "./Response/ResponseChat";
-import { useContext } from "react";
-import { SendRequestContext } from "../../page/ChatPage/SendRequestContext";
-
+import useSendRequestContext from "../../hooks/Request/useSendRequestContext";
 interface ConversationProps {
 	messages: Message[];
 }
@@ -25,7 +23,7 @@ const LoadingResponseMessage = () => {
 export default function Conversation({
 	messages = sampleMessages,
 }: ConversationProps) {
-	const { loading: isLoading } = useContext(SendRequestContext)!;
+	const { loading: isLoading } = useSendRequestContext()!;
 	return (
 		<Stack
 			direction="column"
