@@ -4,8 +4,8 @@ import {
 	ImageResponseCardType,
 	ResponseMessageType,
 } from "../../../Interface/Message/ResponseMessageType";
-import CardResponseMessage from "../../Messages/CardResponseMessage";
-import ContentResponseMessage from "../../Messages/ContentResponseMessage";
+import CardResponseMessage from "../../Messages/Response/CardResponseMessage";
+import ContentResponseMessage from "../../Messages/Response/ContentResponseMessage";
 import { ResponseChat } from "./ResponseChat";
 
 export function ResponseChatChunk({

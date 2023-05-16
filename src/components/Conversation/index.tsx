@@ -1,14 +1,9 @@
 import { Stack } from "@mui/material";
-import sampleMessages from "../../Data/Message";
-import Message from "../../Interface/Message/Message";
-import ChatChunk from "./ChatChunk";
-import { ResponseChat } from "./Response/ResponseChat";
 import useMessageStatus from "../../hooks/Request/useMessageStatus";
-import { LoadingResponseMessage } from "./LoadingResponseMessage";
 import { useAppSelector } from "../../store/store";
-interface ConversationProps {
-	messages: Message[];
-}
+import ChatChunk from "./ChatChunk";
+import { LoadingResponseMessage } from "./LoadingResponseMessage";
+import { ResponseChat } from "./Response/ResponseChat";
 
 export default function Conversation() {
 	const { status: isLoading } = useMessageStatus();

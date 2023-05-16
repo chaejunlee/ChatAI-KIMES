@@ -1,21 +1,15 @@
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import RefreshIcon from "@mui/icons-material/Refresh";
 import SendIcon from "@mui/icons-material/Send";
-import {
-	IconButton,
-	InputAdornment,
-	keyframes,
-	styled,
-	TextField,
-} from "@mui/material";
+import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useRef } from "react";
 import useMessageStatus from "../../hooks/Request/useMessageStatus";
-import { addMessage } from "../../store/message/messageSlice";
 import { fetchResponse } from "../../store/message/fetchResponse";
+import { addMessage } from "../../store/message/messageSlice";
 import { useAppDispatch } from "../../store/store";
 import { primaryColor } from "../../utils/color";
-import { addKeyboardPopupListener } from "../../utils/mobile";
+import { addKeyboardPopupListener } from "../../utils/Mobile/keyboard";
+import { RotatingRefreshIcon } from "./RotatingRefreshIcon";
 
 const useStyles = makeStyles({
 	root: {
@@ -35,15 +29,6 @@ const TextFiledWrapper = styled("div")`
 	background: white;
 	border-top: #eee 2px solid;
 	padding-inline: 0.5rem;
-`;
-
-const rotate = keyframes`
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  `;
-
-const RotatingRefreshIcon = styled(RefreshIcon)`
-	animation: ${rotate} 1s linear infinite;
 `;
 
 export default function MessageInput() {
@@ -127,10 +112,4 @@ const SendComponent = ({ handleOnClick }: { handleOnClick: () => void }) => {
 			</IconButton>
 		</InputAdornment>
 	);
-};
-
-MessageInput.defaultProps = {
-	onClick: (message: string) => {
-		console.log(message);
-	},
 };

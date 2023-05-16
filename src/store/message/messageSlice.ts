@@ -5,7 +5,7 @@ import Message from "../../Interface/Message/Message";
 import { ResponseMessageType } from "../../Interface/Message/ResponseMessageType";
 import { createRequest } from "../../utils/Message/createRequest";
 import { fetchResponse } from "./fetchResponse";
-import { errorMessage } from "./messageHelper";
+import { errorMessage } from "../../utils/Message/errorMessageContent";
 
 interface MessageState {
 	data: Message[];

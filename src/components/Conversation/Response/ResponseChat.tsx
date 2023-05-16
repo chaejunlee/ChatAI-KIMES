@@ -1,6 +1,6 @@
 import { Avatar, Stack } from "@mui/material";
 import Logo from "../../../assets/logo.png";
-import { useSmoothScrollToBottom } from "../../../utils/Chat";
+import { useSmoothScrollToBottom } from "../../../utils/chat";
 
 export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 	const divRef = useSmoothScrollToBottom();
