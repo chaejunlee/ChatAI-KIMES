@@ -26,20 +26,31 @@ export const introMessage: ResponseMessageType = {
 			imageResponseCard: {
 				buttons: [
 					{
-						text: "유방암의 증상은?",
-						value: "system second",
+						text: "유방 조직검사가 무엇인가요?",
+						value: "Question_whwlrrjatk",
 					},
 					{
-						text: "유방암의 원인은?",
-						value: "system second",
-					},
-					{
-						text: "유방암의 진단은?",
-						value: "system second",
+						text: "유방암의 원인은 무엇인가요?",
+						value: "Question_dnjsdls",
 					}
 				],
 				title: "조직 구성(Tissue Composition)"
 			}
+		},
+		{
+			contentType: "PlainText",
+			content: "설문조사 text"
+		},
+		{
+			contextType: "imageResponseCard",
+			imageResponseCard: {
+				buttons: [
+					{
+						text: "설문조사",
+						value: "설문조사",
+					}
+				]
+			}	
 		}
 	] as unknown as BasicResponseMessageType[],
 	type: "response",
