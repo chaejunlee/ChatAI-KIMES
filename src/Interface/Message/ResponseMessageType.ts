@@ -2,7 +2,7 @@ import Message from "./Message";
 
 export interface BasicResponseMessageType {
 	//aws lex response message content type
-	contentType: string;
+	contentType: "PlainText" | "ImageResponseCard";
 }
 
 export interface ResponseMessageType extends Message {
