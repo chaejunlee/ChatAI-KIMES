@@ -1,9 +1,10 @@
 import {
+	BasicResponseMessageType,
 	ContentResponseMessageType,
 	ResponseMessageType,
 } from "../../Interface/Message/ResponseMessageType";
 
-export const createResponse = (content: ContentResponseMessageType[]) => {
+export const createResponse = (content: BasicResponseMessageType[]) => {
 	return {
 		content: content,
 		type: "response",

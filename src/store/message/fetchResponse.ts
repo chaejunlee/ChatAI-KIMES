@@ -5,14 +5,24 @@ import {
 	createResponseContent,
 } from "../../utils/Message/createResponse";
 import { getLexResponse } from "./getLexResponse";
+import {
+	defaultContentResponseMessageData,
+	defaultCardResponseMessageData,
+} from "./defaultResponseMessageData";
 
 export const fetchResponse = createAsyncThunk(
 	"message/fetchResponse",
 	async (message: string) => {
 		let content = await getLexResponse(message);
 
-		let errorMessage = isError(content);
-		if (errorMessage !== null) {
+		if (content === null)
+			return createResponse([
+				defaultContentResponseMessageData,
+				defaultCardResponseMessageData,
+			]);
+
+		let errorMessage = isErrorMessage(content);
+		if (errorMessage) {
 			const errorMessageContent = createResponseContent(errorMessage);
 			return createResponse(errorMessageContent);
 		}
@@ -21,11 +31,9 @@ export const fetchResponse = createAsyncThunk(
 	}
 );
 
-const isError = (
-	response: ContentResponseMessageType[] | null
+const isErrorMessage = (
+	response: ContentResponseMessageType[]
 ): string | null => {
-	if (response === null)
-		return "답변을 생성하지 못했습니다. 잠시 후 다시 시도해주세요.";
 	if (Object.keys(response).filter((key) => key.includes("error")).length > 0)
 		return "답변 생성에 오류가 있었습니다. 잠시 후 다시 시도해주세요.";
 
