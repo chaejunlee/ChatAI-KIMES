@@ -1,5 +1,4 @@
 import {
-	BasicResponseMessageType,
 	ContentResponseMessageType,
 	ImageResponseCardType,
 	ResponseMessageType,
@@ -11,7 +10,8 @@ export const introMessage: ResponseMessageType = {
 	content: [
 		{
 			contentType: "PlainText",
-			content: "안녕하세요! Chat-AIDE입니다. 저에게 유방암 관련 질문을 말씀해주시면 정보를 드릴 수 있어요.",
+			content:
+				"안녕하세요! Chat-AIDE입니다. 저에게 유방암 관련 질문을 말씀해주시면 정보를 드릴 수 있어요.",
 		},
 		{
 			contentType: "PlainText",
@@ -45,10 +45,9 @@ export const introMessage: ResponseMessageType = {
 				title: "설문조사"
 			}	
 		}
-	] as unknown as BasicResponseMessageType[],
+	],
 	type: "response",
 };
-
 
 export const initRequest: RequestMessageType = {
 	type: "request",
@@ -61,7 +60,6 @@ export const sampleTextResponse: ContentResponseMessageType = {
 	content:
 		"정상 유방에서 유방조직(tissue composition)의 구성은 매우 다양합니다. 유방 배경 에코결은 병변 발견의 민감도에 영향을 줄 수 있습니다.",
 };
-
 
 export const sampleImageResponse: ImageResponseCardType = {
 	contentType: "ImageResponseCard",
@@ -82,7 +80,7 @@ export const sampleImageResponse: ImageResponseCardType = {
 		title: "조직 구성(Tissue Composition)",
 	},
 };
-	
+
 export const sampleCardResponse: ResponseMessageType = {
 	type: "response",
 	content: [sampleTextResponse, sampleImageResponse],
