@@ -1,8 +1,8 @@
 import { Stack } from "@mui/material";
 import useMessageStatus from "../../hooks/Request/useMessageStatus";
 import { useAppSelector } from "../../store/store";
-import ChatChunk from "./ChatChunk";
-import { LoadingResponseMessage } from "./LoadingResponseMessage";
+import ChatChunk from "./Chat/ChatChunk";
+import { LoadingResponseMessage } from "./Chat/LoadingResponseMessage";
 import { ResponseChat } from "./Response/ResponseChat";
 
 export default function Conversation() {
