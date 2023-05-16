@@ -34,11 +34,11 @@ export const introMessage: ResponseMessageType = {
 			}
 		},
 		{
-			contextType: "PlainText",
+			contentType: "PlainText",
 			content : "설문조사 text test"
 		},
 		{
-			contextType: "ImageResponseCard",
+			contentType: "ImageResponseCard",
 			imageResponseCard: {
 				buttons: [
 					{
