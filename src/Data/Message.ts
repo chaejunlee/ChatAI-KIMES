@@ -14,11 +14,27 @@ export const introMessage: ResponseMessageType = {
 			content: "안녕하세요! Chat-AIDE입니다. 저에게 유방암 관련 질문을 말씀해주시면 정보를 드릴 수 있어요.",
 		},
 		{
+			contentType: "PlainText",
+			content: "궁금하신 내용을 말씀해주세요."
+		},
+		{
+			contentType: "PlainText",
+			content: "아래의 버튼들은 사람들이 자주 묻는 질문들이에요."
+		},
+		{
 			contentType: "ImageResponseCard",
 			imageResponseCard: {
 				buttons: [
 					{
-						text: "조직 구성(Tissue Composition)",
+						text: "유방암의 증상은?",
+						value: "system second",
+					},
+					{
+						text: "유방암의 원인은?",
+						value: "system second",
+					},
+					{
+						text: "유방암의 진단은?",
 						value: "system second",
 					}
 				],
