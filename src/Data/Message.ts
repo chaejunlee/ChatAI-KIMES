@@ -15,32 +15,36 @@ export const introMessage: ResponseMessageType = {
 		},
 		{
 			contentType: "PlainText",
-			content: "궁금하신 내용을 말씀해주세요.",
-		},
-		{
-			contentType: "PlainText",
-			content: "아래의 버튼들은 사람들이 자주 묻는 질문들이에요.",
+			content: "궁금하신 내용을 말씀해주세요. 아래의 버튼들은 사람들이 자주 묻는 질문들이에요."
 		},
 		{
 			contentType: "ImageResponseCard",
 			imageResponseCard: {
 				buttons: [
 					{
-						text: "유방암의 증상은?",
-						value: "system second",
+						text: "유방 조직검사가 무엇인가요?",
+						value: "유방 조직검사가 무엇인가요",
 					},
 					{
-						text: "유방암의 원인은?",
-						value: "system second",
-					},
-					{
-						text: "유방암의 진단은?",
-						value: "system second",
-					},
+						text: "유방암의 원인은 무엇인가요?",
+						value: "유방암의 원인은 무엇인가요",
+					}
 				],
-				title: "조직 구성(Tissue Composition)",
-			},
+				title: "조직 구성(Tissue Composition)"
+			}
 		},
+		{
+			contextType: "imageResponseCard",
+			imageResponseCard: {
+				buttons: [
+					{
+						text: "설문조사 시작하기",
+						value: "설문조사",
+					}
+				],
+				title: "설문조사"
+			}	
+		}
 	],
 	type: "response",
 };
