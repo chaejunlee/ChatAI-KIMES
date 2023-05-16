@@ -3,16 +3,16 @@ import sampleMessages from "../../Data/Message";
 import Message from "../../Interface/Message/Message";
 import ChatChunk from "./ChatChunk";
 import { ResponseChat } from "./Response/ResponseChat";
-import useSendRequestContext from "../../hooks/Request/useSendRequestContext";
+import useMessageStatus from "../../hooks/Request/useMessageStatus";
 import { LoadingResponseMessage } from "./LoadingResponseMessage";
+import { useAppSelector } from "../../store/store";
 interface ConversationProps {
 	messages: Message[];
 }
 
-export default function Conversation({
-	messages = sampleMessages,
-}: ConversationProps) {
-	const { loading: isLoading } = useSendRequestContext()!;
+export default function Conversation() {
+	const { status: isLoading } = useMessageStatus();
+	const messages = useAppSelector((state) => state.messages.data);
 	return (
 		<Stack
 			direction={"column"}
