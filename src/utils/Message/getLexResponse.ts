@@ -1,4 +1,4 @@
-import { ContentResponseMessageType } from "../../Interface/Message/ResponseMessageType";
+import { BasicResponseMessageType } from "../../Interface/Message/ResponseMessageType";
 
 export const getLexResponse = async (message: string) => {
 	const response = await fetch("/test", {
@@ -12,7 +12,7 @@ export const getLexResponse = async (message: string) => {
 		},
 	});
 
-	const data = (await response.json()) as ContentResponseMessageType[];
+	const data = (await response.json()) as BasicResponseMessageType[];
 
 	return data;
 };
