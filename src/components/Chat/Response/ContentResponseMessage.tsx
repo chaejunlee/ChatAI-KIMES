@@ -2,11 +2,7 @@ import { styled, Typography } from "@mui/material";
 import { ContentResponseMessageType } from "../../../Interface/Message/ResponseMessageType";
 import { containsUrl } from "../../../utils/chat";
 import { primaryColor } from "../../../utils/color";
-import { BasicMessage } from "../BasicMessage";
-
-interface ContentResponseMessageTypeProps {
-	message: ContentResponseMessageType;
-}
+import { BasicResponseMessage } from "./BasicResponseMessage";
 
 const StyledLink = styled("a")`
 	color: ${primaryColor};
@@ -20,10 +16,10 @@ const StyledLink = styled("a")`
 
 export default function ContentResponseMessage({
 	message,
-}: ContentResponseMessageTypeProps) {
-	const isUrl = containsUrl(message.content);
-
-	const content = isUrl ? (
+}: {
+	message: ContentResponseMessageType;
+}) {
+	const content = containsUrl(message.content) ? (
 		<StyledLink href={message.content} target="_blank" rel="noreferrer">
 			{message.content}
 		</StyledLink>
@@ -32,8 +28,8 @@ export default function ContentResponseMessage({
 	);
 
 	return (
-		<BasicMessage>
+		<BasicResponseMessage>
 			<Typography sx={{ textAlign: "left" }}>{content}</Typography>
-		</BasicMessage>
+		</BasicResponseMessage>
 	);
 }

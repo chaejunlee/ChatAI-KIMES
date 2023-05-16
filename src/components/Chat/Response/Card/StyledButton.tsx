@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
-import { primaryColor } from "../../../utils/color";
+import { primaryColor } from "../../../../utils/color";
 
 export interface IsSelectedInterface {
 	disabled: boolean;
