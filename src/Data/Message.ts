@@ -23,11 +23,11 @@ export const introMessage: ResponseMessageType = {
 				buttons: [
 					{
 						text: "유방 조직검사가 무엇인가요?",
-						value: "Question_whwlrrjatk",
+						value: "유방 조직검사가 무엇인가요",
 					},
 					{
 						text: "유방암의 원인은 무엇인가요?",
-						value: "Question_dnjsdls",
+						value: "유방암의 원인은 무엇인가요",
 					}
 				],
 				title: "조직 구성(Tissue Composition)"
@@ -42,10 +42,11 @@ export const introMessage: ResponseMessageType = {
 			imageResponseCard: {
 				buttons: [
 					{
-						text: "설문조사",
+						text: "설문조사 시작하기",
 						value: "설문조사",
 					}
-				]
+				],
+				title: "설문조사"
 			}	
 		}
 	] as unknown as BasicResponseMessageType[],
