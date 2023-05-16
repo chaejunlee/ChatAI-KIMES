@@ -3,10 +3,10 @@ import { useRef } from "react";
 import {
 	ButtonResponseType,
 	imageResponseCardContentType,
-} from "../../../Interface/Message/ResponseMessageType";
-import useMessageStatus from "../../../hooks/Request/useMessageStatus";
-import { fetchResponse } from "../../../store/message/fetchResponse";
-import { useAppDispatch } from "../../../store/store";
+} from "../../../../Interface/Message/ResponseMessageType";
+import useMessageStatus from "../../../../hooks/Request/useMessageStatus";
+import { fetchResponse } from "../../../../store/message/fetchResponse";
+import { useAppDispatch } from "../../../../store/store";
 import { StyledButton } from "./StyledButton";
 
 interface MessageButtonsProps {

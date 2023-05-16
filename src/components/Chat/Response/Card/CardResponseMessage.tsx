@@ -1,5 +1,5 @@
-import { ImageResponseCardType } from "../../../Interface/Message/ResponseMessageType";
-import { BasicMessage } from "../BasicMessage";
+import { ImageResponseCardType } from "../../../../Interface/Message/ResponseMessageType";
+import { BasicResponseMessage } from "../BasicResponseMessage";
 import { MessageButtons } from "./MessageButtons";
 import { MessageImage } from "./MessageImage";
 
@@ -9,7 +9,7 @@ export interface CardResponseMessageTypeProps {
 }
 
 function MessageSubtitle({ subtitle }: { subtitle: string }) {
-	return <BasicMessage>{subtitle}</BasicMessage>;
+	return <BasicResponseMessage>{subtitle}</BasicResponseMessage>;
 }
 
 export default function CardResponseMessage({

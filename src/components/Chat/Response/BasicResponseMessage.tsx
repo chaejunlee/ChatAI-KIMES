@@ -1,6 +1,6 @@
 import { styled } from "@mui/material";
 
-export const BasicMessage = styled("div")`
+export const BasicResponseMessage = styled("div")`
 	z-index: 0;
 	padding: 8px 16px;
 	display: inline-block;
