@@ -2,7 +2,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SendIcon from "@mui/icons-material/Send";
 import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import useMessageStatus from "../../hooks/Request/useMessageStatus";
 import { fetchResponse } from "../../store/message/fetchResponse";
 import { addMessage } from "../../store/message/messageSlice";
@@ -45,17 +45,21 @@ export default function MessageInput() {
 
 	const ref = useRef<HTMLInputElement>(null);
 
+	useEffect(() => {
+		if (isLoading) return;
+		ref.current?.focus();
+	}, [isLoading]);
+
 	const handleOnClick = () => {
 		if (isLoading) return;
 		if (text.length === 0) return;
 		onClick(text);
 		setText("");
-		ref.current?.focus();
 	};
 
-	const handleTextFieldKeyDown = (e: React.KeyboardEvent) => {
+	const handleTextFieldKeyPress = (e: KeyboardEvent<HTMLDivElement>) => {
 		if (isLoading) return;
-		if (e.key === "Enter" && e.keyCode === 13) {
+		if (e.key === "Enter" || e.keyCode === 13) {
 			handleOnClick();
 		}
 	};
@@ -69,7 +73,7 @@ export default function MessageInput() {
 					boxSizing: "border-box",
 				}}
 				variant={"standard"}
-				onKeyDown={handleTextFieldKeyDown}
+				onKeyPress={(e) => handleTextFieldKeyPress(e)}
 				inputRef={ref}
 				value={text}
 				autoComplete={"off"}
