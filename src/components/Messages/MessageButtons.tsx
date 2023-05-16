@@ -5,8 +5,10 @@ import {
 	ButtonResponseType,
 	imageResponseCardContentType,
 } from "../../Interface/Message/ResponseMessageType";
-import useSendRequestContext from "../../hooks/Request/useSendRequestContext";
 import { primaryColor } from "../../utils/color";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { fetchResponse } from "../../store/message/fetchResponse";
+import useMessageStatus from "../../hooks/Request/useMessageStatus";
 
 interface MessageButtonsProps {
 	message: imageResponseCardContentType;
@@ -36,12 +38,17 @@ export const StyledButton = styled(Button)<IsSelectedInterface>`
 
 export function MessageButtons({ message, messageID }: MessageButtonsProps) {
 	const clickedBtnListRef = useRef([] as string[]);
-	const { sendRequest } = useSendRequestContext()!;
+	const dispatch = useAppDispatch();
+	const { status: isLoading } = useMessageStatus();
+	const sendRequest = (value: string) => {
+		dispatch(fetchResponse(value));
+	};
 
 	const handleButtonClick = (
 		button: ButtonResponseType,
 		buttonIndentifier: string
 	) => {
+		if (isLoading) return;
 		clickedBtnListRef.current.push(buttonIndentifier);
 		sendRequest(button.value);
 	};
