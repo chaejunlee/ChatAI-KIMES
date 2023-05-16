@@ -1,37 +1,12 @@
-const minimumKeyboardHeight = 100;
-const windowHeight = window.innerHeight;
-const root = document.getElementById("root");
-const visualViewport = window.visualViewport;
-
-export const scrollToTop = () => {
-	window.scrollTo(0, 0);
-};
-
-const scrollToTopTimeout = () => {
-	setTimeout(() => {
-		scrollToTop();
-	}, 500);
-};
-
-export const addScrollEventListener = () => {
-	scrollToTop();
-	window.addEventListener("scroll", scrollToTopTimeout);
-};
-
-const removeScrollEventListener = () => {
-	window.removeEventListener("scroll", scrollToTopTimeout);
-};
-
-export const setBottom = (bottom: number) => {
-	if (!root) return;
-
-	root.style.bottom = bottom + "px";
-};
-
-export default function setWindowHeight() {
-	document.body.style.height = `${windowHeight}px`;
-	if (root) setBottom(0);
-}
+import {
+	windowHeight,
+	root,
+	minimumKeyboardHeight,
+	addScrollEventListener,
+	setBottom,
+	removeScrollEventListener,
+	visualViewport,
+} from "./mobile";
 
 export function getKeyboardHeight(e: Event | null) {
 	let visualViewport: VisualViewport;
@@ -45,7 +20,6 @@ export function getKeyboardHeight(e: Event | null) {
 
 	return keyboardHeight;
 }
-
 const mobileKeyboardHandler = (e: Event) => {
 	const keyboardHeight = getKeyboardHeight(e);
 
@@ -70,14 +44,8 @@ export function addKeyboardPopupListener() {
 }
 
 export function removeKeyboardPopupListener() {
-	if (!visualViewport) return;
-
 	setTimeout(() => {
+		if (!visualViewport) return;
 		visualViewport.removeEventListener("resize", mobileKeyboardHandler);
-	}, 1000);
-}
-
-export function detectIOS() {
-	const userAgent = window.navigator.userAgent.toLowerCase();
-	return /iphone|ipad|ipod/.test(userAgent);
+	}, 600);
 }

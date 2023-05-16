@@ -15,7 +15,8 @@ import { addMessage } from "../../store/message/messageSlice";
 import { fetchResponse } from "../../store/message/fetchResponse";
 import { useAppDispatch } from "../../store/store";
 import { primaryColor } from "../../utils/color";
-import { addKeyboardPopupListener } from "../../utils/mobile";
+import { addKeyboardPopupListener } from "../../utils/Mobile/keyboard";
+import { RotatingRefreshIcon } from "./RotatingRefreshIcon";
 
 const useStyles = makeStyles({
 	root: {
