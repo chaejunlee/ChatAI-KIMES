@@ -10,7 +10,6 @@ interface ContentResponseMessageTypeProps {
 export const BasicMessage = styled("div")`
 	z-index: 0;
 	padding: 8px 16px;
-	margin-bottom: 5px;
 	display: inline-block;
 
 	max-width: 70%;

@@ -58,7 +58,7 @@ export function MessageButtons({ message, messageID }: MessageButtonsProps) {
 			spacing={0.5}
 			direction={"row"}
 			flexWrap={"wrap"}
-			gap={"4px"}
+			gap={"6px"}
 			justifyContent={"flex-start"}
 			alignItems={"flex-start"}
 		>
