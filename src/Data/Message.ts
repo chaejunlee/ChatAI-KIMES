@@ -15,11 +15,7 @@ export const introMessage: ResponseMessageType = {
 		},
 		{
 			contentType: "PlainText",
-			content: "궁금하신 내용을 말씀해주세요."
-		},
-		{
-			contentType: "PlainText",
-			content: "아래의 버튼들은 사람들이 자주 묻는 질문들이에요."
+			content: "궁금하신 내용을 말씀해주세요. 아래의 버튼들은 사람들이 자주 묻는 질문들이에요."
 		},
 		{
 			contentType: "ImageResponseCard",
