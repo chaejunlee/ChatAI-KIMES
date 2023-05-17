@@ -1,21 +1,20 @@
 import Message from "./Message";
 
-export interface BasicResponseMessageType {
-	//aws lex response message content type
-	contentType: "PlainText" | "ImageResponseCard";
-}
+export type BasicResponseMessageType =
+	| ContentResponseMessageType
+	| ImageResponseCardType;
 
 export interface ResponseMessageType extends Message {
 	content: BasicResponseMessageType[];
 	type: "response";
 }
 
-export interface ContentResponseMessageType extends BasicResponseMessageType {
+export interface ContentResponseMessageType {
 	contentType: "PlainText";
 	content: string;
 }
 
-export interface ImageResponseCardType extends BasicResponseMessageType {
+export interface ImageResponseCardType {
 	contentType: "ImageResponseCard";
 	imageResponseCard: imageResponseCardContentType;
 }
