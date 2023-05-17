@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import styled from "@mui/system/styled";
-import { imageResponseCardContentType } from "../../../Interface/Message/ResponseMessageType";
-import { BasicMessage } from "../BasicMessage";
+import { imageResponseCardContentType } from "../../../../Interface/Message/ResponseMessageType";
+import { BasicResponseMessage } from "../BasicResponseMessage";
 
 const StyledImg = styled("img")`
 	border-radius: 1rem;
@@ -15,11 +15,11 @@ export function MessageImage({
 	message: imageResponseCardContentType;
 }) {
 	return (
-		<BasicMessage>
+		<BasicResponseMessage>
 			<StyledImg src={message.imageUrl} alt={message.title} />
 			{message.title && (
 				<Typography marginTop={"0.5rem"}>{message.title}</Typography>
 			)}
-		</BasicMessage>
+		</BasicResponseMessage>
 	);
 }
