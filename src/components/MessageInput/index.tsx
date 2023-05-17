@@ -2,7 +2,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SendIcon from "@mui/icons-material/Send";
 import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React, { useRef } from "react";
+import { KeyboardEvent, useRef } from "react";
 import useMessageStatus from "../../hooks/Request/useMessageStatus";
 import { fetchResponse } from "../../store/message/fetchResponse";
 import { addMessage } from "../../store/message/messageSlice";
@@ -34,63 +34,95 @@ const TextFiledWrapper = styled("div")`
 export default function MessageInput() {
 	const { status: isLoading } = useMessageStatus();
 	const dispatch = useAppDispatch();
+	const classes = useStyles();
+
+	// for mobile keyboard popup
+	const hiddenInputRef = useRef<HTMLInputElement>(null);
 
 	const onClick = (message: string) => {
 		dispatch(addMessage(message));
 		dispatch(fetchResponse(message));
 	};
 
-	const [text, setText] = React.useState<string>("");
-	const classes = useStyles();
+	const inputRef = useRef<HTMLInputElement>(null);
 
-	const ref = useRef<HTMLInputElement>(null);
+	const flushInput = () => {
+		if (
+			!inputRef ||
+			!inputRef.current ||
+			!hiddenInputRef ||
+			!hiddenInputRef.current
+		)
+			return;
+		inputRef.current.value = "";
+		inputRef.current?.blur();
+		hiddenInputRef.current?.focus({ preventScroll: true });
+		hiddenInputRef.current?.blur();
+		inputRef.current?.focus({ preventScroll: true });
+	};
 
 	const handleOnClick = () => {
 		if (isLoading) return;
+		if (!inputRef || !inputRef.current) return;
+
+		const text = inputRef.current.value;
 		if (text.length === 0) return;
+
 		onClick(text);
-		setText("");
-		ref.current?.focus();
+
+		flushInput();
 	};
 
-	const handleTextFieldKeyDown = (e: React.KeyboardEvent) => {
+	const handleTextFieldKeyPress = (e: KeyboardEvent<HTMLDivElement>) => {
 		if (isLoading) return;
-		if (e.key === "Enter" && e.keyCode === 13) {
+		if (e.key === "Enter" || e.keyCode === 13) {
 			handleOnClick();
 		}
 	};
 
 	return (
-		<TextFiledWrapper>
-			<TextField
-				sx={{
-					width: "100%",
-					borderRadius: "200px",
-					boxSizing: "border-box",
+		<>
+			<TextFiledWrapper>
+				<TextField
+					sx={{
+						width: "100%",
+						borderRadius: "200px",
+						boxSizing: "border-box",
+					}}
+					variant={"standard"}
+					onKeyPress={(e) => handleTextFieldKeyPress(e)}
+					inputRef={inputRef}
+					autoComplete={"off"}
+					onFocus={() => {
+						addKeyboardPopupListener();
+					}}
+					placeholder={
+						isLoading ? "요청을 답변 중입니다." : "메시지를 입력하세요."
+					}
+					classes={{
+						root: classes.root,
+					}}
+					disabled={isLoading}
+					InputProps={{
+						disableUnderline: true,
+						startAdornment: <PlusComponent />,
+						endAdornment: <SendComponent handleOnClick={handleOnClick} />,
+					}}
+				/>
+			</TextFiledWrapper>
+			<input
+				ref={hiddenInputRef}
+				className="hidden-input"
+				style={{
+					overflow: "hidden",
+					position: "absolute",
+					top: "-50%",
+					width: 0,
+					height: 0,
+					zIndex: -1000,
 				}}
-				variant={"standard"}
-				onKeyDown={handleTextFieldKeyDown}
-				inputRef={ref}
-				value={text}
-				autoComplete={"off"}
-				onChange={(v) => setText(v.target.value)}
-				onFocus={() => {
-					addKeyboardPopupListener();
-				}}
-				placeholder={
-					isLoading ? "요청을 답변 중입니다." : "메시지를 입력하세요."
-				}
-				classes={{
-					root: classes.root,
-				}}
-				disabled={isLoading}
-				InputProps={{
-					disableUnderline: true,
-					startAdornment: <PlusComponent />,
-					endAdornment: <SendComponent handleOnClick={handleOnClick} />,
-				}}
-			/>
-		</TextFiledWrapper>
+			></input>
+		</>
 	);
 }
 
