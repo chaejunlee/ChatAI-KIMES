@@ -20,7 +20,7 @@ export function MessageButtons({ message, messageID }: MessageButtonsProps) {
 	const { status: isLoading } = useMessageStatus();
 
 	const sendRequest = (value: string) => {
-		dispatch(fetchResponse(value));
+		dispatch(fetchResponse({ message: value, leaveMessage: false }));
 	};
 
 	const handleButtonClick = (
