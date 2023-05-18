@@ -9,25 +9,37 @@ import {
 	defaultContentResponseMessageData,
 } from "../../utils/Message/defaultResponseMessageData";
 import { getLexResponse } from "../../utils/Message/getLexResponse";
+import { addMessage } from "./messageSlice";
+
+const getResponse = async (message: string) => {
+	let content = await getLexResponse(message);
+
+	if (content === null)
+		return createResponse([
+			defaultContentResponseMessageData,
+			defaultCardResponseMessageData,
+		]);
+
+	let errorMessage = isErrorMessage(content);
+	if (errorMessage) {
+		const errorMessageContent = createResponseContent(errorMessage);
+		return createResponse(errorMessageContent);
+	}
+
+	return createResponse(content);
+};
 
 export const fetchResponse = createAsyncThunk(
 	"message/fetchResponse",
-	async (message: string) => {
-		let content = await getLexResponse(message);
-
-		if (content === null)
-			return createResponse([
-				defaultContentResponseMessageData,
-				defaultCardResponseMessageData,
-			]);
-
-		let errorMessage = isErrorMessage(content);
-		if (errorMessage) {
-			const errorMessageContent = createResponseContent(errorMessage);
-			return createResponse(errorMessageContent);
+	async (
+		{ message, leaveMessage }: { message: string; leaveMessage: boolean },
+		{ dispatch }
+	) => {
+		if (leaveMessage) {
+			dispatch(addMessage(message));
 		}
-
-		return createResponse(content);
+		const response = await getResponse(message);
+		return response;
 	}
 );
 

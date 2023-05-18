@@ -40,8 +40,7 @@ export default function MessageInput() {
 	const hiddenInputRef = useRef<HTMLInputElement>(null);
 
 	const onClick = (message: string) => {
-		dispatch(addMessage(message));
-		dispatch(fetchResponse(message));
+		dispatch(fetchResponse({ message, leaveMessage: true }));
 	};
 
 	const inputRef = useRef<HTMLInputElement>(null);
