@@ -6,7 +6,7 @@ export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 	const divRef = useSmoothScrollToBottom();
 
 	return (
-		<Stack ref={divRef} width={"100%"} alignItems={"start"} gap={"6px"}>
+		<Stack ref={divRef} width={"100%"} alignItems={"start"} gap={"10px"}>
 			<Avatar
 				imgProps={{ style: { objectFit: "contain" } }}
 				alt={"ChatAI"}
