@@ -39,25 +39,20 @@ export default function MessageInput() {
 	// for mobile keyboard popup
 	const hiddenInputRef = useRef<HTMLInputElement>(null);
 
-	const onClick = (message: string) => {
-		dispatch(fetchResponse({ message, leaveMessage: true }));
+	const sendRequest = async (message: string) => {
+		if (inputRef.current) inputRef.current.value = "";
+		await dispatch(fetchResponse({ message, leaveMessage: true })).unwrap();
+		flushPreviouseInput();
 	};
 
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const flushInput = () => {
-		if (
-			!inputRef ||
-			!inputRef.current ||
-			!hiddenInputRef ||
-			!hiddenInputRef.current
-		)
-			return;
-		inputRef.current.value = "";
-		inputRef.current?.blur();
-		hiddenInputRef.current?.focus({ preventScroll: true });
-		hiddenInputRef.current?.blur();
-		inputRef.current?.focus({ preventScroll: true });
+	const flushPreviouseInput = () => {
+		if (!inputRef?.current || !hiddenInputRef?.current) return;
+		inputRef.current.blur();
+		hiddenInputRef.current.focus({ preventScroll: true });
+		hiddenInputRef.current.blur();
+		inputRef.current.focus({ preventScroll: true });
 	};
 
 	const handleOnClick = () => {
@@ -67,9 +62,7 @@ export default function MessageInput() {
 		const text = inputRef.current.value;
 		if (text.length === 0) return;
 
-		onClick(text);
-
-		flushInput();
+		sendRequest(text);
 	};
 
 	const handleTextFieldKeyPress = (e: KeyboardEvent<HTMLDivElement>) => {
