@@ -12,7 +12,7 @@ export const Style =
 	};
 
 export const StyledButton = styled(Button)<IsSelectedInterface>`
-	padding-inline: 0.75rem;
+	padding-inline: 0.8rem;
 
 	background: ${Style("#eaefef", "white")};
 	color: ${Style(primaryColor, "black")};
@@ -21,4 +21,5 @@ export const StyledButton = styled(Button)<IsSelectedInterface>`
 	border-radius: 20px;
 	border: 1px solid ${Style(primaryColor, "#bed1d1")};
 	margin: 0 !important;
+	min-width: 60px; !important;
 `;
