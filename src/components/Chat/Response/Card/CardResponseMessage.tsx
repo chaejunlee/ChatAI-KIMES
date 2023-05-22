@@ -19,10 +19,10 @@ export default function CardResponseMessage({
 	const message = data.imageResponseCard;
 
 	return (
-		<>
+		<div className="message">
 			{message.imageUrl && <MessageImage message={message} />}
 			{message.subtitle && <MessageSubtitle subtitle={message.subtitle} />}
 			<MessageButtons message={message} messageID={messageID} />
-		</>
+		</div>
 	);
 }

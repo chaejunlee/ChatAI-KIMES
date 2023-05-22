@@ -4,5 +4,9 @@ import { FC, ReactNode } from "react";
 export const BasicResponseMessage: FC<{ children: ReactNode }> = ({
 	children,
 }) => {
-	return <BasicMessage isResponse={true}>{children}</BasicMessage>;
+	return (
+		<BasicMessage className="message" isResponse={true}>
+			{children}
+		</BasicMessage>
+	);
 };
