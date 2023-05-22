@@ -5,11 +5,11 @@ import { makeStyles } from "@mui/styles";
 import { KeyboardEvent, useRef } from "react";
 import useMessageStatus from "../../hooks/Request/useMessageStatus";
 import { fetchResponse } from "../../store/message/fetchResponse";
-import { addMessage } from "../../store/message/messageSlice";
 import { useAppDispatch } from "../../store/store";
 import { primaryColor } from "../../utils/color";
 import { addKeyboardPopupListener } from "../../utils/Mobile/keyboard";
 import { RotatingRefreshIcon } from "./RotatingRefreshIcon";
+import { addMessage } from "../../store/message/messageSlice";
 
 const useStyles = makeStyles({
 	root: {
@@ -42,17 +42,17 @@ export default function MessageInput() {
 	const sendRequest = async (message: string) => {
 		if (inputRef.current) inputRef.current.value = "";
 		await dispatch(fetchResponse({ message, leaveMessage: true })).unwrap();
-		flushPreviouseInput();
+		onAnimationEnd();
 	};
 
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const flushPreviouseInput = () => {
-		if (!inputRef?.current || !hiddenInputRef?.current) return;
-		inputRef.current.blur();
-		hiddenInputRef.current.focus({ preventScroll: true });
-		hiddenInputRef.current.blur();
-		inputRef.current.focus({ preventScroll: true });
+	const onAnimationEnd = () => {
+		setTimeout(() => {
+			if (!inputRef?.current || !hiddenInputRef?.current) return;
+			hiddenInputRef.current.focus({ preventScroll: true });
+			inputRef.current.focus({ preventScroll: true });
+		}, 300);
 	};
 
 	const handleOnClick = () => {
