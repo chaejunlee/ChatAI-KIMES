@@ -21,7 +21,7 @@ export default function ContentResponseMessage({
 }) {
 	const content = containsUrl(message.content) ? (
 		<StyledLink href={message.content} target="_blank" rel="noreferrer">
-			{message.content}
+			관련 링크로 바로가기
 		</StyledLink>
 	) : (
 		message.content
