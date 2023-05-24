@@ -37,7 +37,7 @@ export default function ContentResponseMessage({
 							viewBox="0 0 24 24"
 							strokeWidth={1.5}
 							stroke="currentColor"
-							width="18px"
+							width="1.25rem"
 						>
 							<path
 								strokeLinecap="round"

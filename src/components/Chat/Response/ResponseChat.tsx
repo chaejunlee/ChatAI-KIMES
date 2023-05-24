@@ -11,7 +11,7 @@ export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 			<Stack
 				className="message"
 				ref={divRef}
-				gap={"8px"}
+				gap={"0.5rem"}
 				direction={"row"}
 				maxWidth={"80%"}
 			>
@@ -19,8 +19,9 @@ export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 					imgProps={{ style: { objectFit: "contain" } }}
 					alt={"ChatAI"}
 					src={Logo}
+					style={{ width: "2.2rem", height: "2.2rem" }}
 				/>
-				<Stack gap={"8px"} width={"100%"} alignItems={"start"}>
+				<Stack gap={"0.5rem"} width={"100%"} alignItems={"start"}>
 					{children}
 				</Stack>
 			</Stack>

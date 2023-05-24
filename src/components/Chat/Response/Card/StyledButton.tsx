@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Button } from "@mui/material";
 import { primaryColor } from "../../../../utils/color";
 
 export interface IsSelectedInterface {
@@ -18,8 +17,8 @@ export const StyledButton = styled("button")<IsSelectedInterface>`
 	min-width: 50px; !important;
 
 	margin: 0 !important;
-	padding-block: 8px;
-	padding-inline: 14px;
+	padding-block: 0.6rem;
+	padding-inline: 0.8rem;
 
 	background: ${Style("white", "white")};
 	color: ${Style(primaryColor, "#6a6a6a")};
@@ -27,7 +26,7 @@ export const StyledButton = styled("button")<IsSelectedInterface>`
 	font-weight: ${Style("bold", "medium")};
 	font-size: 1rem;
 
-	border-radius: 20px;
+	border-radius: 1.25rem;
 	border: 0;
 	outline: ${Style("2px", "1px")} solid ${Style(primaryColor, "#bed1d1")};
 
