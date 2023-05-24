@@ -1,16 +1,25 @@
-import { styled } from "@mui/system";
+import styled from "@emotion/styled";
 
-export const BasicMessage = styled("div")((props: { isResponse: boolean }) => ({
-	padding: "10px 14px",
-	display: "inline-block",
+export interface isResponseInterface {
+	isResponse?: boolean;
+}
 
-	background: props.isResponse ? "#eaefef" : "#12c670",
-	borderRadius: props.isResponse ? "0px 20px 20px 20px" : "20px 0px 20px 20px",
-	alignItems: props.isResponse ? "flex-start" : "flex-end",
+export const Style =
+	(trueProp: string, falseProp: string) => (props: isResponseInterface) => {
+		return props.isResponse ? trueProp : falseProp;
+	};
 
-	color: props.isResponse ? "black" : "white",
-	border: "none",
-	boxShadow: "none",
+export const BasicMessage = styled("div")<isResponseInterface>`
+	padding: 0.5rem 0.7rem;
+	display: inline-block;
 
-	wordBreak: "keep-all",
-}));
+	background: ${Style("#eaefef", "#12c670")};
+	border-radius: ${Style("0px 1rem 1rem 1rem", "1rem 0px 1rem 1rem")};
+	align-items: ${Style("flex-start", "flex-end")};
+
+	color: ${Style("black", "white")};
+	border: none;
+	box-shadow: none;
+
+	word-break: keep-all;
+`;

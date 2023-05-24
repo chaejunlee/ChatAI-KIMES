@@ -14,8 +14,8 @@ export default function Conversation() {
 			flexGrow={"1"}
 			overflow={"scroll"}
 			style={{ WebkitOverflowScrolling: "touch" }}
-			gap={"18px"}
-			paddingX={"1rem"}
+			gap={"1rem"}
+			paddingX={"0.725rem"}
 			paddingTop={"4rem"}
 			paddingBottom={"1rem"}
 		>

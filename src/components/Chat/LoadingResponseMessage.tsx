@@ -6,7 +6,7 @@ export const LoadingResponseMessage = () => {
 			<Stack justifyContent="flex-start" width="100%" marginTop={"-0.5rem"}>
 				<Skeleton
 					variant={"text"}
-					sx={{ fontSize: "2.5rem", width: "clamp(100px, 30%, 400px)" }}
+					sx={{ fontSize: "2.5rem", width: "clamp(6.25rem, 30%, 25rem)" }}
 					animation={"wave"}
 				/>
 			</Stack>

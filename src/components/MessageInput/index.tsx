@@ -42,17 +42,15 @@ export default function MessageInput() {
 	const sendRequest = async (message: string) => {
 		if (inputRef.current) inputRef.current.value = "";
 		await dispatch(fetchResponse({ message, leaveMessage: true })).unwrap();
-		onAnimationEnd();
+		inputRef.current?.focus({ preventScroll: true });
 	};
 
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const onAnimationEnd = () => {
-		setTimeout(() => {
-			if (!inputRef?.current || !hiddenInputRef?.current) return;
-			hiddenInputRef.current.focus({ preventScroll: true });
-			inputRef.current.focus({ preventScroll: true });
-		}, 300);
+	const flushInput = () => {
+		if (!inputRef?.current || !hiddenInputRef?.current) return;
+		hiddenInputRef.current.focus({ preventScroll: true });
+		inputRef.current.focus({ preventScroll: true });
 	};
 
 	const handleOnClick = () => {
@@ -61,6 +59,8 @@ export default function MessageInput() {
 
 		const text = inputRef.current.value;
 		if (text.length === 0) return;
+
+		flushInput();
 
 		sendRequest(text);
 	};
