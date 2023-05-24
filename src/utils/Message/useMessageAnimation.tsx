@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 const AnimationScopeWrapper = styled("div")`
 	position: relative;
+	display: flex;
 	width: 100%;
 `;
 

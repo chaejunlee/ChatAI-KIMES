@@ -9,7 +9,7 @@ export function RequestChat({ message }: { message: RequestMessageType }) {
 
 	return (
 		<AnimationScope>
-			<Stack ref={divRef} width={"100%"} alignItems={"end"}>
+			<Stack ref={divRef} maxWidth={"80%"} marginLeft={"auto"} right={"0"}>
 				<BasicRequestMessage>
 					<Typography sx={{ textAlign: "left" }}>{message.message}</Typography>
 				</BasicRequestMessage>
