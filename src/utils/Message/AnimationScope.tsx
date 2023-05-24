@@ -10,15 +10,19 @@ const AnimationScopeWrapper = styled("div")`
 
 export default function AnimationScope({
 	children,
+	selector,
 }: {
 	children: React.ReactNode;
+	selector?: string;
 }) {
 	const [scope, animate] = useAnimate();
+
+	const animateSelector = selector ? selector : ".message";
 
 	useEffect(() => {
 		if (scope)
 			animate(
-				".message",
+				animateSelector,
 				{
 					opacity: [0, 1],
 					y: [10, 0],

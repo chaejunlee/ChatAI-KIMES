@@ -1,6 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import RequestMessageType from "../../../Interface/Message/RequestMessageType";
-import AnimationScope from "../../../utils/Message/useMessageAnimation";
+import AnimationScope from "../../../utils/Message/AnimationScope";
 import { useSmoothScrollToBottom } from "../../../utils/chat";
 import { BasicRequestMessage } from "./BasicRequestMessage";
 

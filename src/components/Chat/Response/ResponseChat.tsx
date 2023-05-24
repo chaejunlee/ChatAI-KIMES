@@ -1,6 +1,6 @@
 import { Avatar, Stack } from "@mui/material";
 import Logo from "../../../assets/logo.png";
-import AnimationScope from "../../../utils/Message/useMessageAnimation";
+import AnimationScope from "../../../utils/Message/AnimationScope";
 import { useSmoothScrollToBottom } from "../../../utils/chat";
 
 export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
