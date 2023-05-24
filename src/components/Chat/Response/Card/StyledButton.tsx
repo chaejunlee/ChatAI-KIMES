@@ -11,15 +11,39 @@ export const Style =
 		return props.disabled ? trueProp : falseProp;
 	};
 
-export const StyledButton = styled(Button)<IsSelectedInterface>`
-	padding-inline: 0.8rem;
+export const StyledButton = styled("button")<IsSelectedInterface>`
+	display: flex;
+	justify-content: center;
 
-	background: ${Style("#eaefef", "white")};
-	color: ${Style(primaryColor, "black")};
+	min-width: 50px; !important;
+
+	margin: 0 !important;
+	padding-block: 8px;
+	padding-inline: 14px;
+
+	background: ${Style("white", "white")};
+	color: ${Style(primaryColor, "#6a6a6a")};
 	text-align: start;
+	font-weight: ${Style("bold", "medium")};
+	font-size: 1rem;
 
 	border-radius: 20px;
-	border: 1px solid ${Style(primaryColor, "#bed1d1")};
-	margin: 0 !important;
-	min-width: 60px; !important;
+	border: 0;
+	outline: ${Style("2px", "1px")} solid ${Style(primaryColor, "#bed1d1")};
+
+	cursor: pointer;
+
+	transition: all 0.2s ease-in-out;
+
+	&:hover {
+		background: ${Style("#f3f3f3", "#f3f3f3")};
+	}
+
+	&:focus {
+		background: ${Style("#f3f3f3", "#f3f3f3")};
+	}
+
+	&:active {
+		background: ${Style("#e1e1e1", "#e1e1e1")};
+	}
 `;
