@@ -7,8 +7,6 @@ import {
 import CardResponseMessage from "./Card/CardResponseMessage";
 import ContentResponseMessage from "./ContentResponseMessage";
 
-import { ResponseChat } from "./ResponseChat";
-
 export function ResponseChatChunk({
 	message,
 	messageID,
@@ -18,7 +16,7 @@ export function ResponseChatChunk({
 }) {
 	const receivedResponse = message.content;
 	return (
-		<ResponseChat>
+		<>
 			{receivedResponse.map(
 				(content: BasicResponseMessageType, idx: number) => {
 					switch (content.contentType) {
@@ -40,6 +38,6 @@ export function ResponseChatChunk({
 					}
 				}
 			)}
-		</ResponseChat>
+		</>
 	);
 }

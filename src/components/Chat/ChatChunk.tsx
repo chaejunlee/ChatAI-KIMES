@@ -1,19 +1,30 @@
-import { Stack } from "@mui/material";
 import Message from "../../Interface/Message/Message";
-import { ChatChunkContent } from "./ChatChunkContent";
+import RequestMessageType from "../../Interface/Message/RequestMessageType";
+import { ResponseMessageType } from "../../Interface/Message/ResponseMessageType";
+import { RequestChat } from "./Request/RequestChat";
+import { ResponseChat } from "./Response/ResponseChat";
+import { ResponseChatChunk } from "./Response/ResponseChatChunk";
 
-const ChatChunk = ({
+export function ChatChunk({
 	message,
 	messageID,
 }: {
 	message: Message;
 	messageID: string;
-}) => {
-	return (
-		<Stack spacing={1.25} direction={"row"}>
-			<ChatChunkContent message={message} messageID={String(messageID)} />
-		</Stack>
-	);
-};
+}) {
+	switch (message.type) {
+		case "request":
+			return <RequestChat message={message as RequestMessageType} />;
+		case "response":
+			return (
+				<ResponseChat>
+					<ResponseChatChunk
+						message={message as ResponseMessageType}
+						messageID={messageID}
+					/>
+				</ResponseChat>
+			);
+	}
+}
 
 export default ChatChunk;

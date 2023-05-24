@@ -11,16 +11,18 @@ export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 			<Stack
 				className="message"
 				ref={divRef}
-				width={"100%"}
-				alignItems={"start"}
-				gap={"10px"}
+				gap={"8px"}
+				direction={"row"}
+				maxWidth={"80%"}
 			>
 				<Avatar
 					imgProps={{ style: { objectFit: "contain" } }}
 					alt={"ChatAI"}
 					src={Logo}
 				/>
-				{children}
+				<Stack gap={"8px"} width={"100%"} alignItems={"start"}>
+					{children}
+				</Stack>
 			</Stack>
 		</AnimationScope>
 	);

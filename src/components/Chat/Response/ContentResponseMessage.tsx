@@ -3,14 +3,10 @@ import { ContentResponseMessageType } from "../../../Interface/Message/ResponseM
 import { containsUrl } from "../../../utils/chat";
 import { primaryColor } from "../../../utils/color";
 import { BasicResponseMessage } from "./BasicResponseMessage";
+import { StyledButton } from "./Card/StyledButton";
 
 const StyledLink = styled("a")`
-	padding-inline: 0.8rem;
-	padding-block: 0.55rem;
-
-	background: white;
-	color: black;
-	text-align: start;
+	color: #6a6a6a;
 
 	display: flex;
 	align-items: center;
@@ -18,22 +14,7 @@ const StyledLink = styled("a")`
 	gap: 5px;
 	width: fit-content;
 
-	border-radius: 20px;
-	border: 1px solid ${primaryColor};
 	text-decoration: none;
-	font-size: 14px;
-
-	transition: all 0.2s ease-in-out;
-
-	&:hover {
-		background: ${primaryColor};
-		color: white;
-	}
-
-	&:active {
-		background: ${primaryColor};
-		color: white;
-	}
 `;
 
 export default function ContentResponseMessage({
@@ -44,23 +25,28 @@ export default function ContentResponseMessage({
 	if (containsUrl(message.content))
 		return (
 			<div className="message">
-				<StyledLink href={message.content} target="_blank">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						strokeWidth={1.5}
-						stroke="currentColor"
-						width="18px"
-					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-						/>
-					</svg>
-					<span>관련 링크로 바로가기</span>
-				</StyledLink>
+				<StyledButton
+					disabled={false}
+					style={{ outline: `${primaryColor} 2px solid` }}
+				>
+					<StyledLink href={message.content} target="_blank">
+						<span>관련 링크로 바로가기</span>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							strokeWidth={1.5}
+							stroke="currentColor"
+							width="18px"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+							/>
+						</svg>
+					</StyledLink>
+				</StyledButton>
 			</div>
 		);
 
