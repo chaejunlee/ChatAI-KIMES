@@ -17,7 +17,7 @@ export const StyledButton = styled("button")<IsSelectedInterface>`
 	min-width: 50px; !important;
 
 	margin: 0 !important;
-	padding-block: 0.6rem;
+	padding-block: 0.5rem;
 	padding-inline: 0.8rem;
 
 	background: ${Style("white", "white")};
@@ -27,8 +27,8 @@ export const StyledButton = styled("button")<IsSelectedInterface>`
 	font-size: 1rem;
 
 	border-radius: 1.25rem;
-	border: 0;
-	outline: ${Style("2px", "1px")} solid ${Style(primaryColor, "#bed1d1")};
+	border: ${Style("3px", "1px")} solid ${Style(primaryColor, "#bed1d1")};
+	margin: ${Style("-2px", "0px")};
 
 	cursor: pointer;
 
