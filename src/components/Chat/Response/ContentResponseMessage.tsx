@@ -27,7 +27,7 @@ export default function ContentResponseMessage({
 			<div className="message">
 				<StyledButton
 					disabled={false}
-					style={{ outline: `${primaryColor} 2px solid` }}
+					style={{ border: `${primaryColor} 3px solid` }}
 				>
 					<StyledLink href={message.content} target="_blank">
 						<span>관련 링크로 바로가기</span>
