@@ -4,7 +4,7 @@ import {
 	ResponseMessageType,
 } from "../Interface/Message/ResponseMessageType";
 import RequestMessageType from "../Interface/Message/RequestMessageType";
-import Message from "../Interface/Message/Message";
+import { Message } from "../Interface/Message/Message";
 
 export const introMessage: ResponseMessageType = {
 	content: [

@@ -1,10 +1,8 @@
-import Message from "./Message";
-
 export type BasicResponseMessageType =
 	| ContentResponseMessageType
 	| ImageResponseCardType;
 
-export interface ResponseMessageType extends Message {
+export interface ResponseMessageType {
 	content: BasicResponseMessageType[];
 	type: "response";
 }
