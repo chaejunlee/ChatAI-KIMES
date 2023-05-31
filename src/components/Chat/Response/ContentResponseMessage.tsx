@@ -3,7 +3,7 @@ import { ContentResponseMessageType } from "../../../Interface/Message/ResponseM
 import { containsUrl } from "../../../utils/chat";
 import { primaryColor } from "../../../utils/color";
 import { BasicResponseMessage } from "./BasicResponseMessage";
-import { StyledButton } from "./Card/StyledButton";
+import StyledButton from "./Card/StyledButton";
 
 const StyledLink = styled("a")`
 	color: #6a6a6a;

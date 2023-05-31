@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { primaryColor } from "../../../../utils/color";
+import { memo } from "react";
 
 export interface IsSelectedInterface {
 	disabled: boolean;
@@ -46,3 +47,5 @@ export const StyledButton = styled("button")<IsSelectedInterface>`
 		background: ${Style("#e1e1e1", "#e1e1e1")};
 	}
 `;
+
+export default memo(StyledButton);
