@@ -1,11 +1,13 @@
-import { BasicResponseMessageType } from "../../Interface/Message/ResponseMessageType";
+import { BasicResponseMessageType } from "../Interface/Message/ResponseMessageType";
 
 export const getLexResponse = async (message: string) => {
-	const response = await fetch("/test", {
+	const userAgent = window.navigator.userAgent;
+
+	const response = await fetch("/api", {
 		method: "POST",
 		body: JSON.stringify({
 			message: message,
-			userId: btoa(window.navigator.userAgent).slice(0, 30),
+			userId: btoa(userAgent).slice(0, 30),
 		}),
 		headers: {
 			"Content-Type": "application/json",
