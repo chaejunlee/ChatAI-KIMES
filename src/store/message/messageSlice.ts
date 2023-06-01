@@ -29,36 +29,47 @@ const initialState = messageAdapter.getInitialState<MessageState>({
 	status: "idle",
 });
 
+const testContent = introMessage.content.map((cur) => {
+	if (cur.contentType !== "ImageResponseCard") return cur;
+
+	const buttonArray = cur.imageResponseCard.buttons;
+
+	const hasButtons = buttonArray.length > 0;
+	if (!hasButtons) return cur;
+
+	let buttonsId = 0;
+
+	const buttonsPayload: WithId<ButtonResponseType>[] = buttonArray.map(
+		(cur) => {
+			return {
+				id: ("button" + buttonsId++) as EntityId,
+				...(cur as ButtonResponseType),
+			};
+		}
+	);
+
+	return {
+		...cur,
+		imageResponseCard: {
+			...cur.imageResponseCard,
+			buttons: buttonsPayload.map((cur) => cur.id),
+		},
+	};
+});
+
+// for testing
+export const manyContent = Array.from({ length: 100 }, (_, i) => {
+	return {
+		id: ("message" + i) as EntityId,
+		type: "response",
+		content: testContent,
+	};
+}) as WithId<Message>[];
+
 const initialStateWithIntroMessage = messageAdapter.addOne(initialState, {
-	id: "message0",
-	type: introMessage.type,
-	content: introMessage.content.map((cur) => {
-		if (cur.contentType !== "ImageResponseCard") return cur;
-
-		const buttonArray = cur.imageResponseCard.buttons;
-
-		const hasButtons = buttonArray.length > 0;
-		if (!hasButtons) return cur;
-
-		let buttonsId = 0;
-
-		const buttonsPayload: WithId<ButtonResponseType>[] = buttonArray.map(
-			(cur) => {
-				return {
-					id: ("button" + buttonsId++) as EntityId,
-					...(cur as ButtonResponseType),
-				};
-			}
-		);
-
-		return {
-			...cur,
-			imageResponseCard: {
-				...cur.imageResponseCard,
-				buttons: buttonsPayload.map((cur) => cur.id),
-			},
-		};
-	}),
+	id: "message0" as EntityId,
+	type: "response",
+	content: testContent,
 });
 
 export const messageSlice = createSlice({

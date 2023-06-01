@@ -29,7 +29,7 @@ export function ResponseChatChunk({ messageId }: { messageId: EntityId }) {
 						case "ImageResponseCard":
 							return (
 								<CardResponseMessage
-									key={content.contentType + idx}
+									key={messageId.toString() + content.contentType + idx}
 									data={content as ImageResponseCardType}
 								/>
 							);

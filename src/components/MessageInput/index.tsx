@@ -118,13 +118,13 @@ function MessageInput() {
 	);
 }
 
-const PlusComponent = () => {
+const PlusComponent = memo(() => {
 	return (
 		<InputAdornment sx={{ paddingLeft: "0.5rem" }} position={"start"}>
 			<AddCircleIcon fontSize={"large"} sx={{ color: primaryColor }} />
 		</InputAdornment>
 	);
-};
+});
 
 const SendComponent = ({ handleOnClick }: { handleOnClick: () => void }) => {
 	const { status: isLoading } = useMessageStatus();
