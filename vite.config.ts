@@ -9,8 +9,6 @@ export default ({ mode }) => {
 		...loadEnv(mode, process.cwd()),
 	};
 
-	console.log(process.env.VITE_API_URL);
-
 	return defineConfig({
 		plugins: [
 			react(),
@@ -37,10 +35,10 @@ export default ({ mode }) => {
 		],
 		server: {
 			proxy: {
-				"^/test": {
+				"^/api": {
 					target: process.env.VITE_API_URL,
 					changeOrigin: true,
-					rewrite: (path) => path.replace(/^\/test/, ""),
+					rewrite: (path) => path.replace(/^\/api/, ""),
 					secure: false,
 				},
 			},
