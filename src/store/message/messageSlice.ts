@@ -1,15 +1,27 @@
-import { EntityId, PayloadAction, createEntityAdapter } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
+import {
+	EntityId,
+	PayloadAction,
+	createEntityAdapter,
+	createSlice,
+} from "@reduxjs/toolkit";
 import { introMessage } from "../../Data/Message";
+import { Message, WithId } from "../../Interface/Message/Message";
+import {
+	ButtonResponseType,
+	ImageResponseCardType,
+	imageResponseCardContentType,
+} from "../../Interface/Message/ResponseMessageType";
 import { createRequest } from "../../utils/Message/createRequest";
-import { fetchResponse } from "./fetchResponse";
 import { errorMessage } from "../../utils/Message/errorMessageContent";
 import { RootState } from "../store";
-import { MessageWithId } from "../../Interface/Message/Message";
+import { fetchResponse } from "./fetchResponse";
+import { addButtons } from "./buttonsSlice";
 
 interface MessageState {
 	status: "idle" | "loading" | "failed" | "succeeded";
 }
+
+type MessageWithId = WithId<Message>;
 
 const messageAdapter = createEntityAdapter<MessageWithId>();
 
@@ -19,7 +31,34 @@ const initialState = messageAdapter.getInitialState<MessageState>({
 
 const initialStateWithIntroMessage = messageAdapter.addOne(initialState, {
 	id: "message0",
-	...introMessage,
+	type: introMessage.type,
+	content: introMessage.content.map((cur) => {
+		if (cur.contentType !== "ImageResponseCard") return cur;
+
+		const buttonArray = cur.imageResponseCard.buttons;
+
+		const hasButtons = buttonArray.length > 0;
+		if (!hasButtons) return cur;
+
+		let buttonsId = 0;
+
+		const buttonsPayload: WithId<ButtonResponseType>[] = buttonArray.map(
+			(cur) => {
+				return {
+					id: ("button" + buttonsId++) as EntityId,
+					...(cur as ButtonResponseType),
+				};
+			}
+		);
+
+		return {
+			...cur,
+			imageResponseCard: {
+				...cur.imageResponseCard,
+				buttons: buttonsPayload.map((cur) => cur.id),
+			},
+		};
+	}),
 });
 
 export const messageSlice = createSlice({

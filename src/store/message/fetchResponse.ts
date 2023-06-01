@@ -1,5 +1,9 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { BasicResponseMessageType } from "../../Interface/Message/ResponseMessageType";
+import { EntityId, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+	BasicResponseMessageType,
+	ButtonResponseType,
+	ResponseMessageType,
+} from "../../Interface/Message/ResponseMessageType";
 import {
 	createResponse,
 	createResponseContent,
@@ -11,36 +15,84 @@ import {
 
 import { getLexResponse } from "../../api/getLexResponse";
 import { addMessage } from "./messageSlice";
+import { RootState } from "../store";
+import { addButtons } from "./buttonsSlice";
+import { WithId } from "../../Interface/Message/Message";
 
-const getResponse = async (message: string) => {
-	let content = await getLexResponse(message);
-
-	if (content === null)
-		return createResponse([
-			defaultContentResponseMessageData,
-			defaultCardResponseMessageData,
-		]);
-
-	let errorMessage = isErrorMessage(content);
-	if (errorMessage) {
-		const errorMessageContent = createResponseContent(errorMessage);
-		return createResponse(errorMessageContent);
-	}
+const getResponse = (content: BasicResponseMessageType[]) => {
+	const contentResponse = createResponse(content);
 
 	return createResponse(content);
 };
 
-export const fetchResponse = createAsyncThunk(
+interface fetchResponseProps {
+	message: string;
+	leaveMessage: boolean;
+}
+
+export const fetchResponse = createAsyncThunk<
+	ResponseMessageType,
+	fetchResponseProps,
+	{
+		state: RootState;
+	}
+>(
 	"message/fetchResponse",
 	async (
-		{ message, leaveMessage }: { message: string; leaveMessage: boolean },
-		{ dispatch }
+		{ message, leaveMessage }: fetchResponseProps,
+		{ dispatch, getState }
 	) => {
 		if (leaveMessage) {
 			dispatch(addMessage(message));
 		}
-		const response = await getResponse(message);
-		return response;
+		const response = await getLexResponse(message);
+
+		if (response === null)
+			return createResponse([
+				defaultContentResponseMessageData,
+				defaultCardResponseMessageData,
+			]);
+
+		let errorMessage = isErrorMessage(response);
+		if (errorMessage) {
+			const errorMessageContent = createResponseContent(errorMessage);
+			return createResponse(errorMessageContent);
+		}
+
+		const normalizedResponse = response.map((cur) => {
+			if (cur.contentType !== "ImageResponseCard") return cur;
+
+			const buttonArray = cur.imageResponseCard.buttons;
+
+			const hasButtons = buttonArray.length > 0;
+			if (!hasButtons) return cur;
+
+			const { buttons } = getState();
+			let buttonsId = buttons.ids.length;
+
+			const buttonsPayload: WithId<ButtonResponseType>[] = buttonArray.map(
+				(cur) => {
+					return {
+						id: ("button" + buttonsId++) as EntityId,
+						...(cur as ButtonResponseType),
+					};
+				}
+			);
+
+			dispatch(addButtons(buttonsPayload));
+
+			return {
+				...cur,
+				imageResponseCard: {
+					...cur.imageResponseCard,
+					buttons: buttonsPayload.map((cur) => cur.id),
+				},
+			};
+		});
+
+		const responseMessage = getResponse(normalizedResponse);
+
+		return responseMessage;
 	}
 );
 

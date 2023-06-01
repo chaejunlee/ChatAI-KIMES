@@ -1,3 +1,4 @@
+import { EntityId } from "@reduxjs/toolkit";
 import {
 	BasicResponseMessageType,
 	ContentResponseMessageType,
@@ -6,15 +7,13 @@ import {
 } from "../../../Interface/Message/ResponseMessageType";
 import CardResponseMessage from "./Card/CardResponseMessage";
 import ContentResponseMessage from "./ContentResponseMessage";
+import store from "../../../store/store";
+import { selectMessageById } from "../../../store/message/messageSlice";
 
-export function ResponseChatChunk({
-	message,
-	messageID,
-}: {
-	message: ResponseMessageType;
-	messageID: string;
-}) {
-	const receivedResponse = message.content;
+export function ResponseChatChunk({ messageId }: { messageId: EntityId }) {
+	const message = selectMessageById(store.getState(), messageId)!;
+	const receivedResponse = message.type === "response" ? message.content : [];
+
 	return (
 		<>
 			{receivedResponse.map(
@@ -32,7 +31,6 @@ export function ResponseChatChunk({
 								<CardResponseMessage
 									key={content.contentType + idx}
 									data={content as ImageResponseCardType}
-									messageID={`${messageID}-${idx}`}
 								/>
 							);
 					}

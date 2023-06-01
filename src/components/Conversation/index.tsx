@@ -21,7 +21,7 @@ export default function Conversation() {
 			paddingTop={"4rem"}
 			paddingBottom={"1rem"}
 		>
-			{messages.map((message, idx) => (
+			{messages.map((message) => (
 				<ChatChunk key={message} messageId={message} />
 			))}
 			{isLoading && (
