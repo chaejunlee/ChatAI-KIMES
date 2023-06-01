@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { useRef } from "react";
+import { memo, useRef } from "react";
 import {
 	ButtonResponseType,
 	imageResponseCardContentType,
@@ -7,7 +7,7 @@ import {
 import useMessageStatus from "../../../../hooks/Request/useMessageStatus";
 import { fetchResponse } from "../../../../store/message/fetchResponse";
 import { useAppDispatch } from "../../../../store/store";
-import { StyledButton } from "./StyledButton";
+import StyledButton from "./StyledButton";
 
 interface MessageButtonsProps {
 	message: imageResponseCardContentType;
@@ -61,3 +61,5 @@ export function MessageButtons({ message, messageID }: MessageButtonsProps) {
 		</Stack>
 	);
 }
+
+export default memo(MessageButtons);

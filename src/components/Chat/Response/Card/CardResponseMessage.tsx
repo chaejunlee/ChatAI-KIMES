@@ -1,6 +1,6 @@
 import { ImageResponseCardType } from "../../../../Interface/Message/ResponseMessageType";
 import { BasicResponseMessage } from "../BasicResponseMessage";
-import { MessageButtons } from "./MessageButtons";
+import MessageButtons from "./MessageButtons";
 import { MessageImage } from "./MessageImage";
 
 export interface CardResponseMessageTypeProps {

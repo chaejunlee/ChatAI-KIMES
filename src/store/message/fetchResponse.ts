@@ -8,7 +8,8 @@ import {
 	defaultCardResponseMessageData,
 	defaultContentResponseMessageData,
 } from "../../utils/Message/defaultResponseMessageData";
-import { getLexResponse } from "../../utils/Message/getLexResponse";
+
+import { getLexResponse } from "../../api/getLexResponse";
 import { addMessage } from "./messageSlice";
 
 const getResponse = async (message: string) => {

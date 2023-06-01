@@ -1,3 +1,6 @@
-export default interface Message {
-	type: "request" | "response";
-}
+import RequestMessageType from "./RequestMessageType";
+import { ResponseMessageType } from "./ResponseMessageType";
+
+export type Message = RequestMessageType | ResponseMessageType;
+
+export type MessageWithId = { id: string } & Message;
