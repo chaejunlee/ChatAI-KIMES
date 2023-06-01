@@ -45,18 +45,17 @@ export const fetchResponse = createAsyncThunk<
 		if (leaveMessage) {
 			dispatch(addMessage(message));
 		}
-		const response = await getLexResponse(message);
+		let response = await getLexResponse(message);
 
 		if (response === null)
-			return createResponse([
+			response = [
 				defaultContentResponseMessageData,
 				defaultCardResponseMessageData,
-			]);
+			];
 
 		let errorMessage = isErrorMessage(response);
 		if (errorMessage) {
 			const errorMessageContent = createResponseContent(errorMessage);
-			return createResponse(errorMessageContent);
 		}
 
 		const normalizedResponse = response.map((cur) => {
