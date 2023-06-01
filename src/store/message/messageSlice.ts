@@ -5,13 +5,7 @@ import { createRequest } from "../../utils/Message/createRequest";
 import { fetchResponse } from "./fetchResponse";
 import { errorMessage } from "../../utils/Message/errorMessageContent";
 import { RootState } from "../store";
-import { ResponseMessageType } from "../../Interface/Message/ResponseMessageType";
-import RequestMessageType from "../../Interface/Message/RequestMessageType";
-
-export interface MessageWithId {
-	content: ResponseMessageType | RequestMessageType;
-	id: number;
-}
+import { MessageWithId } from "../../Interface/Message/Message";
 
 interface MessageState {
 	status: "idle" | "loading" | "failed" | "succeeded";
@@ -24,8 +18,8 @@ const initialState = messageAdapter.getInitialState<MessageState>({
 });
 
 const initialStateWithIntroMessage = messageAdapter.addOne(initialState, {
-	id: 0,
-	content: introMessage,
+	id: "message0",
+	...introMessage,
 });
 
 export const messageSlice = createSlice({
@@ -35,7 +29,7 @@ export const messageSlice = createSlice({
 		addMessage: (state, action: PayloadAction<string>) => {
 			messageAdapter.addOne(state, {
 				id: createId(state.ids),
-				content: createRequest(action.payload),
+				...createRequest(action.payload),
 			});
 		},
 	},
@@ -45,7 +39,7 @@ export const messageSlice = createSlice({
 				state.status = "succeeded";
 				messageAdapter.addOne(state, {
 					id: createId(state.ids),
-					content: action.payload,
+					...action.payload,
 				});
 			})
 			.addCase(fetchResponse.pending, (state) => {
@@ -55,11 +49,9 @@ export const messageSlice = createSlice({
 				state.status = "failed";
 				messageAdapter.addOne(state, {
 					id: createId(state.ids),
-					content: {
-						type: "response",
-						content: errorMessage,
-					},
-				} as MessageWithId);
+					type: "response",
+					content: errorMessage,
+				});
 			});
 	},
 });
@@ -75,5 +67,5 @@ export const {
 export default messageSlice.reducer;
 
 const createId = (data: EntityId[]) => {
-	return data.length;
+	return "message" + data.length;
 };

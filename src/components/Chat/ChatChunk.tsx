@@ -19,14 +19,14 @@ export function ChatChunk({ messageId }: { messageId: EntityId }) {
 	const message = selectMessageById(store.getState(), messageId)!;
 	const divRef = useSmoothScrollToBottom();
 
-	switch (message.content.type) {
+	switch (message.type) {
 		case "request":
 			return (
 				<AnimationScope>
 					<Stack ref={divRef} maxWidth={"80%"} marginLeft={"auto"} right={"0"}>
 						<BasicRequestMessage>
 							<Typography sx={{ textAlign: "left" }}>
-								{message.content.message}
+								{message.message}
 							</Typography>
 						</BasicRequestMessage>
 					</Stack>
@@ -36,7 +36,7 @@ export function ChatChunk({ messageId }: { messageId: EntityId }) {
 			return (
 				<ResponseChat>
 					<>
-						{message.content.content.map(
+						{message.content.map(
 							(content: BasicResponseMessageType, idx: number) => {
 								switch (content.contentType) {
 									case "PlainText":
