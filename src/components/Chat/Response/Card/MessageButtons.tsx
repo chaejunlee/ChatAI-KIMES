@@ -54,7 +54,7 @@ export function MessageButtons({ message, messageID }: MessageButtonsProps) {
 						id={buttonIndentifier}
 						onClick={() => handleButtonClick(button, buttonIndentifier)}
 					>
-						{button.text}
+						{button?.text}
 					</StyledButton>
 				);
 			})}
