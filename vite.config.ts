@@ -9,9 +9,6 @@ export default ({ mode }) => {
 		...loadEnv(mode, process.cwd()),
 	};
 
-	process.env.VITE_API_URL =
-		"https://ad1q3eqae2.execute-api.ap-northeast-2.amazonaws.com/test";
-
 	return defineConfig({
 		plugins: [
 			react(),
@@ -38,10 +35,10 @@ export default ({ mode }) => {
 		],
 		server: {
 			proxy: {
-				"^/api": {
+				"^/test": {
 					target: process.env.VITE_API_URL,
 					changeOrigin: true,
-					rewrite: (path) => path.replace(/^\/api/, ""),
+					rewrite: (path) => path.replace(/^\/test/, ""),
 					secure: false,
 				},
 			},

@@ -3,7 +3,7 @@ import { BasicResponseMessageType } from "../Interface/Message/ResponseMessageTy
 export const getLexResponse = async (message: string) => {
 	const userAgent = window.navigator.userAgent;
 
-	const response = await fetch("/api", {
+	const response = await fetch("/test", {
 		method: "POST",
 		body: JSON.stringify({
 			message: message,
