@@ -1,3 +1,5 @@
+import { EntityId } from "@reduxjs/toolkit";
+
 export type BasicResponseMessageType =
 	| ContentResponseMessageType
 	| ImageResponseCardType;
@@ -18,7 +20,7 @@ export interface ImageResponseCardType {
 }
 
 export interface imageResponseCardContentType {
-	buttons: ButtonResponseType[];
+	buttons: ButtonResponseType[] | EntityId[];
 	imageUrl?: string;
 	subtitle?: string;
 	title?: string;

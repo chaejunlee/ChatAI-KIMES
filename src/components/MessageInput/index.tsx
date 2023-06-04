@@ -2,7 +2,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SendIcon from "@mui/icons-material/Send";
 import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { KeyboardEvent, useRef } from "react";
+import { KeyboardEvent, memo, useRef } from "react";
 import useMessageStatus from "../../hooks/Request/useMessageStatus";
 import { fetchResponse } from "../../store/message/fetchResponse";
 import { useAppDispatch } from "../../store/store";
@@ -31,7 +31,7 @@ const TextFiledWrapper = styled("div")`
 	padding-inline: 0.5rem;
 `;
 
-export default function MessageInput() {
+function MessageInput() {
 	const { status: isLoading } = useMessageStatus();
 	const dispatch = useAppDispatch();
 	const classes = useStyles();
@@ -118,13 +118,13 @@ export default function MessageInput() {
 	);
 }
 
-const PlusComponent = () => {
+const PlusComponent = memo(() => {
 	return (
 		<InputAdornment sx={{ paddingLeft: "0.5rem" }} position={"start"}>
 			<AddCircleIcon fontSize={"large"} sx={{ color: primaryColor }} />
 		</InputAdornment>
 	);
-};
+});
 
 const SendComponent = ({ handleOnClick }: { handleOnClick: () => void }) => {
 	const { status: isLoading } = useMessageStatus();
@@ -137,3 +137,5 @@ const SendComponent = ({ handleOnClick }: { handleOnClick: () => void }) => {
 		</InputAdornment>
 	);
 };
+
+export default memo(MessageInput);
