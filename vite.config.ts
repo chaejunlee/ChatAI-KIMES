@@ -9,6 +9,9 @@ export default ({ mode }) => {
 		...loadEnv(mode, process.cwd()),
 	};
 
+	process.env.VITE_API_URL =
+		"https://ad1q3eqae2.execute-api.ap-northeast-2.amazonaws.com/test";
+
 	return defineConfig({
 		plugins: [
 			react(),
