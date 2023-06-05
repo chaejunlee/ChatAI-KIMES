@@ -3,7 +3,7 @@ import { IconButton, Stack, styled } from "@mui/material";
 import MenuButton from "../../components/MenuButton";
 
 import BeamworksLogo from "../../assets/BeamworksLogo.png";
-import ChatAIDE from "../../assets/Chat-AIDE.png";
+import ChatAIDE from "../../assets/ChatAi-B.png";
 
 import HeaderSVG from "../../assets/HeaderSVG";
 
