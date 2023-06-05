@@ -28,7 +28,6 @@ export default function ContentResponseMessage({
 				<StyledButton
 					disabled={false}
 					style={{
-						background: "white",
 						border: "none",
 						filter: "drop-shadow(rgba(150, 200, 150, 0.8) 0px 3px 3px)",
 					}}
