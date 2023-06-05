@@ -24,12 +24,20 @@ export default function ContentResponseMessage({
 }) {
 	if (containsUrl(message.content))
 		return (
-			<div className="message">
+			<div className="message" style={{ marginBottom: "8px" }}>
 				<StyledButton
 					disabled={false}
-					style={{ border: `${primaryColor} 3px solid` }}
+					style={{
+						background: "white",
+						border: "none",
+						filter: "drop-shadow(rgba(150, 200, 150, 0.8) 0px 3px 3px)",
+					}}
 				>
-					<StyledLink href={message.content} target="_blank">
+					<StyledLink
+						style={{ color: `${primaryColor}` }}
+						href={message.content}
+						target="_blank"
+					>
 						<span>관련 링크로 바로가기</span>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"

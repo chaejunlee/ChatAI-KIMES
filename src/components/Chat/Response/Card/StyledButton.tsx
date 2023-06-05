@@ -24,11 +24,11 @@ export const StyledButton = styled("button")<IsSelectedInterface>`
 	background: ${Style("white", "white")};
 	color: ${Style(primaryColor, "#6a6a6a")};
 	text-align: start;
-	font-weight: ${Style("bold", "medium")};
+	font-weight: ${Style("700", "500")};
 	font-size: 1rem;
 
 	border-radius: 1.25rem;
-	border: ${Style("2px", "1px")} solid ${Style(primaryColor, "#bed1d1")};
+	border: ${Style("2px", "1px")} solid ${Style(primaryColor, "#cacfcf")};
 	// margin: ${Style("-2px", "-1px")} !important;
 
 	cursor: pointer;

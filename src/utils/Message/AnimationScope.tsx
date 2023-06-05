@@ -28,7 +28,10 @@ export default function AnimationScope({
 					y: [10, 0],
 				},
 				{
-					delay: stagger(0.1, { startDelay: 0.1 }),
+					delay: stagger(0.1),
+					duration: 0.3,
+					stiffness: 1000,
+					damping: 20,
 				}
 			);
 	}, []);

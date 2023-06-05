@@ -6,16 +6,11 @@ import {
 } from "@reduxjs/toolkit";
 import { introMessage } from "../../Data/Message";
 import { Message, WithId } from "../../Interface/Message/Message";
-import {
-	ButtonResponseType,
-	ImageResponseCardType,
-	imageResponseCardContentType,
-} from "../../Interface/Message/ResponseMessageType";
+import { ButtonResponseType } from "../../Interface/Message/ResponseMessageType";
 import { createRequest } from "../../utils/Message/createRequest";
 import { errorMessage } from "../../utils/Message/errorMessageContent";
 import { RootState } from "../store";
-import { fetchResponse } from "./fetchResponse";
-import { addButtons } from "./buttonsSlice";
+import { fetchResponse, normalizeButtons } from "./fetchResponse";
 
 interface MessageState {
 	status: "idle" | "loading" | "failed" | "succeeded";
@@ -32,29 +27,21 @@ const initialState = messageAdapter.getInitialState<MessageState>({
 const testContent = introMessage.content.map((cur) => {
 	if (cur.contentType !== "ImageResponseCard") return cur;
 
-	const buttonArray = cur.imageResponseCard.buttons;
+	const buttonArray = cur.imageResponseCard.buttons as ButtonResponseType[];
 
 	const hasButtons = buttonArray.length > 0;
 	if (!hasButtons) return cur;
 
 	let buttonsId = 0;
 
-	const buttonsPayload: WithId<ButtonResponseType>[] = buttonArray.map(
-		(cur) => {
-			return {
-				id: ("button" + buttonsId++) as EntityId,
-				...(cur as ButtonResponseType),
-			};
-		}
+	const buttonsPayload = normalizeButtons(buttonsId, buttonArray);
+
+	const normalizedResponse = { ...cur };
+	normalizedResponse.imageResponseCard.buttons = buttonsPayload.map(
+		(cur) => cur.id
 	);
 
-	return {
-		...cur,
-		imageResponseCard: {
-			...cur.imageResponseCard,
-			buttons: buttonsPayload.map((cur) => cur.id),
-		},
-	};
+	return normalizedResponse;
 });
 
 // for testing
