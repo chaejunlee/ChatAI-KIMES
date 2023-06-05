@@ -18,8 +18,9 @@ import { addMessage } from "./messageSlice";
 import { RootState } from "../store";
 import { addButtons } from "./buttonsSlice";
 import { WithId } from "../../Interface/Message/Message";
+import { AppDispatch } from "../store";
 
-const getResponse = (content: BasicResponseMessageType[]) => {
+const formatResponse = (content: BasicResponseMessageType[]) => {
 	const contentResponse = createResponse(content);
 
 	return createResponse(content);
@@ -35,6 +36,7 @@ export const fetchResponse = createAsyncThunk<
 	fetchResponseProps,
 	{
 		state: RootState;
+		dispatch: AppDispatch;
 	}
 >(
 	"message/fetchResponse",
@@ -61,39 +63,49 @@ export const fetchResponse = createAsyncThunk<
 		const normalizedResponse = response.map((cur) => {
 			if (cur.contentType !== "ImageResponseCard") return cur;
 
-			const buttonArray = cur.imageResponseCard.buttons;
+			const buttonArray = cur.imageResponseCard.buttons as ButtonResponseType[];
 
 			const hasButtons = buttonArray.length > 0;
 			if (!hasButtons) return cur;
 
-			const { buttons } = getState();
-			let buttonsId = buttons.ids.length;
+			const startingButtonsId = getState().buttons.ids.length;
 
-			const buttonsPayload: WithId<ButtonResponseType>[] = buttonArray.map(
-				(cur) => {
-					return {
-						id: ("button" + buttonsId++) as EntityId,
-						...(cur as ButtonResponseType),
-					};
-				}
+			const normalizedButtons = normalizeButtons(
+				startingButtonsId,
+				buttonArray
 			);
 
-			dispatch(addButtons(buttonsPayload));
+			dispatch(addButtons(normalizedButtons));
+
+			const normalizedButtonIds = normalizedButtons.map((cur) => cur.id);
 
 			return {
 				...cur,
 				imageResponseCard: {
-					...cur.imageResponseCard,
-					buttons: buttonsPayload.map((cur) => cur.id),
+					buttons: normalizedButtonIds,
 				},
 			};
 		});
 
-		const responseMessage = getResponse(normalizedResponse);
+		const responseMessage = formatResponse(normalizedResponse);
 
 		return responseMessage;
 	}
 );
+
+export function normalizeButtons(
+	startingButtonsId: number,
+	buttonArray: ButtonResponseType[]
+): WithId<ButtonResponseType>[] {
+	let buttonsId = startingButtonsId;
+
+	return buttonArray.map((cur) => {
+		return {
+			id: ("button" + buttonsId++) as EntityId,
+			...(cur as ButtonResponseType),
+		};
+	});
+}
 
 const isErrorMessage = (
 	response: BasicResponseMessageType[]
