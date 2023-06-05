@@ -29,11 +29,10 @@ export const StyledButton = styled("button")<IsSelectedInterface>`
 
 	border-radius: 1.25rem;
 	border: ${Style("2px", "1px")} solid ${Style(primaryColor, "#cacfcf")};
-	// margin: ${Style("-2px", "-1px")} !important;
 
 	cursor: pointer;
 
-	transition: all 0.2s linear;
+	transition: background 0.2s linear;
 
 	&:hover {
 		background: ${Style("#f3f3f3", "#f3f3f3")};
