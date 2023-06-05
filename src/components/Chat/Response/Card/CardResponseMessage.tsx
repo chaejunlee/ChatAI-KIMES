@@ -27,7 +27,7 @@ function CardResponseMessage({ data }: CardResponseMessageTypeProps) {
 	const buttons = message.buttons || [];
 
 	return (
-		<div className="message">
+		<>
 			{message.imageUrl && <MessageImage message={message} />}
 			{message.subtitle && <MessageSubtitle subtitle={message.subtitle} />}
 			{message.buttons && (
@@ -49,7 +49,7 @@ function CardResponseMessage({ data }: CardResponseMessageTypeProps) {
 					))}
 				</Stack>
 			)}
-		</div>
+		</>
 	);
 }
 
@@ -82,13 +82,15 @@ const Button = memo(
 		const buttonContent = selectById(store.getState().buttons, button)!;
 
 		return (
-			<StyledButton
-				disabled={isSelected}
-				id={buttonIndentifier}
-				onClick={() => handleButtonClick(buttonContent, buttonIndentifier)}
-			>
-				{buttonContent.text}
-			</StyledButton>
+			<div style={{ margin: "0" }} className="message">
+				<StyledButton
+					disabled={isSelected}
+					id={buttonIndentifier}
+					onClick={() => handleButtonClick(buttonContent, buttonIndentifier)}
+				>
+					{buttonContent.text}
+				</StyledButton>
+			</div>
 		);
 	}
 );
