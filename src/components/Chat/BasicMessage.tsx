@@ -13,7 +13,7 @@ export const BasicMessage = styled("div")<isResponseInterface>`
 	padding: 0.5rem 0.7rem;
 	display: inline-block;
 
-	background: ${Style("#eaefef", "#12c670")};
+	background: ${Style("#f6f8f8", "#12c670")};
 	border-radius: ${Style("0px 1rem 1rem 1rem", "1rem 0px 1rem 1rem")};
 	align-items: ${Style("flex-start", "flex-end")};
 
