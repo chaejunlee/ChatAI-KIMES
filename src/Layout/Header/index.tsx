@@ -1,11 +1,8 @@
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import { IconButton, Stack, styled } from "@mui/material";
-import MenuButton from "../../components/MenuButton";
-
-import BeamworksLogo from "../../assets/BeamworksLogo.png";
-import ChatAIDE from "../../assets/ChatAi-B.png";
+import { Stack, styled } from "@mui/material";
 
 import HeaderSVG from "../../assets/HeaderSVG";
+import { SurveyButton } from "./SurveyButton";
+import { Logo } from "./Logo";
 
 // to the header
 const StyledHeader = styled("div")`
@@ -13,7 +10,7 @@ const StyledHeader = styled("div")`
 	display: flex;
 	top: 0;
 	width: 100%;
-	height: 5.3rem;
+	height: 5.25rem;
 	justify-content: center;
 	background: white;
 	filter: drop-shadow(0px 10px 30px rgba(0, 0, 0, 0.1));
@@ -31,6 +28,7 @@ export default function Header() {
 			left={"0"}
 			right={"0"}
 			zIndex={"10"}
+			style={{ isolation: "isolate" }}
 		>
 			<StyledHeader>
 				<HeaderSVG
@@ -43,44 +41,21 @@ export default function Header() {
 				/>
 			</StyledHeader>
 			<Stack
-				m={"1rem"}
-				direction={"row"}
 				width="100%"
+				direction={"row"}
+				height={"3.25rem"}
 				justifyContent={"space-between"}
 				alignItems={"center"}
+				p={"1rem"}
+				sx={{
+					"@media (min-width: 600px)": { paddingInline: "2rem" },
+					isolation: "isolate",
+				}}
 				zIndex={2}
 			>
-				<MenuButton />
-				<IconButton disabled>
-					<img
-						style={{
-							display: "block",
-							width: "12rem",
-							height: "auto",
-							zIndex: 2,
-						}}
-						src={BeamworksLogo}
-						alt="Beamworks"
-					/>
-				</IconButton>
-				<IconButton>
-					<HelpOutlineIcon />
-				</IconButton>
+				<SurveyButton />
+				<Logo />
 			</Stack>
-			<img
-				style={{
-					position: "absolute",
-					top: "4.75rem",
-					left: "calc(50% + 0.5rem)",
-					right: 0,
-					width: "8rem",
-					height: "auto",
-					zIndex: 2,
-					transform: "translate(-50%, -50%)",
-				}}
-				src={ChatAIDE}
-				alt="Chat AIDE"
-			/>
 		</Stack>
 	);
 }
