@@ -30,8 +30,6 @@ export default function AnimationScope({
 				{
 					delay: stagger(0.1),
 					duration: 0.3,
-					stiffness: 1000,
-					damping: 20,
 				}
 			);
 	}, []);
