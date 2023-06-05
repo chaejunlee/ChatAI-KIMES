@@ -59,7 +59,11 @@ export default function ContentResponseMessage({
 
 	return (
 		<BasicResponseMessage>
-			<Typography sx={{ textAlign: "left" }}>{message.content}</Typography>
+			{message.content.split(/\\n|\n/g).map((p, idx) => (
+				<Typography key={p + idx} sx={{ textAlign: "left" }}>
+					{p}
+				</Typography>
+			))}
 		</BasicResponseMessage>
 	);
 }
