@@ -31,21 +31,11 @@ export default function Header() {
 	return (
 		<>
 			<StyledHeader>
-				<HeaderSVG
-					style={{
-						position: "absolute",
-						height: "8rem",
-						maxWidth: "100%",
-						marginInline: "auto",
-						flexShrink: 0,
-						pointerEvents: "none",
-						bottom: "-3.8rem",
-					}}
-				/>
+				<HeaderSVG />
 				<Stack
 					width="100%"
 					direction={"row"}
-					justifyContent={"space-between"}
+					justifyContent={"flex-end"}
 					alignItems={"center"}
 					p={"1rem"}
 					sx={{
@@ -54,15 +44,15 @@ export default function Header() {
 					}}
 					zIndex={2}
 				>
+					<Logo />
 					<HeaderButton
 						clickHandlerBuilder={(callback: () => void) => () => {
 							sendRequest(SURVEY_ACTION);
 							callback();
 						}}
 					>
-						설문조사 시작하기
+						설문 시작
 					</HeaderButton>
-					<Logo />
 				</Stack>
 			</StyledHeader>
 		</>
