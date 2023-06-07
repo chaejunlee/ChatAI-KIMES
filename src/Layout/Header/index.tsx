@@ -14,7 +14,7 @@ const StyledHeader = styled("div")`
 	display: flex;
 	top: 0;
 	width: 100%;
-	height: 4rem;
+	height: 4.5rem;
 	justify-content: center;
 	background: white;
 	filter: drop-shadow(0px 10px 30px rgba(0, 0, 0, 0.1));
@@ -35,11 +35,11 @@ export default function Header() {
 					style={{
 						position: "absolute",
 						height: "8rem",
-						width: "100%",
+						maxWidth: "100%",
 						marginInline: "auto",
 						flexShrink: 0,
 						pointerEvents: "none",
-						translate: "0 -0.2rem",
+						bottom: "-3.8rem",
 					}}
 				/>
 				<Stack
