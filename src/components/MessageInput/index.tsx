@@ -136,8 +136,8 @@ const HomeComponent = () => {
 				background: primaryColor,
 				borderRadius: "100vh",
 				aspectRatio: "1 / 1",
-				placeContent: "center",
-				padding: "0.65rem",
+				height: "3rem",
+				placeItems: "center",
 				minWidth: 0,
 			}}
 		>
