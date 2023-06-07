@@ -7,7 +7,7 @@ export const Logo = () => {
 			style={{
 				position: "absolute",
 				display: "grid",
-				top: "1.5rem",
+				top: "1rem",
 				placeItems: "center",
 				left: "50%",
 				transform: "translateX(-50%)",
@@ -16,7 +16,7 @@ export const Logo = () => {
 			<img
 				style={{
 					display: "block",
-					width: "12rem",
+					width: "10rem",
 					height: "auto",
 				}}
 				src={BeamworksLogo}
@@ -25,7 +25,7 @@ export const Logo = () => {
 			<img
 				style={{
 					display: "block",
-					width: "8rem",
+					width: "6rem",
 					height: "auto",
 					translate: "0.3rem 0rem",
 				}}
