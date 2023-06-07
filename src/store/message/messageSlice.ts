@@ -36,7 +36,7 @@ const testContent = introMessage.content.map((cur) => {
 
 	const buttonsPayload = normalizeButtons(buttonsId, buttonArray);
 
-	const normalizedResponse = { ...cur };
+	const normalizedResponse = structuredClone(cur);
 	normalizedResponse.imageResponseCard.buttons = buttonsPayload.map(
 		(cur) => cur.id
 	);
