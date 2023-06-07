@@ -8,6 +8,9 @@ const AnimationScopeWrapper = styled("div")`
 	width: 100%;
 `;
 
+export const ANIMATION_TARGET = "animation-target";
+const ANIMATION_TARGET_SELECTOR = `.${ANIMATION_TARGET}`;
+
 export default function AnimationScope({
 	children,
 	selector,
@@ -17,7 +20,7 @@ export default function AnimationScope({
 }) {
 	const [scope, animate] = useAnimate();
 
-	const animateSelector = selector ? selector : ".message";
+	const animateSelector = selector ? selector : ANIMATION_TARGET_SELECTOR;
 
 	useEffect(() => {
 		if (scope)

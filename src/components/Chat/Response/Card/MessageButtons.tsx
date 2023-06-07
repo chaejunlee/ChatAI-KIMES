@@ -11,6 +11,7 @@ import {
 import { selectById } from "../../../../store/message/buttonsSlice";
 import ContentResponseMessage from "../ContentResponseMessage";
 import { errorMessage } from "../../../../utils/Message/errorMessageContent";
+import { ANIMATION_TARGET } from "../../../../utils/Message/AnimationScope";
 
 const MessageButton = memo(
 	({
@@ -22,6 +23,7 @@ const MessageButton = memo(
 	}) => {
 		const dispatch = useAppDispatch();
 		const { status: isLoading } = useMessageStatus();
+		// const isLoading = false;
 
 		const sendRequest = (value: string) => {
 			dispatch(fetchResponse({ message: value, leaveMessage: false }));
@@ -51,7 +53,7 @@ const MessageButton = memo(
 			);
 
 		return (
-			<div style={{ margin: "0" }} className="message">
+			<div style={{ margin: "0" }} className={ANIMATION_TARGET}>
 				<StyledButton
 					disabled={isSelected}
 					id={buttonIndentifier}
