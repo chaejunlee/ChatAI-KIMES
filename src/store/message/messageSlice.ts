@@ -6,7 +6,11 @@ import {
 } from "@reduxjs/toolkit";
 import { introMessage } from "../../Data/Message";
 import { Message, WithId } from "../../Interface/Message/Message";
-import { ButtonResponseType } from "../../Interface/Message/ResponseMessageType";
+import {
+	ButtonResponseType,
+	ContentResponseMessageType,
+	ImageResponseCardType,
+} from "../../Interface/Message/ResponseMessageType";
 import { createRequest } from "../../utils/Message/createRequest";
 import { errorMessage } from "../../utils/Message/errorMessageContent";
 import { RootState } from "../store";
@@ -24,7 +28,7 @@ const initialState = messageAdapter.getInitialState<MessageState>({
 	status: "idle",
 });
 
-const testContent = introMessage.content.map((cur) => {
+export const testContent = introMessage.content.map((cur) => {
 	if (cur.contentType !== "ImageResponseCard") return cur;
 
 	const buttonArray = cur.imageResponseCard.buttons as ButtonResponseType[];
@@ -36,7 +40,7 @@ const testContent = introMessage.content.map((cur) => {
 
 	const buttonsPayload = normalizeButtons(buttonsId, buttonArray);
 
-	const normalizedResponse = { ...cur };
+	const normalizedResponse = structuredClone(cur);
 	normalizedResponse.imageResponseCard.buttons = buttonsPayload.map(
 		(cur) => cur.id
 	);
@@ -63,10 +67,22 @@ export const messageSlice = createSlice({
 	name: "message",
 	initialState: initialStateWithIntroMessage,
 	reducers: {
-		addMessage: (state, action: PayloadAction<string>) => {
+		getResponse: (state, action: PayloadAction<string>) => {
 			messageAdapter.addOne(state, {
 				id: createId(state.ids),
 				...createRequest(action.payload),
+			});
+		},
+		addMessage: (
+			state,
+			action: PayloadAction<
+				(ContentResponseMessageType | ImageResponseCardType)[]
+			>
+		) => {
+			messageAdapter.addOne(state, {
+				id: createId(state.ids),
+				type: "response",
+				content: action.payload,
 			});
 		},
 	},
@@ -93,7 +109,7 @@ export const messageSlice = createSlice({
 	},
 });
 
-export const { addMessage } = messageSlice.actions;
+export const { getResponse, addMessage } = messageSlice.actions;
 
 export const {
 	selectAll: selectAllMessages,

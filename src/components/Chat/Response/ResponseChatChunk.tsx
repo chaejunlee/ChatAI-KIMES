@@ -3,15 +3,24 @@ import {
 	BasicResponseMessageType,
 	ContentResponseMessageType,
 	ImageResponseCardType,
-	ResponseMessageType,
 } from "../../../Interface/Message/ResponseMessageType";
+import { selectMessageById } from "../../../store/message/messageSlice";
+import { useAppSelector } from "../../../store/store";
+import { errorMessage } from "../../../utils/Message/errorMessageContent";
 import CardResponseMessage from "./Card/CardResponseMessage";
 import ContentResponseMessage from "./ContentResponseMessage";
-import store from "../../../store/store";
-import { selectMessageById } from "../../../store/message/messageSlice";
 
 export function ResponseChatChunk({ messageId }: { messageId: EntityId }) {
-	const message = selectMessageById(store.getState(), messageId)!;
+	const message = useAppSelector((state) =>
+		selectMessageById(state, messageId)
+	);
+	if (!message)
+		return (
+			<ContentResponseMessage
+				key={"message-error"}
+				message={errorMessage as unknown as ContentResponseMessageType}
+			/>
+		);
 	const receivedResponse = message.type === "response" ? message.content : [];
 
 	return (

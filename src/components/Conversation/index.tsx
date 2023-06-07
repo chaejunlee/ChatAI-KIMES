@@ -1,14 +1,14 @@
 import { Stack } from "@mui/material";
 import useMessageStatus from "../../hooks/Request/useMessageStatus";
 import { selectMessageIds } from "../../store/message/messageSlice";
-import store from "../../store/store";
+import { useAppSelector } from "../../store/store";
 import ChatChunk from "../Chat/ChatChunk";
 import { LoadingResponseMessage } from "../Chat/LoadingResponseMessage";
 import { ResponseChat } from "../Chat/Response/ResponseChat";
 
 export default function Conversation() {
 	const { status: isLoading } = useMessageStatus();
-	const messages = selectMessageIds(store.getState());
+	const messageIds = useAppSelector(selectMessageIds);
 
 	return (
 		<Stack
@@ -21,7 +21,7 @@ export default function Conversation() {
 			paddingTop={"4rem"}
 			paddingBottom={"1rem"}
 		>
-			{messages.map((message) => (
+			{messageIds.map((message) => (
 				<ChatChunk key={message} messageId={message} />
 			))}
 			{isLoading && (

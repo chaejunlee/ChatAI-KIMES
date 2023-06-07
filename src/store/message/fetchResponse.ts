@@ -14,7 +14,7 @@ import {
 } from "../../utils/Message/defaultResponseMessageData";
 
 import { getLexResponse } from "../../api/getLexResponse";
-import { addMessage } from "./messageSlice";
+import { getResponse } from "./messageSlice";
 import { RootState } from "../store";
 import { addButtons } from "./buttonsSlice";
 import { WithId } from "../../Interface/Message/Message";
@@ -45,7 +45,7 @@ export const fetchResponse = createAsyncThunk<
 		{ dispatch, getState }
 	) => {
 		if (leaveMessage) {
-			dispatch(addMessage(message));
+			dispatch(getResponse(message));
 		}
 		let response = await getLexResponse(message);
 

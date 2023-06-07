@@ -1,65 +1,67 @@
-import { Stack } from "@mui/material";
-import { memo, useRef } from "react";
-import { ButtonResponseType } from "../../../../Interface/Message/ResponseMessageType";
-import useMessageStatus from "../../../../hooks/Request/useMessageStatus";
-import { fetchResponse } from "../../../../store/message/fetchResponse";
-import store, { useAppDispatch } from "../../../../store/store";
+import { memo } from "react";
 import StyledButton from "./StyledButton";
 import { EntityId } from "@reduxjs/toolkit";
+import { useAppDispatch, useAppSelector } from "../../../../store/store";
+import useMessageStatus from "../../../../hooks/Request/useMessageStatus";
+import { fetchResponse } from "../../../../store/message/fetchResponse";
+import {
+	ButtonResponseType,
+	ContentResponseMessageType,
+} from "../../../../Interface/Message/ResponseMessageType";
 import { selectById } from "../../../../store/message/buttonsSlice";
-import { selectMessageById } from "../../../../store/message/messageSlice";
+import ContentResponseMessage from "../ContentResponseMessage";
+import { errorMessage } from "../../../../utils/Message/errorMessageContent";
 
-interface MessageButtonsProps {
-	messageId: EntityId;
-}
+const MessageButton = memo(
+	({
+		button,
+		clickedBtnListRef,
+	}: {
+		button: EntityId;
+		clickedBtnListRef: React.MutableRefObject<string[]>;
+	}) => {
+		const dispatch = useAppDispatch();
+		const { status: isLoading } = useMessageStatus();
 
-export function MessageButtons({ messageId }: MessageButtonsProps) {
-	const clickedBtnListRef = useRef([] as string[]);
-	const dispatch = useAppDispatch();
-	const { status: isLoading } = useMessageStatus();
-	const message = selectMessageById(store.getState(), messageId)!;
-	const buttons = message.type === "response" ? message.content : [];
+		const sendRequest = (value: string) => {
+			dispatch(fetchResponse({ message: value, leaveMessage: false }));
+		};
 
-	const sendRequest = (value: string) => {
-		dispatch(fetchResponse({ message: value, leaveMessage: false }));
-	};
+		const handleButtonClick = (
+			button: ButtonResponseType,
+			buttonIndentifier: string
+		) => {
+			if (isLoading) return;
+			clickedBtnListRef.current.push(buttonIndentifier);
+			sendRequest(button.value);
+		};
 
-	const handleButtonClick = (
-		button: ButtonResponseType,
-		buttonIndentifier: string
-	) => {
-		if (isLoading) return;
-		clickedBtnListRef.current.push(buttonIndentifier);
-		sendRequest(button.value);
-	};
-
-	const Button = ({ button }: { button: EntityId }) => {
 		const buttonIndentifier = button.toString();
 		const isSelected = clickedBtnListRef.current.includes(buttonIndentifier);
-		const buttonContent = selectById(store.getState().buttons, button)!;
+		const buttonContent = useAppSelector((state) =>
+			selectById(state.buttons, button)
+		);
+
+		if (!buttonContent)
+			return (
+				<ContentResponseMessage
+					key={"message-error"}
+					message={errorMessage as unknown as ContentResponseMessageType}
+				/>
+			);
 
 		return (
-			<StyledButton
-				disabled={isSelected}
-				id={buttonIndentifier}
-				onClick={() => handleButtonClick(buttonContent, buttonIndentifier)}
-			>
-				{buttonContent.text}
-			</StyledButton>
+			<div style={{ margin: "0" }} className="message">
+				<StyledButton
+					disabled={isSelected}
+					id={buttonIndentifier}
+					onClick={() => handleButtonClick(buttonContent, buttonIndentifier)}
+				>
+					{buttonContent.text}
+				</StyledButton>
+			</div>
 		);
-	};
+	}
+);
 
-	return (
-		<Stack
-			spacing={0.5}
-			direction={"row"}
-			flexWrap={"wrap"}
-			columnGap={"0.5rem"}
-			rowGap={"0.5rem"}
-			justifyContent={"flex-start"}
-			alignItems={"flex-start"}
-		></Stack>
-	);
-}
-
-export default memo(MessageButtons);
+export default MessageButton;
