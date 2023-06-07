@@ -14,7 +14,7 @@ const StyledHeader = styled("div")`
 	display: flex;
 	top: 0;
 	width: 100%;
-	height: 4.5rem;
+	height: 4rem;
 	justify-content: center;
 	background: white;
 	filter: drop-shadow(0px 10px 30px rgba(0, 0, 0, 0.1));
@@ -37,7 +37,7 @@ export default function Header() {
 					direction={"row"}
 					justifyContent={"flex-end"}
 					alignItems={"center"}
-					p={"1rem"}
+					p={"0.75rem"}
 					sx={{
 						"@media (min-width: 600px)": { paddingInline: "1.5rem" },
 						isolation: "isolate",

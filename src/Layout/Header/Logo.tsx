@@ -16,7 +16,7 @@ export const Logo = () => {
 			<img
 				style={{
 					display: "block",
-					width: "12rem",
+					width: "10rem",
 					height: "auto",
 					marginBottom: "0.3rem",
 				}}
@@ -26,7 +26,7 @@ export const Logo = () => {
 			<img
 				style={{
 					display: "block",
-					width: "7rem",
+					width: "6rem",
 					height: "auto",
 					translate: "0.3rem 0rem",
 				}}

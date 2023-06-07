@@ -10,8 +10,6 @@ const StyledSpan = styled("span")`
 	font-size: 1rem;
 
 	@media (max-width: 600px) {
-		word-break: keep-all;
-		width: min-content;
 		font-size: 0.9rem;
 		padding: 0.2rem 0.5rem;
 	}
