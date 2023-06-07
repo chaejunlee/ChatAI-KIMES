@@ -14,7 +14,7 @@ const StyledHeader = styled("div")`
 	display: flex;
 	top: 0;
 	width: 100%;
-	height: 4rem;
+	height: 4.5rem;
 	justify-content: center;
 	background: white;
 	filter: drop-shadow(0px 10px 30px rgba(0, 0, 0, 0.1));
@@ -31,21 +31,11 @@ export default function Header() {
 	return (
 		<>
 			<StyledHeader>
-				<HeaderSVG
-					style={{
-						position: "absolute",
-						height: "8rem",
-						width: "100%",
-						marginInline: "auto",
-						flexShrink: 0,
-						pointerEvents: "none",
-						translate: "0 -0.2rem",
-					}}
-				/>
+				<HeaderSVG />
 				<Stack
 					width="100%"
 					direction={"row"}
-					justifyContent={"space-between"}
+					justifyContent={"flex-end"}
 					alignItems={"center"}
 					p={"1rem"}
 					sx={{
@@ -54,15 +44,15 @@ export default function Header() {
 					}}
 					zIndex={2}
 				>
+					<Logo />
 					<HeaderButton
 						clickHandlerBuilder={(callback: () => void) => () => {
 							sendRequest(SURVEY_ACTION);
 							callback();
 						}}
 					>
-						설문조사 시작하기
+						설문 시작
 					</HeaderButton>
-					<Logo />
 				</Stack>
 			</StyledHeader>
 		</>
