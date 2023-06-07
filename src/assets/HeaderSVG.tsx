@@ -5,11 +5,11 @@ export default function HeaderSVG() {
 		<div
 			style={{
 				position: "absolute",
-				width: "30rem",
+				width: "25rem",
 				overflow: "hidden",
 				marginInline: "auto",
 				pointerEvents: "none",
-				bottom: "-4.9rem",
+				bottom: "-4rem",
 			}}
 		>
 			<svg
