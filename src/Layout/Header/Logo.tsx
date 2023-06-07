@@ -1,5 +1,5 @@
 import BeamworksLogo from "../../assets/BeamworksLogo.png";
-import ChatAIDE from "../../assets/ChatAi-B.png";
+import ChatAIDE from "../../assets/ChatAI-B.png";
 
 export const Logo = () => {
 	return (
