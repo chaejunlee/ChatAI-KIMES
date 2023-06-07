@@ -1,6 +1,8 @@
 import { Avatar, Stack } from "@mui/material";
 import Logo from "../../../assets/logo.png";
-import AnimationScope from "../../../utils/Message/AnimationScope";
+import AnimationScope, {
+	ANIMATION_TARGET,
+} from "../../../utils/Message/AnimationScope";
 import { useSmoothScrollToBottom } from "../../../utils/chat";
 
 export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
@@ -9,7 +11,7 @@ export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<AnimationScope>
 			<Stack
-				className="message"
+				className={ANIMATION_TARGET}
 				ref={divRef}
 				gap={"0.5rem"}
 				direction={"row"}

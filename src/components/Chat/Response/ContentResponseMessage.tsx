@@ -4,6 +4,7 @@ import { containsUrl } from "../../../utils/chat";
 import { primaryColor } from "../../../utils/color";
 import { BasicResponseMessage } from "./BasicResponseMessage";
 import StyledButton from "./Card/StyledButton";
+import { ANIMATION_TARGET } from "../../../utils/Message/AnimationScope";
 
 const StyledLink = styled("a")`
 	color: #6a6a6a;
@@ -38,7 +39,7 @@ export default function ContentResponseMessage({
 
 function ResponseLink({ messageContent }: { messageContent: string }) {
 	return (
-		<div className="message" style={{ marginBottom: "8px" }}>
+		<div className={ANIMATION_TARGET} style={{ marginBottom: "8px" }}>
 			<StyledButton
 				disabled={false}
 				style={{
