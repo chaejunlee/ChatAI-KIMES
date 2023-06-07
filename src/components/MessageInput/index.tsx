@@ -1,15 +1,15 @@
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { HomeRounded } from "@mui/icons-material";
 import SendIcon from "@mui/icons-material/Send";
 import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { KeyboardEvent, memo, useRef } from "react";
 import useMessageStatus from "../../hooks/Request/useMessageStatus";
 import { fetchResponse } from "../../store/message/fetchResponse";
+import { addMessage, testContent } from "../../store/message/messageSlice";
 import { useAppDispatch } from "../../store/store";
 import { primaryColor } from "../../utils/color";
 import { addKeyboardPopupListener } from "../../utils/Mobile/keyboard";
 import { RotatingRefreshIcon } from "./RotatingRefreshIcon";
-import { addMessage } from "../../store/message/messageSlice";
 
 const useStyles = makeStyles({
 	root: {
@@ -22,13 +22,16 @@ const useStyles = makeStyles({
 
 const TextFiledWrapper = styled("div")`
 	position: sticky;
+	display: flex;
 	left: 0rem;
 	right: 0rem;
 	bottom: 0rem;
-	padding-block: 0.5rem;
+	padding-block: 0.75rem;
 	background: white;
 	border-top: #eee 2px solid;
-	padding-inline: 0.5rem;
+	padding-inline: 0.75rem;
+	gap: 0.5rem;
+	align-items: center;
 `;
 
 function MessageInput() {
@@ -75,11 +78,14 @@ function MessageInput() {
 	return (
 		<>
 			<TextFiledWrapper>
+				<HomeComponent />
 				<TextField
 					sx={{
-						width: "100%",
+						display: "flex",
 						borderRadius: "200px",
 						boxSizing: "border-box",
+						flexGrow: 1,
+						paddingLeft: "1rem",
 					}}
 					variant={"standard"}
 					onKeyPress={(e) => handleTextFieldKeyPress(e)}
@@ -97,7 +103,6 @@ function MessageInput() {
 					disabled={isLoading}
 					InputProps={{
 						disableUnderline: true,
-						startAdornment: <PlusComponent />,
 						endAdornment: <SendComponent handleOnClick={handleOnClick} />,
 					}}
 				/>
@@ -118,13 +123,28 @@ function MessageInput() {
 	);
 }
 
-const PlusComponent = memo(() => {
+const HomeComponent = () => {
+	const dispatch = useAppDispatch();
+
 	return (
-		<InputAdornment sx={{ paddingLeft: "0.5rem" }} position={"start"}>
-			<AddCircleIcon fontSize={"large"} sx={{ color: primaryColor }} />
-		</InputAdornment>
+		<IconButton
+			onClick={() => {
+				dispatch(addMessage(testContent));
+			}}
+			style={{
+				display: "grid",
+				background: primaryColor,
+				borderRadius: "100vh",
+				aspectRatio: "1 / 1",
+				placeContent: "center",
+				padding: "0.65rem",
+				minWidth: 0,
+			}}
+		>
+			<HomeRounded htmlColor={"white"} />
+		</IconButton>
 	);
-});
+};
 
 const SendComponent = ({ handleOnClick }: { handleOnClick: () => void }) => {
 	const { status: isLoading } = useMessageStatus();
