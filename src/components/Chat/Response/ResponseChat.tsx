@@ -3,18 +3,14 @@ import Logo from "../../../assets/logo.png";
 import AnimationScope, {
 	ANIMATION_TARGET,
 } from "../../../utils/Message/AnimationScope";
-import { useSmoothScrollToBottom } from "../../../utils/chat";
 
 export const CHAT_MAX_WIDTH = "80%";
 
 export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
-	const divRef = useSmoothScrollToBottom();
-
 	return (
 		<AnimationScope>
 			<Stack
 				className={ANIMATION_TARGET}
-				ref={divRef}
 				gap={"0.5rem"}
 				direction={"row"}
 				maxWidth={CHAT_MAX_WIDTH}
