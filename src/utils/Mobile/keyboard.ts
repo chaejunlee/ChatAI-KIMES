@@ -1,3 +1,5 @@
+import { setKeyboardHeight } from "../../store/keyboard/keyboardSlice";
+import store from "../../store/store";
 import {
 	windowHeight,
 	root,
@@ -21,6 +23,7 @@ export function getKeyboardHeight(e: Event | null) {
 
 	return keyboardHeight;
 }
+
 const mobileKeyboardHandler = (e: Event) => {
 	const keyboardHeight = getKeyboardHeight(e);
 
@@ -30,9 +33,11 @@ const mobileKeyboardHandler = (e: Event) => {
 	if (keyboardHeight > minimumKeyboardHeight) {
 		addScrollEventListener();
 		setBottom(keyboardHeight);
+		store.dispatch(setKeyboardHeight(keyboardHeight));
 		root.style.transition = "none";
 	} else {
 		setBottom(0);
+		store.dispatch(setKeyboardHeight(0));
 		root.style.transition = "bottom 200ms ease-in-out";
 		removeScrollEventListener();
 		removeKeyboardPopupListener();

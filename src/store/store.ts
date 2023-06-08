@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import messageReducer from "./message/messageSlice";
 import buttonsReducer from "./message/buttonsSlice";
+import keyboardReducer from "./keyboard/keyboardSlice";
 
 export const store = configureStore({
 	reducer: {
 		messages: messageReducer,
 		buttons: buttonsReducer,
+		keyboard: keyboardReducer,
 	},
 });
 
