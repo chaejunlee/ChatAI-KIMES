@@ -14,7 +14,7 @@ const scrollToTopTimeout = () => {
 };
 
 export const addScrollEventListener = () => {
-	scrollToTop();
+	// scrollToTop();
 	window.addEventListener("scroll", scrollToTopTimeout);
 };
 
@@ -31,6 +31,11 @@ export const setBottom = (bottom: number) => {
 export default function setWindowHeight() {
 	document.body.style.height = `${windowHeight}px`;
 	if (root) setBottom(0);
+}
+
+export function detectSamsungBrowser() {
+	const userAgent = window.navigator.userAgent.toLowerCase();
+	return /samsungbrowser/.test(userAgent);
 }
 
 export function detectIOS() {

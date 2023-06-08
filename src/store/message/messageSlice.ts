@@ -28,7 +28,7 @@ const initialState = messageAdapter.getInitialState<MessageState>({
 	status: "idle",
 });
 
-export const testContent = introMessage.content.map((cur) => {
+export const startingMessage = introMessage.content.map((cur) => {
 	if (cur.contentType !== "ImageResponseCard") return cur;
 
 	const buttonArray = cur.imageResponseCard.buttons as ButtonResponseType[];
@@ -53,15 +53,20 @@ export const manyContent = Array.from({ length: 100 }, (_, i) => {
 	return {
 		id: ("message" + i) as EntityId,
 		type: "response",
-		content: testContent,
+		content: startingMessage,
 	};
 }) as WithId<Message>[];
 
 const initialStateWithIntroMessage = messageAdapter.addOne(initialState, {
 	id: "message0" as EntityId,
 	type: "response",
-	content: testContent,
+	content: startingMessage,
 });
+
+// const initialStateWithIntroMessage = messageAdapter.addMany(
+// 	initialState,
+// 	manyContent
+// );
 
 export const messageSlice = createSlice({
 	name: "message",

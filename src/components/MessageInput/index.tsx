@@ -4,8 +4,10 @@ import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { KeyboardEvent, memo, useRef } from "react";
 import useMessageStatus from "../../hooks/Request/useMessageStatus";
-import { fetchResponse } from "../../store/message/fetchResponse";
-import { addMessage, testContent } from "../../store/message/messageSlice";
+import {
+	DEFAULT_MESSAGE,
+	fetchResponse,
+} from "../../store/message/fetchResponse";
 import { useAppDispatch } from "../../store/store";
 import { primaryColor } from "../../utils/color";
 import { addKeyboardPopupListener } from "../../utils/Mobile/keyboard";
@@ -39,39 +41,41 @@ function MessageInput() {
 	const dispatch = useAppDispatch();
 	const classes = useStyles();
 
+	const inputRef = useRef<HTMLInputElement>(null);
 	// for mobile keyboard popup
 	const hiddenInputRef = useRef<HTMLInputElement>(null);
 
 	const sendRequest = async (message: string) => {
 		if (inputRef.current) inputRef.current.value = "";
+
+		hiddenInputRef.current?.focus({ preventScroll: true });
+
 		await dispatch(fetchResponse({ message, leaveMessage: true })).unwrap();
+
 		inputRef.current?.focus({ preventScroll: true });
 	};
 
-	const inputRef = useRef<HTMLInputElement>(null);
+	const canSend = () => {
+		if (isLoading) return false;
+		if (!inputRef || !inputRef.current) return false;
 
-	const flushInput = () => {
-		if (!inputRef?.current || !hiddenInputRef?.current) return;
-		hiddenInputRef.current.focus({ preventScroll: true });
-		inputRef.current.focus({ preventScroll: true });
+		const text = inputRef.current.value;
+		if (text.length === 0) return false;
+
+		return true;
 	};
 
 	const handleOnClick = () => {
-		if (isLoading) return;
-		if (!inputRef || !inputRef.current) return;
+		if (!canSend()) return;
 
-		const text = inputRef.current.value;
-		if (text.length === 0) return;
-
-		flushInput();
-
-		sendRequest(text);
+		sendRequest(inputRef.current?.value!);
 	};
 
-	const handleTextFieldKeyPress = (e: KeyboardEvent<HTMLDivElement>) => {
-		if (isLoading) return;
+	const handleTextFieldKey = (e: KeyboardEvent<HTMLDivElement>) => {
+		if (!canSend()) return;
+
 		if (e.key === "Enter" || e.keyCode === 13) {
-			handleOnClick();
+			sendRequest(inputRef.current?.value!);
 		}
 	};
 
@@ -80,6 +84,7 @@ function MessageInput() {
 			<TextFiledWrapper>
 				<HomeComponent />
 				<TextField
+					inputProps={{ enterKeyHint: "send" }}
 					sx={{
 						display: "flex",
 						borderRadius: "200px",
@@ -88,7 +93,8 @@ function MessageInput() {
 						paddingLeft: "1rem",
 					}}
 					variant={"standard"}
-					onKeyPress={(e) => handleTextFieldKeyPress(e)}
+					type="search"
+					onKeyDown={(e) => handleTextFieldKey(e)}
 					inputRef={inputRef}
 					autoComplete={"off"}
 					onFocus={() => {
@@ -114,10 +120,13 @@ function MessageInput() {
 					overflow: "hidden",
 					position: "absolute",
 					top: "-50%",
-					width: 0,
-					height: 0,
+					width: 10,
+					height: 10,
 					zIndex: -1000,
 				}}
+				type="search"
+				enterKeyHint="send"
+				tabIndex={-1}
 			></input>
 		</>
 	);
@@ -129,7 +138,9 @@ const HomeComponent = () => {
 	return (
 		<IconButton
 			onClick={() => {
-				dispatch(addMessage(testContent));
+				dispatch(
+					fetchResponse({ message: DEFAULT_MESSAGE, leaveMessage: false })
+				);
 			}}
 			style={{
 				display: "grid",
