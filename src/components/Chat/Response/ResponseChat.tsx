@@ -5,6 +5,8 @@ import AnimationScope, {
 } from "../../../utils/Message/AnimationScope";
 import { useSmoothScrollToBottom } from "../../../utils/chat";
 
+export const CHAT_MAX_WIDTH = "80%";
+
 export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 	const divRef = useSmoothScrollToBottom();
 
@@ -15,7 +17,7 @@ export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 				ref={divRef}
 				gap={"0.5rem"}
 				direction={"row"}
-				maxWidth={"80%"}
+				maxWidth={CHAT_MAX_WIDTH}
 			>
 				<Avatar
 					imgProps={{ style: { objectFit: "contain" } }}
