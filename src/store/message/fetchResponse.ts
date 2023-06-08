@@ -14,7 +14,7 @@ import {
 } from "../../utils/Message/defaultResponseMessageData";
 
 import { getLexResponse } from "../../api/getLexResponse";
-import { getResponse } from "./messageSlice";
+import { getResponse, startingMessage } from "./messageSlice";
 import { RootState } from "../store";
 import { addButtons } from "./buttonsSlice";
 import { WithId } from "../../Interface/Message/Message";
@@ -30,6 +30,11 @@ interface fetchResponseProps {
 	message: string;
 	leaveMessage: boolean;
 }
+
+export const DEFAULT_MESSAGE = "자주 묻는 질문";
+const isDefaultMessage = (message: string) => {
+	return message === DEFAULT_MESSAGE;
+};
 
 export const fetchResponse = createAsyncThunk<
 	ResponseMessageType,
@@ -47,6 +52,11 @@ export const fetchResponse = createAsyncThunk<
 		if (leaveMessage) {
 			dispatch(getResponse(message));
 		}
+
+		if (isDefaultMessage(message)) {
+			return formatResponse(startingMessage);
+		}
+
 		let response = await getLexResponse(message);
 
 		if (response === null)
@@ -58,6 +68,7 @@ export const fetchResponse = createAsyncThunk<
 		let errorMessage = isErrorMessage(response);
 		if (errorMessage) {
 			const errorMessageContent = createResponseContent(errorMessage);
+			return formatResponse(errorMessageContent);
 		}
 
 		const normalizedResponse = response.map((cur) => {

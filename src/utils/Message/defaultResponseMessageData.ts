@@ -8,8 +8,8 @@ export const defaultCardResponseMessageData: ImageResponseCardType = {
 	imageResponseCard: {
 		buttons: [
 			{
-				text: "메뉴 보기",
-				value: "메인 메뉴",
+				text: "자주 묻는 질문 보기",
+				value: "자주 묻는 질문",
 			},
 		],
 	},

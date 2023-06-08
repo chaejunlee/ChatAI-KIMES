@@ -4,8 +4,10 @@ import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { KeyboardEvent, memo, useRef } from "react";
 import useMessageStatus from "../../hooks/Request/useMessageStatus";
-import { fetchResponse } from "../../store/message/fetchResponse";
-import { addMessage, testContent } from "../../store/message/messageSlice";
+import {
+	DEFAULT_MESSAGE,
+	fetchResponse,
+} from "../../store/message/fetchResponse";
 import { useAppDispatch } from "../../store/store";
 import { primaryColor } from "../../utils/color";
 import { addKeyboardPopupListener } from "../../utils/Mobile/keyboard";
@@ -129,7 +131,9 @@ const HomeComponent = () => {
 	return (
 		<IconButton
 			onClick={() => {
-				dispatch(addMessage(testContent));
+				dispatch(
+					fetchResponse({ message: DEFAULT_MESSAGE, leaveMessage: false })
+				);
 			}}
 			style={{
 				display: "grid",
