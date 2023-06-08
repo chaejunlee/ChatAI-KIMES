@@ -11,45 +11,41 @@ export const introMessage: ResponseMessageType = {
 		{
 			contentType: "PlainText",
 			content:
-				"안녕하세요! Chat-AIDE입니다. 저에게 유방암 관련 질문을 말씀해주시면 정보를 드릴 수 있어요.",
+				"안녕하세요! ChatAI-B입니다. 저에게 유방암 관련 질문을 물어보면 정보를 줄 수 있어요.",
 		},
 		{
 			contentType: "PlainText",
 			content:
-				"궁금하신 내용을 말씀해주세요. 아래의 버튼들은 사람들이 자주 묻는 질문들이에요:)",
+				"궁금하신 내용을 말해주세요. 아래의 버튼들은 사람들이 자주 묻는 질문들이에요.",
 		},
 		{
 			contentType: "ImageResponseCard",
 			imageResponseCard: {
 				buttons: [
 					{
-						text: "유방 조직검사가 무엇인가요?",
-						value: "유방 조직검사가 무엇인가요",
+						text: "유방초음파를 하는데 유방촬영술이 꼭 필요한가요?",
+						value: "유방초음파를 하는데 유방촬영술이 꼭 필요한가요?",
 					},
 					{
-						text: "유방암의 원인은 무엇인가요?",
-						value: "유방암의 원인은 무엇인가요",
+						text: "유방촬영 시 압박하는 이유?",
+						value: "유방촬영 시 압박하는 이유?",
+					},
+					{
+						text: "치밀유방이 무엇인가요",
+						value: "치밀유방이 무엇인가요",
+					},
+					{
+						text: "유방자동초음파는 무엇인가요?",
+						value: "유방자동초음파는 무엇인가요?",
+					},
+					{
+						text: "유방검사가 꼭 필요한 증상은?",
+						value: "유방검사가 꼭 필요한 증상은?",
 					},
 				],
 				title: "조직 구성(Tissue Composition)",
 			},
-		},
-		{
-			contentType: "PlainText",
-			content: "설문조사 text test",
-		},
-		{
-			contentType: "ImageResponseCard",
-			imageResponseCard: {
-				buttons: [
-					{
-						text: "설문조사 시작하기",
-						value: "설문조사",
-					},
-				],
-				title: "설문조사",
-			},
-		},
+		}
 	],
 	type: "response",
 };
