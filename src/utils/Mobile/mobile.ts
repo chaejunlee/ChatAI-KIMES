@@ -14,7 +14,7 @@ const scrollToTopTimeout = () => {
 };
 
 export const addScrollEventListener = () => {
-	// scrollToTop();
+	scrollToTop();
 	window.addEventListener("scroll", scrollToTopTimeout);
 };
 
