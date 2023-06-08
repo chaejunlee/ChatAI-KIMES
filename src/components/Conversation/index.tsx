@@ -32,7 +32,7 @@ export default function Conversation() {
 			overflow={"scroll"}
 			style={{ WebkitOverflowScrolling: "touch" }}
 			gap={"1rem"}
-			paddingX={"0.725rem"}
+			paddingX={"1rem"}
 			paddingTop={"4rem"}
 			paddingBottom={"1rem"}
 		>

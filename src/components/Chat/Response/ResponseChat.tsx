@@ -4,7 +4,7 @@ import AnimationScope, {
 	ANIMATION_TARGET,
 } from "../../../utils/Message/AnimationScope";
 
-export const CHAT_MAX_WIDTH = "80%";
+export const CHAT_MAX_WIDTH = "85%";
 
 export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -12,8 +12,13 @@ export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 			<Stack
 				className={ANIMATION_TARGET}
 				gap={"0.5rem"}
-				direction={"row"}
 				maxWidth={CHAT_MAX_WIDTH}
+				sx={{
+					flexDirection: "row",
+					"@media (max-width: 600px)": {
+						flexDirection: "column",
+					},
+				}}
 			>
 				<Avatar
 					imgProps={{ style: { objectFit: "contain" } }}
