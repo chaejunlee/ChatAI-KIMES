@@ -6,6 +6,7 @@ import {
 	setBottom,
 	removeScrollEventListener,
 	visualViewport,
+	detectSamsungBrowser,
 } from "./mobile";
 
 export function getKeyboardHeight(e: Event | null) {
@@ -24,6 +25,7 @@ const mobileKeyboardHandler = (e: Event) => {
 	const keyboardHeight = getKeyboardHeight(e);
 
 	if (!root) return;
+	if (detectSamsungBrowser()) return;
 
 	if (keyboardHeight > minimumKeyboardHeight) {
 		addScrollEventListener();

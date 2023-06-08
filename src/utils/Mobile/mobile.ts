@@ -33,6 +33,11 @@ export default function setWindowHeight() {
 	if (root) setBottom(0);
 }
 
+export function detectSamsungBrowser() {
+	const userAgent = window.navigator.userAgent.toLowerCase();
+	return /samsungbrowser/.test(userAgent);
+}
+
 export function detectIOS() {
 	const userAgent = window.navigator.userAgent.toLowerCase();
 	return /iphone|ipad|ipod/.test(userAgent);
