@@ -28,7 +28,7 @@ const TextFiledWrapper = styled("div")`
 	left: 0rem;
 	right: 0rem;
 	bottom: 0rem;
-	padding-block: 0.75rem;
+	padding-block: 0.5rem;
 	background: white;
 	border-top: #eee 2px solid;
 	padding-inline: 0.75rem;
@@ -84,7 +84,10 @@ function MessageInput() {
 			<TextFiledWrapper>
 				<HomeComponent />
 				<TextField
-					inputProps={{ enterKeyHint: "send" }}
+					inputProps={{
+						enterKeyHint: "send",
+						style: { paddingBlock: "0.5rem" },
+					}}
 					sx={{
 						display: "flex",
 						borderRadius: "200px",
@@ -101,7 +104,7 @@ function MessageInput() {
 						addKeyboardPopupListener();
 					}}
 					placeholder={
-						isLoading ? "요청을 답변 중입니다." : "메시지를 입력하세요."
+						isLoading ? "요청을 답변 중입니다." : "궁금한 점을 입력하세요."
 					}
 					classes={{
 						root: classes.root,
@@ -147,8 +150,9 @@ const HomeComponent = () => {
 				background: primaryColor,
 				borderRadius: "100vh",
 				aspectRatio: "1 / 1",
-				height: "3rem",
+				height: "2.5rem",
 				placeItems: "center",
+				padding: 0,
 				minWidth: 0,
 			}}
 		>
