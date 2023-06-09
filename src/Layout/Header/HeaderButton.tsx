@@ -11,7 +11,7 @@ const StyledSpan = styled("span")`
 
 	@media (max-width: 600px) {
 		font-size: 0.9rem;
-		padding: 0.2rem 0.5rem;
+		padding: 0.2rem 0.25rem;
 	}
 `;
 
@@ -33,7 +33,7 @@ const HeaderButton = ({
 				padding: 0,
 				color: isStarted ? "#3e3e3e" : primaryColor,
 				background: isStarted ? "#bbbbbb" : "white",
-				border: primaryColor + " 1px solid",
+				border: (isStarted ? "#2e2e2e" : primaryColor) + " 1px solid",
 				fontWeight: "700",
 				lineHeight: "1.2rem",
 				minWidth: "0",
