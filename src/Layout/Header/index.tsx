@@ -20,6 +20,10 @@ const StyledHeader = styled("div")`
 	z-index: 1;
 `;
 
+const openLink = (url: string) => {
+	window.open(url, "_blank");
+};
+
 export default function Header() {
 	const dispatch = useAppDispatch();
 
@@ -47,6 +51,7 @@ export default function Header() {
 					<HeaderButton
 						clickHandlerBuilder={(callback: () => void) => () => {
 							sendRequest(SURVEY_ACTION);
+							// openLink("https://naver.com");
 							callback();
 						}}
 					>
