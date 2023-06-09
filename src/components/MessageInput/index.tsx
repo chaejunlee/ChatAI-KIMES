@@ -81,7 +81,7 @@ function MessageInput() {
 
 	return (
 		<>
-			<TextFiledWrapper>
+			<TextFiledWrapper className="message-input">
 				<HomeComponent />
 				<TextField
 					inputProps={{
