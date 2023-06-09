@@ -1,17 +1,23 @@
-import { setKeyboardHeight } from "../../store/keyboard/keyboardSlice";
-import store from "../../store/store";
 import {
-	windowHeight,
-	root,
-	minimumKeyboardHeight,
 	addScrollEventListener,
-	setBottom,
-	removeScrollEventListener,
-	visualViewport,
 	detectSamsungBrowser,
+	minimumKeyboardHeight,
+	removeScrollEventListener,
+	root,
+	visualViewport,
+	windowHeight,
 } from "./mobile";
 
-export function getKeyboardHeight(e: Event | null) {
+let _keyboardHeight = 0;
+
+const messageInput = document.querySelector(".message-input");
+const messageInputHeight = messageInput?.clientHeight || 0;
+
+export function getKeyboardHeight() {
+	return _keyboardHeight;
+}
+
+export function getCurrentKeyboardHeight(e: Event) {
 	let visualViewport: VisualViewport;
 	if (e) {
 		visualViewport = e.target as VisualViewport;
@@ -24,21 +30,36 @@ export function getKeyboardHeight(e: Event | null) {
 	return keyboardHeight;
 }
 
+export function setKeyboardHeight(e: Event) {}
+
 const mobileKeyboardHandler = (e: Event) => {
-	const keyboardHeight = getKeyboardHeight(e);
+	let prevKeyboardHeight = _keyboardHeight;
+	let currKeyboardHeight = getCurrentKeyboardHeight(e);
+	console.log(prevKeyboardHeight, currKeyboardHeight);
+	const diff = currKeyboardHeight - prevKeyboardHeight + messageInputHeight;
+	const KEYBOARD_OPEN = prevKeyboardHeight > 0;
+	const KEYBOARD_CLOSING = diff < -10;
+
+	if (!KEYBOARD_OPEN) {
+		_keyboardHeight = currKeyboardHeight;
+		prevKeyboardHeight = currKeyboardHeight;
+	}
+
+	if (KEYBOARD_CLOSING) prevKeyboardHeight = currKeyboardHeight;
 
 	if (!root) return;
 	if (detectSamsungBrowser()) return;
 
-	if (keyboardHeight > minimumKeyboardHeight) {
-		addScrollEventListener();
-		setBottom(keyboardHeight);
-		store.dispatch(setKeyboardHeight(keyboardHeight));
+	const viewportWithKeyboard = windowHeight - prevKeyboardHeight;
+	const originalHeight = document.body.style.height;
+
+	if (prevKeyboardHeight > minimumKeyboardHeight) {
+		root.style.height = `${viewportWithKeyboard}px`;
 		root.style.transition = "none";
+		addScrollEventListener();
 	} else {
-		setBottom(0);
-		store.dispatch(setKeyboardHeight(0));
-		root.style.transition = "bottom 200ms ease-in-out";
+		root.style.height = originalHeight;
+		root.style.transition = "height 200ms ease-in-out";
 		removeScrollEventListener();
 		removeKeyboardPopupListener();
 	}

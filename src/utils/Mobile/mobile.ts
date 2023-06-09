@@ -3,34 +3,27 @@ export const windowHeight = window.innerHeight;
 export const root = document.getElementById("root");
 export const visualViewport = window.visualViewport;
 
-export const scrollToTop = () => {
-	window.scrollTo(0, 0);
+export const pushDownTop = () => {
+	const offsetTop = visualViewport?.offsetTop || 0;
+	if (root) root.style.top = offsetTop + "px";
 };
 
-const scrollToTopTimeout = () => {
-	setTimeout(() => {
-		scrollToTop();
-	}, 500);
+const pushDownTopTimeout = () => {
+	const offsetTop = visualViewport?.offsetTop || 0;
+	if (root) root.style.top = offsetTop + "px";
 };
 
 export const addScrollEventListener = () => {
-	scrollToTop();
-	window.addEventListener("scroll", scrollToTopTimeout);
+	visualViewport?.addEventListener("scroll", pushDownTopTimeout);
 };
 
 export const removeScrollEventListener = () => {
-	window.removeEventListener("scroll", scrollToTopTimeout);
-};
-
-export const setBottom = (bottom: number) => {
-	if (!root) return;
-
-	root.style.bottom = bottom + "px";
+	if (root) root.style.top = "0px";
+	visualViewport?.removeEventListener("scroll", pushDownTopTimeout);
 };
 
 export default function setWindowHeight() {
 	document.body.style.height = `${windowHeight}px`;
-	if (root) setBottom(0);
 }
 
 export function detectSamsungBrowser() {

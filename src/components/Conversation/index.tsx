@@ -90,7 +90,7 @@ export default function Conversation() {
 				style={{
 					opacity: showScrollToTop ? 1 : 0,
 					visibility: showScrollToTop ? "visible" : "hidden",
-					position: "fixed",
+					position: "absolute",
 					left: "auto",
 					right: "1rem",
 					bottom: `calc(5rem + ${keyboardHeight}px)`,
