@@ -4,6 +4,7 @@ export const visualViewport = window.visualViewport;
 
 const shiftBodyTop = () => {
 	const offsetTop = visualViewport?.offsetTop || 0;
+	scrollTo(0, 0);
 	if (root) root.style.top = offsetTop + "px";
 };
 
