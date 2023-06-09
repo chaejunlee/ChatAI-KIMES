@@ -40,7 +40,8 @@ export default function Header() {
 					direction={"row"}
 					justifyContent={"flex-end"}
 					alignItems={"center"}
-					p={"1rem"}
+					paddingY={"1rem"}
+					paddingX={"0.65rem"}
 					sx={{
 						"@media (min-width: 600px)": { paddingInline: "1.5rem" },
 						isolation: "isolate",
