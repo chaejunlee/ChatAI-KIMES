@@ -17,5 +17,5 @@ export const defaultCardResponseMessageData: ImageResponseCardType = {
 
 export const defaultContentResponseMessageData: ContentResponseMessageType = {
 	contentType: "PlainText",
-	content: "질문을 제대로 알아듣지 못했어요. 준비된 답변을 보시겠어요?",
+	content: "다른 문의사항이 있으신가요?",
 };

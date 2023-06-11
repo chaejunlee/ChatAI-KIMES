@@ -51,8 +51,8 @@ export default function Header() {
 					<Logo />
 					<HeaderButton
 						clickHandlerBuilder={(callback: () => void) => () => {
-							sendRequest(SURVEY_ACTION);
-							// openLink("https://naver.com");
+							// sendRequest(SURVEY_ACTION);
+							openLink("https://forms.gle/DVH8sNSo94G8Rarj6");
 							callback();
 						}}
 					>

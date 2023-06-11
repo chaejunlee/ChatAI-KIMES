@@ -11,12 +11,12 @@ export const introMessage: ResponseMessageType = {
 		{
 			contentType: "PlainText",
 			content:
-				"안녕하세요! ChatAI-B입니다. 저에게 유방암 관련 질문을 물어보면 정보를 줄 수 있어요.",
+				"안녕하세요! 채티(ChatAI-B)입니다! 저에게 유방검사 혹은 유방암 관련한 궁금한 점을 질문해주세요.",
 		},
 		{
 			contentType: "PlainText",
 			content:
-				"궁금하신 내용을 말해주세요. 아래의 버튼들은 사람들이 자주 묻는 질문들이에요.",
+				"아래의 버튼은 사람들이 자주 묻는 질문들이에요:)",
 		},
 		{
 			contentType: "ImageResponseCard",
