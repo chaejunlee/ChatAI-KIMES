@@ -16,31 +16,31 @@ export const introMessage: ResponseMessageType = {
 		{
 			contentType: "PlainText",
 			content:
-				"아래의 버튼은 사람들이 자주 묻는 질문들이에요:)",
+				"아래의 버튼은 사람들이 자주 묻는 질문이에요:)",
 		},
 		{
 			contentType: "ImageResponseCard",
 			imageResponseCard: {
 				buttons: [
 					{
-						text: "유방초음파를 하는데 유방촬영술이 꼭 필요한가요?",
-						value: "유방초음파를 하는데 유방촬영술이 꼭 필요한가요?",
+						text: "유방 촬영술에서 4매 촬영하는 이유는?",
+						value: "유방 촬영술에서 4매 촬영하는 이유는?",
 					},
 					{
 						text: "유방촬영 시 압박하는 이유?",
 						value: "유방촬영 시 압박하는 이유?",
 					},
 					{
-						text: "치밀유방이 무엇인가요",
-						value: "치밀유방이 무엇인가요",
+						text: "유방 초음파를 하는데 유방 촬영술이 꼭 필요한가요?",
+						value: "유방 초음파를 하는데 유방 촬영술이 꼭 필요한가요?",
 					},
 					{
-						text: "유방자동초음파는 무엇인가요?",
-						value: "유방자동초음파는 무엇인가요?",
+						text: "유방 검사가 꼭 필요한 증상은?",
+						value: "유방 검사가 꼭 필요한 증상은?",
 					},
 					{
-						text: "유방검사가 꼭 필요한 증상은?",
-						value: "유방검사가 꼭 필요한 증상은?",
+						text: "유방 자동 초음파는 무엇인가요?",
+						value: "유방 자동 초음파는 무엇인가요?",
 					},
 				],
 				title: "조직 구성(Tissue Composition)",
