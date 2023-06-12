@@ -18,6 +18,7 @@ export const removeScrollEventListener = () => {
 };
 
 export default function setWindowHeight() {
+	if (!detectIOS()) return;
 	document.body.style.height = `${windowHeight}px`;
 }
 
