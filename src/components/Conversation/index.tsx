@@ -19,6 +19,9 @@ export default function Conversation() {
 	const { status: isLoading } = useMessageStatus();
 	const messageIds = useAppSelector(selectMessageIds);
 	const dispatch = useAppDispatch();
+	const isBottom = useAppSelector((state) => {
+		return state.messages.targetMessageId === "bottom";
+	});
 
 	const stackRef = useRef<HTMLDivElement>(null);
 
@@ -42,6 +45,12 @@ export default function Conversation() {
 	useEffect(() => {
 		scrollToBottom(stackRef);
 	}, [isLoading]);
+
+	useEffect(() => {
+		requestAnimationFrame(() => {
+			scrollToBottom(stackRef);
+		});
+	}, [isBottom]);
 
 	return (
 		<>
@@ -105,11 +114,7 @@ export default function Conversation() {
 						transition: "opacity 0.5s ease-in-out",
 					}}
 					onClick={() => {
-						dispatch(
-							getNextMessage({
-								callback: () => scrollToBottom(stackRef),
-							})
-						);
+						dispatch(getNextMessage());
 					}}
 					disabled={!showBottomButton}
 				>
