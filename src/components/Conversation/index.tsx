@@ -3,7 +3,7 @@ import {
 	ArrowUpwardOutlined,
 } from "@mui/icons-material";
 import { IconButton, Stack } from "@mui/material";
-import { useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef } from "react";
 import useMessageStatus from "../../hooks/Request/useMessageStatus";
 import {
 	getNextMessage,
@@ -22,13 +22,17 @@ export default function Conversation() {
 
 	const stackRef = useRef<HTMLDivElement>(null);
 
-	useEffect(() => {
+	const scrollToBottom = (stackRef: RefObject<HTMLDivElement>) => {
 		if (stackRef.current) {
 			stackRef.current.scrollTo({
 				top: stackRef.current.scrollHeight,
 				behavior: "smooth",
 			});
 		}
+	};
+
+	useEffect(() => {
+		scrollToBottom(stackRef);
 	}, [isLoading]);
 
 	return (
@@ -92,7 +96,11 @@ export default function Conversation() {
 						transition: "opacity 0.5s ease-in-out",
 					}}
 					onClick={() => {
-						dispatch(getNextMessage());
+						dispatch(
+							getNextMessage({
+								callback: () => scrollToBottom(stackRef),
+							})
+						);
 					}}
 				>
 					<ArrowDownwardOutlined />

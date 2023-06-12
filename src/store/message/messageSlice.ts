@@ -97,10 +97,17 @@ export const messageSlice = createSlice({
 			if (targetMessageIndex === 0) return;
 			state.targetMessageId = state.ids[targetMessageIndex - 1];
 		},
-		getNextMessage: (state) => {
+		getNextMessage: (
+			state,
+			payload: PayloadAction<{ callback: () => void }>
+		) => {
 			const targetMessageIndex = state.ids.indexOf(state.targetMessageId);
-			if (targetMessageIndex === state.ids.length - 1) return;
+			if (targetMessageIndex === state.ids.length - 1) {
+				payload.payload.callback();
+				return;
+			}
 			state.targetMessageId = state.ids[targetMessageIndex + 1];
+			return;
 		},
 	},
 	extraReducers: (builder) => {
