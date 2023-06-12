@@ -1,10 +1,16 @@
-import { ArrowUpwardOutlined } from "@mui/icons-material";
+import {
+	ArrowDownwardOutlined,
+	ArrowUpwardOutlined,
+} from "@mui/icons-material";
 import { IconButton, Stack } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useRef } from "react";
 import useMessageStatus from "../../hooks/Request/useMessageStatus";
-import { selectKeyboardHeight } from "../../store/keyboard/keyboardSlice";
-import { selectMessageIds } from "../../store/message/messageSlice";
-import { useAppSelector } from "../../store/store";
+import {
+	getNextMessage,
+	getPreviousMessage,
+	selectMessageIds,
+} from "../../store/message/messageSlice";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 import ChatChunk from "../Chat/ChatChunk";
 import { LoadingResponseMessage } from "../Chat/LoadingResponseMessage";
 import { ResponseChat } from "../Chat/Response/ResponseChat";
@@ -12,56 +18,30 @@ import { ResponseChat } from "../Chat/Response/ResponseChat";
 export default function Conversation() {
 	const { status: isLoading } = useMessageStatus();
 	const messageIds = useAppSelector(selectMessageIds);
-	const keyboardHeight = useAppSelector(selectKeyboardHeight);
+	const dispatch = useAppDispatch();
 
 	const stackRef = useRef<HTMLDivElement>(null);
 
-	const [showScrollToTop, setShowScrollToTop] = useState(false);
-
-	const scrollToTop = () => {
+	const scrollToBottom = (stackRef: RefObject<HTMLDivElement>) => {
 		if (stackRef.current) {
 			stackRef.current.scrollTo({
-				top: 0,
+				top: stackRef.current.scrollHeight,
 				behavior: "smooth",
 			});
 		}
 	};
 
+	const showTopButton = useAppSelector((state) => {
+		return state.messages.targetMessageId !== state.messages.ids[0];
+	});
+
+	const showBottomButton = useAppSelector((state) => {
+		return state.messages.targetMessageId !== "bottom";
+	});
+
 	useEffect(() => {
-		requestAnimationFrame(() => {
-			if (stackRef.current) {
-				stackRef.current.scrollTo({
-					top: stackRef.current.scrollHeight,
-					behavior: "smooth",
-				});
-			}
-		});
+		scrollToBottom(stackRef);
 	}, [isLoading]);
-
-	useEffect(() => {
-		if (stackRef.current) {
-			let prevValue = stackRef.current?.scrollTop;
-
-			stackRef.current.addEventListener("scroll", () => {
-				if (stackRef.current) {
-					let currValue = stackRef.current.scrollTop;
-					if (Math.abs(prevValue - currValue) < 50) return;
-					prevValue = currValue;
-
-					if (stackRef.current.scrollTop > 100) {
-						setShowScrollToTop(true);
-					} else {
-						setShowScrollToTop(false);
-					}
-				}
-			});
-		}
-		return () => {
-			if (stackRef.current) {
-				stackRef.current.removeEventListener("scroll", () => {});
-			}
-		};
-	}, []);
 
 	return (
 		<>
@@ -86,26 +66,56 @@ export default function Conversation() {
 					</ResponseChat>
 				)}
 			</Stack>
-			<IconButton
+			<div
 				style={{
-					opacity: showScrollToTop ? 1 : 0,
-					visibility: showScrollToTop ? "visible" : "hidden",
 					position: "absolute",
+					display: "flex",
+					flexDirection: "column",
+					gap: "1rem",
 					left: "auto",
 					right: "1rem",
-					bottom: `calc(5rem + ${keyboardHeight}px)`,
-					width: "2.5rem",
-					height: "2.5rem",
-					background: "#fafafa",
-					filter: "drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2))",
-					borderRadius: "50%",
+					bottom: "5rem",
 					zIndex: 100,
-					transition: "opacity 0.5s ease-in-out",
 				}}
-				onClick={scrollToTop}
 			>
-				<ArrowUpwardOutlined />
-			</IconButton>
+				<IconButton
+					style={{
+						width: "2.5rem",
+						height: "2.5rem",
+						background: "#fafafa",
+						filter: "drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2))",
+						borderRadius: "50%",
+
+						transition: "opacity 0.5s ease-in-out",
+					}}
+					onClick={() => {
+						dispatch(getPreviousMessage());
+					}}
+					disabled={!showTopButton}
+				>
+					<ArrowUpwardOutlined />
+				</IconButton>
+				<IconButton
+					style={{
+						width: "2.5rem",
+						height: "2.5rem",
+						background: "#fafafa",
+						filter: "drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2))",
+						borderRadius: "50%",
+						transition: "opacity 0.5s ease-in-out",
+					}}
+					onClick={() => {
+						dispatch(
+							getNextMessage({
+								callback: () => scrollToBottom(stackRef),
+							})
+						);
+					}}
+					disabled={!showBottomButton}
+				>
+					<ArrowDownwardOutlined />
+				</IconButton>
+			</div>
 		</>
 	);
 }
