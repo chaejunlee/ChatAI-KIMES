@@ -59,16 +59,16 @@ export const manyContent = Array.from({ length: 100 }, (_, i) => {
 	};
 }) as WithId<Message>[];
 
-const initialStateWithIntroMessage = messageAdapter.addOne(initialState, {
-	id: "message0" as EntityId,
-	type: "response",
-	content: startingMessage,
-});
+// const initialStateWithIntroMessage = messageAdapter.addOne(initialState, {
+// 	id: "message0" as EntityId,
+// 	type: "response",
+// 	content: startingMessage,
+// });
 
-// const initialStateWithIntroMessage = messageAdapter.addMany(
-// 	initialState,
-// 	manyContent
-// );
+const initialStateWithIntroMessage = messageAdapter.addMany(
+	initialState,
+	manyContent
+);
 
 export const messageSlice = createSlice({
 	name: "message",
@@ -106,16 +106,12 @@ export const messageSlice = createSlice({
 			}
 			state.targetMessageId = state.ids[targetMessageIndex - 1];
 		},
-		getNextMessage: (
-			state,
-			payload: PayloadAction<{ callback: () => void }>
-		) => {
+		getNextMessage: (state) => {
 			if (state.targetMessageId === "bottom") {
 				return;
 			}
 			const targetMessageIndex = state.ids.indexOf(state.targetMessageId);
 			if (targetMessageIndex === state.ids.length - 1) {
-				payload.payload.callback();
 				state.targetMessageId = "bottom";
 				return;
 			}
