@@ -31,6 +31,14 @@ export default function Conversation() {
 		}
 	};
 
+	const showTopButton = useAppSelector((state) => {
+		return state.messages.targetMessageId !== state.messages.ids[0];
+	});
+
+	const showBottomButton = useAppSelector((state) => {
+		return state.messages.targetMessageId !== "bottom";
+	});
+
 	useEffect(() => {
 		scrollToBottom(stackRef);
 	}, [isLoading]);
@@ -83,6 +91,7 @@ export default function Conversation() {
 					onClick={() => {
 						dispatch(getPreviousMessage());
 					}}
+					disabled={!showTopButton}
 				>
 					<ArrowUpwardOutlined />
 				</IconButton>
@@ -102,6 +111,7 @@ export default function Conversation() {
 							})
 						);
 					}}
+					disabled={!showBottomButton}
 				>
 					<ArrowDownwardOutlined />
 				</IconButton>

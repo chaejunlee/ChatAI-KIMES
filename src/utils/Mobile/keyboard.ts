@@ -27,15 +27,13 @@ const mobileKeyboardHandler = (e: Event) => {
 	let currHeightDifference = _keyboardHeight;
 	let newHeightDifference = getWindowViewportHeightDifference();
 
-	const messageInputHeight =
-		document.querySelector(".message-input")?.clientHeight || 0;
 	const bodyHeight = document.body.style.height;
 
-	const heightDiff =
-		newHeightDifference - currHeightDifference + messageInputHeight;
-	const isKeyboardOpening =
-		currHeightDifference === 0 && heightDiff > KEYBOARD_THRESHOLD;
+	const heightDiff = newHeightDifference - currHeightDifference;
+	const isKeyboardOpening = heightDiff > KEYBOARD_THRESHOLD;
 	const isKeyboardClosing = heightDiff < KEYBOARD_THRESHOLD * -1;
+
+	console.log(isKeyboardOpening, isKeyboardClosing, heightDiff);
 
 	if (isKeyboardOpening) {
 		_keyboardHeight = currHeightDifference = newHeightDifference;

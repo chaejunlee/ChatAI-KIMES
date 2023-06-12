@@ -93,17 +93,30 @@ export const messageSlice = createSlice({
 			});
 		},
 		getPreviousMessage: (state) => {
+			if (state.targetMessageId === "bottom") {
+				state.targetMessageId = state.ids[state.ids.length - 1];
+				return;
+			}
+			if (state.targetMessageId === state.ids[0]) {
+				return;
+			}
 			const targetMessageIndex = state.ids.indexOf(state.targetMessageId);
-			if (targetMessageIndex === 0) return;
+			if (targetMessageIndex === 0) {
+				return;
+			}
 			state.targetMessageId = state.ids[targetMessageIndex - 1];
 		},
 		getNextMessage: (
 			state,
 			payload: PayloadAction<{ callback: () => void }>
 		) => {
+			if (state.targetMessageId === "bottom") {
+				return;
+			}
 			const targetMessageIndex = state.ids.indexOf(state.targetMessageId);
 			if (targetMessageIndex === state.ids.length - 1) {
 				payload.payload.callback();
+				state.targetMessageId = "bottom";
 				return;
 			}
 			state.targetMessageId = state.ids[targetMessageIndex + 1];
