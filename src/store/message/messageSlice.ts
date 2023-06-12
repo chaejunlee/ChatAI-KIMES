@@ -18,6 +18,7 @@ import { fetchResponse, normalizeButtons } from "./fetchResponse";
 
 interface MessageState {
 	status: "idle" | "loading" | "failed" | "succeeded";
+	targetMessageId: EntityId;
 }
 
 type MessageWithId = WithId<Message>;
@@ -26,6 +27,7 @@ const messageAdapter = createEntityAdapter<MessageWithId>();
 
 const initialState = messageAdapter.getInitialState<MessageState>({
 	status: "idle",
+	targetMessageId: "message0" as EntityId,
 });
 
 export const startingMessage = introMessage.content.map((cur) => {
@@ -90,31 +92,46 @@ export const messageSlice = createSlice({
 				content: action.payload,
 			});
 		},
+		getPreviousMessage: (state) => {
+			const targetMessageIndex = state.ids.indexOf(state.targetMessageId);
+			if (targetMessageIndex === 0) return;
+			state.targetMessageId = state.ids[targetMessageIndex - 1];
+		},
+		getNextMessage: (state) => {
+			const targetMessageIndex = state.ids.indexOf(state.targetMessageId);
+			if (targetMessageIndex === state.ids.length - 1) return;
+			state.targetMessageId = state.ids[targetMessageIndex + 1];
+		},
 	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchResponse.fulfilled, (state, action) => {
+				const id = createId(state.ids);
 				state.status = "succeeded";
 				messageAdapter.addOne(state, {
-					id: createId(state.ids),
+					id: id,
 					...action.payload,
 				});
+				state.targetMessageId = id;
 			})
 			.addCase(fetchResponse.pending, (state) => {
 				state.status = "loading";
 			})
 			.addCase(fetchResponse.rejected, (state) => {
+				const id = createId(state.ids);
 				state.status = "failed";
 				messageAdapter.addOne(state, {
-					id: createId(state.ids),
+					id: id,
 					type: "response",
 					content: errorMessage,
 				});
+				state.targetMessageId = id;
 			});
 	},
 });
 
-export const { getResponse, addMessage } = messageSlice.actions;
+export const { getResponse, addMessage, getNextMessage, getPreviousMessage } =
+	messageSlice.actions;
 
 export const {
 	selectAll: selectAllMessages,
