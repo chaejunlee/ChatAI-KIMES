@@ -13,6 +13,7 @@ const StyledHeader = styled("div")`
 	position: sticky;
 	display: flex;
 	top: 0;
+	flex-shrink: 0;
 	width: 100%;
 	justify-content: center;
 	background: white;
