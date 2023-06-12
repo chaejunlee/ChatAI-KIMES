@@ -28,9 +28,16 @@ export function ChatChunk({ messageId }: { messageId: EntityId }) {
 		});
 	}, [isSelectedMessage]);
 
+	const selectedStyle = isSelectedMessage
+		? {
+				filter: "drop-shadow(0 0.1rem 0.2rem rgba(0, 0, 0, 0.2))",
+				transition: "filter 0.5s ease-in-out",
+		  }
+		: { transition: "filter 0.5s ease-in-out" };
+
 	if (!message)
 		return (
-			<div ref={messageRef}>
+			<div style={selectedStyle} ref={messageRef}>
 				<ContentResponseMessage
 					key={"message-error"}
 					message={errorMessage as unknown as ContentResponseMessageType}
@@ -41,13 +48,13 @@ export function ChatChunk({ messageId }: { messageId: EntityId }) {
 	switch (message.type) {
 		case "request":
 			return (
-				<div ref={messageRef}>
+				<div style={selectedStyle} ref={messageRef}>
 					<RequestChat message={message} />
 				</div>
 			);
 		case "response":
 			return (
-				<div ref={messageRef}>
+				<div style={selectedStyle} ref={messageRef}>
 					<ResponseChat>
 						<ResponseChatChunk messageId={messageId} />
 					</ResponseChat>
