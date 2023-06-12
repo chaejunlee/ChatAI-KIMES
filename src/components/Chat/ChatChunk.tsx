@@ -30,7 +30,7 @@ export function ChatChunk({ messageId }: { messageId: EntityId }) {
 
 	const selectedStyle = isSelectedMessage
 		? {
-				filter: "drop-shadow(0 0.1rem 0.2rem rgba(0, 0, 0, 0.2))",
+				filter: "drop-shadow(0 0.1rem 0.3rem rgba(0, 0, 0, 0.15))",
 				transition: "filter 0.5s ease-in-out",
 		  }
 		: { transition: "filter 0.5s ease-in-out" };
