@@ -51,6 +51,7 @@ export const startingMessage = introMessage.content.map((cur) => {
 });
 
 // for testing
+const TESTING = false;
 export const manyContent = Array.from({ length: 100 }, (_, i) => {
 	return {
 		id: ("message" + i) as EntityId,
@@ -59,16 +60,13 @@ export const manyContent = Array.from({ length: 100 }, (_, i) => {
 	};
 }) as WithId<Message>[];
 
-// const initialStateWithIntroMessage = messageAdapter.addOne(initialState, {
-// 	id: "message0" as EntityId,
-// 	type: "response",
-// 	content: startingMessage,
-// });
-
-const initialStateWithIntroMessage = messageAdapter.addMany(
-	initialState,
-	manyContent
-);
+const initialStateWithIntroMessage = TESTING
+	? messageAdapter.addMany(initialState, manyContent)
+	: messageAdapter.addOne(initialState, {
+			id: "message0" as EntityId,
+			type: "response",
+			content: startingMessage,
+	  });
 
 export const messageSlice = createSlice({
 	name: "message",
