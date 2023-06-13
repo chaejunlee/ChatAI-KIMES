@@ -41,14 +41,17 @@ export default function Conversation() {
 	const showBottomButton = useAppSelector((state) => {
 		return state.messages.targetMessageId !== "bottom";
 	});
+	console.log(stackRef.current?.scrollHeight);
 
 	useEffect(() => {
-		scrollToBottom(stackRef);
+		requestAnimationFrame(() => {
+			if (isLoading) scrollToBottom(stackRef);
+		});
 	}, [isLoading]);
 
 	useEffect(() => {
 		requestAnimationFrame(() => {
-			scrollToBottom(stackRef);
+			if (isBottom) scrollToBottom(stackRef);
 		});
 	}, [isBottom]);
 
@@ -64,7 +67,7 @@ export default function Conversation() {
 				gap={"1rem"}
 				paddingX={"1rem"}
 				paddingTop={"4rem"}
-				paddingBottom={"1rem"}
+				paddingBottom={"1.25rem"}
 			>
 				{messageIds.map((message) => (
 					<ChatChunk key={message} messageId={message} />

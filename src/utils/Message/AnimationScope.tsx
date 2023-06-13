@@ -33,6 +33,7 @@ export default function AnimationScope({
 				{
 					delay: stagger(0.1),
 					duration: 0.3,
+					ease: "easeOut",
 				}
 			);
 	}, []);

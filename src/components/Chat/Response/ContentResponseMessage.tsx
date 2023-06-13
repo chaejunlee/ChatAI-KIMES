@@ -59,7 +59,7 @@ function ResponseLink({ messageContent }: { messageContent: string }) {
 						viewBox="0 0 24 24"
 						strokeWidth={1.5}
 						stroke="currentColor"
-						width="1.25rem"
+						width="20px"
 					>
 						<path
 							strokeLinecap="round"
