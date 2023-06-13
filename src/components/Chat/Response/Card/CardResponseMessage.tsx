@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Stack, styled } from "@mui/material";
 import { EntityId } from "@reduxjs/toolkit";
 import { memo, useRef } from "react";
 import { ImageResponseCardType } from "../../../../Interface/Message/ResponseMessageType";
@@ -10,10 +10,6 @@ export interface CardResponseMessageTypeProps {
 	data: ImageResponseCardType;
 }
 
-function MessageSubtitle({ subtitle }: { subtitle: string }) {
-	return <BasicResponseMessage>{subtitle}</BasicResponseMessage>;
-}
-
 function CardResponseMessage({ data }: CardResponseMessageTypeProps) {
 	const message = data.imageResponseCard;
 	const clickedBtnListRef = useRef([] as string[]);
@@ -23,15 +19,7 @@ function CardResponseMessage({ data }: CardResponseMessageTypeProps) {
 			{message.imageUrl && <MessageImage message={message} />}
 			{message.subtitle && <MessageSubtitle subtitle={message.subtitle} />}
 			{message.buttons && (
-				<Stack
-					spacing={0.5}
-					direction={"row"}
-					flexWrap={"wrap"}
-					columnGap={"0.5rem"}
-					rowGap={"0.5rem"}
-					justifyContent={"flex-start"}
-					alignItems={"flex-start"}
-				>
+				<MessageButtons>
 					{message.buttons.map((button) => (
 						<MessageButton
 							clickedBtnListRef={clickedBtnListRef}
@@ -39,10 +27,24 @@ function CardResponseMessage({ data }: CardResponseMessageTypeProps) {
 							button={button as EntityId}
 						/>
 					))}
-				</Stack>
+				</MessageButtons>
 			)}
 		</>
 	);
 }
+
+function MessageSubtitle({ subtitle }: { subtitle: string }) {
+	return <BasicResponseMessage>{subtitle}</BasicResponseMessage>;
+}
+
+const MessageButtons = styled(Stack)`
+	spacing: 0.5rem;
+	direction: row;
+	flex-wrap: wrap;
+	column-gap: 0.5rem;
+	row-gap: 0.5rem;
+	justify-content: flex-start;
+	align-items: flex-start;
+`;
 
 export default memo(CardResponseMessage);
