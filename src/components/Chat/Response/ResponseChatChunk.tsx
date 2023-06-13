@@ -6,21 +6,17 @@ import {
 } from "../../../Interface/Message/ResponseMessageType";
 import { selectMessageById } from "../../../store/message/messageSlice";
 import { useAppSelector } from "../../../store/store";
-import { errorMessage } from "../../../utils/Message/errorMessageContent";
 import CardResponseMessage from "./Card/CardResponseMessage";
 import ContentResponseMessage from "./ContentResponseMessage";
+import { ErrorMessage } from "../ErrorMessage";
 
 export function ResponseChatChunk({ messageId }: { messageId: EntityId }) {
 	const message = useAppSelector((state) =>
 		selectMessageById(state, messageId)
 	);
-	if (!message)
-		return (
-			<ContentResponseMessage
-				key={"message-error"}
-				message={errorMessage as unknown as ContentResponseMessageType}
-			/>
-		);
+	if (!message) return <ErrorMessage />;
+
+	// TODO: messageId로 prop 받아서 map 부분 지우기
 	const receivedResponse = message.type === "response" ? message.content : [];
 
 	return (

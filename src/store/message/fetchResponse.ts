@@ -36,6 +36,10 @@ const isDefaultMessage = (message: string) => {
 	return message === DEFAULT_MESSAGE;
 };
 
+const sleep = (ms: number) => {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
 export const fetchResponse = createAsyncThunk<
 	ResponseMessageType,
 	fetchResponseProps,
@@ -54,6 +58,7 @@ export const fetchResponse = createAsyncThunk<
 		}
 
 		if (isDefaultMessage(message)) {
+			await sleep(1000);
 			return formatResponse(startingMessage);
 		}
 

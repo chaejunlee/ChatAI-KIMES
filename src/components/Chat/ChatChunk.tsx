@@ -1,11 +1,9 @@
 import { EntityId } from "@reduxjs/toolkit";
-import { memo, useEffect, useRef } from "react";
-import { ContentResponseMessageType } from "../../Interface/Message/ResponseMessageType";
+import { memo } from "react";
 import { selectMessageById } from "../../store/message/messageSlice";
 import { useAppSelector } from "../../store/store";
-import { errorMessage } from "../../utils/Message/errorMessageContent";
+import { ErrorMessage } from "./ErrorMessage";
 import { RequestChat } from "./Request/RequestChat";
-import ContentResponseMessage from "./Response/ContentResponseMessage";
 import { ResponseChat } from "./Response/ResponseChat";
 import { ResponseChatChunk } from "./Response/ResponseChatChunk";
 
@@ -13,52 +11,28 @@ export function ChatChunk({ messageId }: { messageId: EntityId }) {
 	const message = useAppSelector((state) =>
 		selectMessageById(state, messageId)
 	);
-	const isSelectedMessage = useAppSelector((state) => {
-		const targetId = state.messages.targetMessageId;
-		return targetId === messageId;
-	});
-	const messageRef = useRef<HTMLDivElement>(null);
 
-	useEffect(() => {
-		requestAnimationFrame(() => {
-			if (isSelectedMessage && messageRef.current) {
-				messageRef.current.style.scrollMarginTop = "1rem";
-				messageRef.current.scrollIntoView({ behavior: "smooth" });
-			}
-		});
-	}, [isSelectedMessage]);
-
-	const selectedStyle = isSelectedMessage
-		? {
-				filter: "drop-shadow(0 0.1rem 0.3rem rgba(0, 0, 0, 0.15))",
-				transition: "filter 0.5s ease-in-out",
-		  }
-		: { transition: "filter 0.5s ease-in-out" };
-
-	if (!message)
-		return (
-			<div style={selectedStyle} ref={messageRef}>
-				<ContentResponseMessage
-					key={"message-error"}
-					message={errorMessage as unknown as ContentResponseMessageType}
-				/>
-			</div>
-		);
-
-	switch (message.type) {
+	switch (message?.type) {
 		case "request":
-			return (
-				<div style={selectedStyle} ref={messageRef}>
-					<RequestChat message={message} />
-				</div>
-			);
+			return <RequestChat message={message} />;
 		case "response":
 			return (
-				<div style={selectedStyle} ref={messageRef}>
-					<ResponseChat>
-						<ResponseChatChunk messageId={messageId} />
-					</ResponseChat>
-				</div>
+				<ResponseChat>
+					{/**
+					 * TODO: message.map으로 바꾸기
+					 *
+					 * 그러러면 ResponseChatChunk에 primitive value를 넘겨줘야함
+					 * message 자체를 넘겨주면 불필요한 re-rendering 발생하기 때문에
+					 * messageId를 넘겨주고 있음
+					 */}
+					<ResponseChatChunk messageId={messageId} />
+				</ResponseChat>
+			);
+		default:
+			return (
+				<ResponseChat>
+					<ErrorMessage />
+				</ResponseChat>
 			);
 	}
 }

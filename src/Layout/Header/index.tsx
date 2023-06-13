@@ -19,6 +19,8 @@ const StyledHeader = styled("div")`
 	background: white;
 	filter: drop-shadow(0px 10px 30px rgba(0, 0, 0, 0.1));
 	z-index: 1;
+	backdrop-filter: blur(0px);
+	transform: translateZ(0);
 `;
 
 const openLink = (url: string) => {
