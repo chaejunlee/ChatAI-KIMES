@@ -8,15 +8,6 @@ export const useScrollToBottom = () => {
 	const { status: isLoading } = useMessageStatus();
 	const isBottom = useAppSelector(hasMessageReachedBottom);
 
-	const scrollToBottom = (stackRef: RefObject<HTMLDivElement>) => {
-		if (stackRef.current) {
-			stackRef.current.scrollTo({
-				top: stackRef.current.scrollHeight,
-				behavior: "smooth",
-			});
-		}
-	};
-
 	useEffect(() => {
 		requestAnimationFrame(() => {
 			if (isLoading) scrollToBottom(stackRef);
@@ -28,6 +19,15 @@ export const useScrollToBottom = () => {
 			if (isBottom) scrollToBottom(stackRef);
 		});
 	}, [isBottom]);
+
+	const scrollToBottom = (stackRef: RefObject<HTMLDivElement>) => {
+		if (stackRef.current) {
+			stackRef.current.scrollTo({
+				top: stackRef.current.scrollHeight,
+				behavior: "smooth",
+			});
+		}
+	};
 
 	return { stackRef };
 };
