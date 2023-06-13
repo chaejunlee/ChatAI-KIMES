@@ -147,6 +147,11 @@ export const messageSlice = createSlice({
 export const { getResponse, addMessage, getNextMessage, getPreviousMessage } =
 	messageSlice.actions;
 
+export const hasMessageReachedBottom = (state: RootState) =>
+	state.messages.targetMessageId === "bottom";
+export const hasMessageReachedTop = (state: RootState) =>
+	state.messages.targetMessageId === state.messages.ids[0];
+
 export const {
 	selectAll: selectAllMessages,
 	selectById: selectMessageById,
