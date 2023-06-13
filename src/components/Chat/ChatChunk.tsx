@@ -31,6 +31,8 @@ export function ChatChunk({ messageId }: { messageId: EntityId }) {
 	const selectedStyle = isSelectedMessage
 		? {
 				filter: "drop-shadow(0 0.1rem 0.3rem rgba(0, 0, 0, 0.15))",
+				backdropFilter: "blur(0)",
+				transform: "translateZ(0)",
 				transition: "filter 0.5s ease-in-out",
 		  }
 		: { transition: "filter 0.5s ease-in-out" };
@@ -39,7 +41,6 @@ export function ChatChunk({ messageId }: { messageId: EntityId }) {
 		return (
 			<div style={selectedStyle} ref={messageRef}>
 				<ContentResponseMessage
-					key={"message-error"}
 					message={errorMessage as unknown as ContentResponseMessageType}
 				/>
 			</div>

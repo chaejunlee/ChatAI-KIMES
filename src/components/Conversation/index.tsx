@@ -94,7 +94,8 @@ export default function Conversation() {
 						background: "#fafafa",
 						filter: "drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2))",
 						borderRadius: "50%",
-
+						backdropFilter: "blur(0)",
+						transform: "translateZ(0)",
 						transition: "opacity 0.5s ease-in-out",
 					}}
 					onClick={() => {
@@ -110,7 +111,9 @@ export default function Conversation() {
 						height: "2.5rem",
 						background: "#fafafa",
 						filter: "drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2))",
+						backdropFilter: "blur(0)",
 						borderRadius: "50%",
+						transform: "translateZ(0)",
 						transition: "opacity 0.5s ease-in-out",
 					}}
 					onClick={() => {
