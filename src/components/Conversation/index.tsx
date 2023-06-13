@@ -2,10 +2,10 @@ import { Stack, styled } from "@mui/material";
 import useMessageStatus from "../../hooks/Request/useMessageStatus";
 import { selectMessageIds } from "../../store/message/messageSlice";
 import { useAppSelector } from "../../store/store";
-import ChatChunk from "../Chat/ChatChunk";
 import { LoadingResponseMessage } from "../Chat/LoadingResponseMessage";
 import { ScrollButton } from "./ScrollButton";
 import { useScrollToBottom } from "./useScrollToBottom";
+import { FocusableChatChunk } from "../Chat/FocusableChatChunk";
 
 export default function Conversation() {
 	const { status: isLoading } = useMessageStatus();
@@ -19,7 +19,7 @@ export default function Conversation() {
 				style={{ WebkitOverflowScrolling: "touch" }}
 			>
 				{messageIds.map((message) => (
-					<ChatChunk key={message} messageId={message} />
+					<FocusableChatChunk key={message} messageId={message} />
 				))}
 				{isLoading && <LoadingResponseMessage />}
 			</ConversationWrapper>

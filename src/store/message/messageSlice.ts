@@ -18,7 +18,7 @@ import { fetchResponse, normalizeButtons } from "./fetchResponse";
 
 interface MessageState {
 	status: "idle" | "loading" | "failed" | "succeeded";
-	targetMessageId: EntityId;
+	focusedMessageId: EntityId;
 }
 
 type MessageWithId = WithId<Message>;
@@ -27,7 +27,7 @@ const messageAdapter = createEntityAdapter<MessageWithId>();
 
 const initialState = messageAdapter.getInitialState<MessageState>({
 	status: "idle",
-	targetMessageId: "message0" as EntityId,
+	focusedMessageId: "message0" as EntityId,
 });
 
 export const startingMessage = introMessage.content.map((cur) => {
@@ -91,29 +91,29 @@ export const messageSlice = createSlice({
 			});
 		},
 		getPreviousMessage: (state) => {
-			if (state.targetMessageId === "bottom") {
-				state.targetMessageId = state.ids[state.ids.length - 1];
+			if (state.focusedMessageId === "bottom") {
+				state.focusedMessageId = state.ids[state.ids.length - 1];
 				return;
 			}
-			if (state.targetMessageId === state.ids[0]) {
+			if (state.focusedMessageId === state.ids[0]) {
 				return;
 			}
-			const targetMessageIndex = state.ids.indexOf(state.targetMessageId);
+			const targetMessageIndex = state.ids.indexOf(state.focusedMessageId);
 			if (targetMessageIndex === 0) {
 				return;
 			}
-			state.targetMessageId = state.ids[targetMessageIndex - 1];
+			state.focusedMessageId = state.ids[targetMessageIndex - 1];
 		},
 		getNextMessage: (state) => {
-			if (state.targetMessageId === "bottom") {
+			if (state.focusedMessageId === "bottom") {
 				return;
 			}
-			const targetMessageIndex = state.ids.indexOf(state.targetMessageId);
+			const targetMessageIndex = state.ids.indexOf(state.focusedMessageId);
 			if (targetMessageIndex === state.ids.length - 1) {
-				state.targetMessageId = "bottom";
+				state.focusedMessageId = "bottom";
 				return;
 			}
-			state.targetMessageId = state.ids[targetMessageIndex + 1];
+			state.focusedMessageId = state.ids[targetMessageIndex + 1];
 			return;
 		},
 	},
@@ -126,7 +126,7 @@ export const messageSlice = createSlice({
 					id: id,
 					...action.payload,
 				});
-				state.targetMessageId = id;
+				state.focusedMessageId = id;
 			})
 			.addCase(fetchResponse.pending, (state) => {
 				state.status = "loading";
@@ -139,7 +139,7 @@ export const messageSlice = createSlice({
 					type: "response",
 					content: errorMessage,
 				});
-				state.targetMessageId = id;
+				state.focusedMessageId = id;
 			});
 	},
 });
@@ -148,9 +148,14 @@ export const { getResponse, addMessage, getNextMessage, getPreviousMessage } =
 	messageSlice.actions;
 
 export const hasMessageReachedBottom = (state: RootState) =>
-	state.messages.targetMessageId === "bottom";
+	state.messages.focusedMessageId === "bottom";
 export const hasMessageReachedTop = (state: RootState) =>
-	state.messages.targetMessageId === state.messages.ids[0];
+	state.messages.focusedMessageId === state.messages.ids[0];
+export const selectFocusedMessageId =
+	(messageId: EntityId) => (state: RootState) => {
+		const targetId = state.messages.focusedMessageId;
+		return targetId === messageId;
+	};
 
 export const {
 	selectAll: selectAllMessages,
