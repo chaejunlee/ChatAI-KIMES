@@ -16,6 +16,7 @@ export function ResponseChatChunk({ messageId }: { messageId: EntityId }) {
 	);
 	if (!message) return <ErrorMessage />;
 
+	// TODO: messageId로 prop 받아서 map 부분 지우기
 	const receivedResponse = message.type === "response" ? message.content : [];
 
 	return (

@@ -12,15 +12,26 @@ export function ChatChunk({ messageId }: { messageId: EntityId }) {
 		selectMessageById(state, messageId)
 	);
 
-	if (!message) return <ErrorMessage />;
-
-	switch (message.type) {
+	switch (message?.type) {
 		case "request":
 			return <RequestChat message={message} />;
 		case "response":
 			return (
 				<ResponseChat>
+					{/**
+					 * TODO: message.map으로 바꾸기
+					 *
+					 * 그러러면 ResponseChatChunk에 primitive value를 넘겨줘야함
+					 * message 자체를 넘겨주면 불필요한 re-rendering 발생하기 때문에
+					 * messageId를 넘겨주고 있음
+					 */}
 					<ResponseChatChunk messageId={messageId} />
+				</ResponseChat>
+			);
+		default:
+			return (
+				<ResponseChat>
+					<ErrorMessage />
 				</ResponseChat>
 			);
 	}
