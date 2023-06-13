@@ -7,9 +7,8 @@ import {
 import { introMessage } from "../../Data/Message";
 import { Message, WithId } from "../../Interface/Message/Message";
 import {
+	BasicResponseMessageType,
 	ButtonResponseType,
-	ContentResponseMessageType,
-	ImageResponseCardType,
 } from "../../Interface/Message/ResponseMessageType";
 import { createRequest } from "../../utils/Message/createRequest";
 import { errorMessage } from "../../utils/Message/errorMessageContent";
@@ -78,12 +77,7 @@ export const messageSlice = createSlice({
 				...createRequest(action.payload),
 			});
 		},
-		addMessage: (
-			state,
-			action: PayloadAction<
-				(ContentResponseMessageType | ImageResponseCardType)[]
-			>
-		) => {
+		addMessage: (state, action: PayloadAction<BasicResponseMessageType[]>) => {
 			messageAdapter.addOne(state, {
 				id: createId(state.ids),
 				type: "response",
@@ -91,30 +85,22 @@ export const messageSlice = createSlice({
 			});
 		},
 		getPreviousMessage: (state) => {
-			if (state.focusedMessageId === "bottom") {
-				state.focusedMessageId = state.ids[state.ids.length - 1];
-				return;
-			}
-			if (state.focusedMessageId === state.ids[0]) {
-				return;
-			}
+			const isFirstMessage = state.focusedMessageId === state.ids[0];
+			if (isFirstMessage) return;
+
 			const targetMessageIndex = state.ids.indexOf(state.focusedMessageId);
-			if (targetMessageIndex === 0) {
-				return;
-			}
 			state.focusedMessageId = state.ids[targetMessageIndex - 1];
 		},
 		getNextMessage: (state) => {
-			if (state.focusedMessageId === "bottom") {
-				return;
-			}
-			const targetMessageIndex = state.ids.indexOf(state.focusedMessageId);
-			if (targetMessageIndex === state.ids.length - 1) {
+			const hasReachedBottom = state.focusedMessageId === "bottom";
+			if (hasReachedBottom) return;
+			const isLastMessage = state.focusedMessageId === state.ids[-1];
+			if (isLastMessage) {
 				state.focusedMessageId = "bottom";
 				return;
 			}
+			const targetMessageIndex = state.ids.indexOf(state.focusedMessageId);
 			state.focusedMessageId = state.ids[targetMessageIndex + 1];
-			return;
 		},
 	},
 	extraReducers: (builder) => {
