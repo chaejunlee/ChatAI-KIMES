@@ -1,14 +1,16 @@
 import { Stack, styled } from "@mui/material";
-import useMessageStatus from "../../hooks/Request/useMessageStatus";
-import { selectMessageIds } from "../../store/message/messageSlice";
+import {
+	isMessageStatusLoading,
+	selectMessageIds,
+} from "../../store/message/messageSlice";
 import { useAppSelector } from "../../store/store";
+import FocusableChatChunk from "../Chat/FocusableChatChunk";
 import { LoadingResponseMessage } from "./LoadingResponseMessage";
 import { ScrollButton } from "./ScrollButton";
 import { useScrollToBottom } from "./useScrollToBottom";
-import { FocusableChatChunk } from "../Chat/FocusableChatChunk";
 
 export default function Conversation() {
-	const { status: isLoading } = useMessageStatus();
+	const isLoading = useAppSelector(isMessageStatusLoading);
 	const messageIds = useAppSelector(selectMessageIds);
 	const { stackRef } = useScrollToBottom();
 

@@ -1,6 +1,6 @@
 import { Skeleton, Stack } from "@mui/material";
 import { ANIMATION_TARGET } from "../../utils/Message/AnimationScope";
-import { ResponseChat } from "../Chat/Response/ResponseChat";
+import ResponseChat from "../Chat/Response/ResponseChat";
 
 export const LoadingResponseMessage = () => {
 	return (

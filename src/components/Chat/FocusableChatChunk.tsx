@@ -1,6 +1,7 @@
 import { EntityId } from "@reduxjs/toolkit";
-import { useFocusedMessage } from "./useFocusedMessage";
+import { memo } from "react";
 import { ChatChunk } from "./ChatChunk";
+import { useFocusedMessage } from "./useFocusedMessage";
 
 export function FocusableChatChunk({ messageId }: { messageId: EntityId }) {
 	const { focusedStyle, messageRef } = useFocusedMessage(messageId);
@@ -11,3 +12,5 @@ export function FocusableChatChunk({ messageId }: { messageId: EntityId }) {
 		</div>
 	);
 }
+
+export default memo(FocusableChatChunk);

@@ -1,11 +1,12 @@
 import { styled, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { forwardRef, KeyboardEvent, memo } from "react";
-import useMessageStatus from "../../hooks/Request/useMessageStatus";
 import { addKeyboardPopupListener } from "../../utils/Mobile/keyboard";
 import { SendComponent } from "./SendComponent";
 import { HomeButton } from "./HomeButton";
 import { useSendRequest } from "./useSendRequest";
+import { useAppSelector } from "../../store/store";
+import { isMessageStatusLoading } from "../../store/message/messageSlice";
 
 const useStyles = makeStyles({
 	root: {
@@ -20,7 +21,7 @@ const ENTER_KEY_HINT = "send";
 const INPUT_TYPE = "search";
 
 function MessageInput() {
-	const { status: isLoading } = useMessageStatus();
+	const isLoading = useAppSelector(isMessageStatusLoading);
 	const classes = useStyles();
 
 	const { inputRef, hiddenInputRef, sendRequest } = useSendRequest();

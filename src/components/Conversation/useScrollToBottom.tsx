@@ -1,12 +1,14 @@
 import { RefObject, useEffect, useRef } from "react";
-import useMessageStatus from "../../hooks/Request/useMessageStatus";
-import { hasMessageReachedBottom } from "../../store/message/messageSlice";
+import {
+	hasMessageReachedBottom,
+	isMessageStatusLoading,
+} from "../../store/message/messageSlice";
 import { useAppSelector } from "../../store/store";
 
 export const useScrollToBottom = () => {
 	const stackRef = useRef<HTMLDivElement>(null);
-	const { status: isLoading } = useMessageStatus();
 	const isBottom = useAppSelector(hasMessageReachedBottom);
+	const isLoading = useAppSelector(isMessageStatusLoading);
 
 	useEffect(() => {
 		requestAnimationFrame(() => {

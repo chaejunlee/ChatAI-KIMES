@@ -4,8 +4,8 @@ import { selectMessageById } from "../../store/message/messageSlice";
 import { useAppSelector } from "../../store/store";
 import { ErrorMessage } from "./ErrorMessage";
 import { RequestChat } from "./Request/RequestChat";
-import { ResponseChat } from "./Response/ResponseChat";
-import { ResponseChatChunk } from "./Response/ResponseChatChunk";
+import ResponseChat from "./Response/ResponseChat";
+import ResponseChatChunk from "./Response/ResponseChatChunk";
 
 export function ChatChunk({ messageId }: { messageId: EntityId }) {
 	const message = useAppSelector((state) =>
@@ -18,14 +18,7 @@ export function ChatChunk({ messageId }: { messageId: EntityId }) {
 		case "response":
 			return (
 				<ResponseChat>
-					{/**
-					 * TODO: message.map으로 바꾸기
-					 *
-					 * 그러러면 ResponseChatChunk에 primitive value를 넘겨줘야함
-					 * message 자체를 넘겨주면 불필요한 re-rendering 발생하기 때문에
-					 * messageId를 넘겨주고 있음
-					 */}
-					<ResponseChatChunk messageId={messageId} />
+					<ResponseChatChunk message={message.content} />
 				</ResponseChat>
 			);
 		default:

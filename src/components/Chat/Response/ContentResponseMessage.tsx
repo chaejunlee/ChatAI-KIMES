@@ -1,10 +1,11 @@
 import { Typography } from "@mui/material";
+import { memo, useMemo } from "react";
 import { ContentResponseMessageType } from "../../../Interface/Message/ResponseMessageType";
 import { containsUrl } from "../../../utils/chat";
 import { BasicResponseMessage } from "./BasicResponseMessage";
 import { ResponseLink } from "./ResponseLink";
 
-export default function ContentResponseMessage({
+function ContentResponseMessage({
 	message,
 }: {
 	message: ContentResponseMessageType;
@@ -12,7 +13,10 @@ export default function ContentResponseMessage({
 	if (containsUrl(message.content))
 		return <ResponseLink messageContent={message.content} />;
 
-	const multiLineMessage = message.content.split(/\\n|\n/g);
+	const multiLineMessage = useMemo(
+		() => message.content.split(/\\n|\n/g),
+		[message.content]
+	);
 
 	return (
 		<BasicResponseMessage>
@@ -24,3 +28,5 @@ export default function ContentResponseMessage({
 		</BasicResponseMessage>
 	);
 }
+
+export default memo(ContentResponseMessage);
