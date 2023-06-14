@@ -85,16 +85,21 @@ export const messageSlice = createSlice({
 			});
 		},
 		getPreviousMessage: (state) => {
+			if (state.focusedMessageId === "bottom") {
+				state.focusedMessageId = state.ids.at(-1)!;
+				return;
+			}
 			const isFirstMessage = state.focusedMessageId === state.ids[0];
 			if (isFirstMessage) return;
 
 			const targetMessageIndex = state.ids.indexOf(state.focusedMessageId);
+			if (targetMessageIndex === 0) return;
 			state.focusedMessageId = state.ids[targetMessageIndex - 1];
 		},
 		getNextMessage: (state) => {
 			const hasReachedBottom = state.focusedMessageId === "bottom";
 			if (hasReachedBottom) return;
-			const isLastMessage = state.focusedMessageId === state.ids[-1];
+			const isLastMessage = state.focusedMessageId === state.ids.at(-1);
 			if (isLastMessage) {
 				state.focusedMessageId = "bottom";
 				return;
