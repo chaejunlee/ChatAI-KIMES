@@ -1,4 +1,4 @@
-import { RefObject, useRef } from "react";
+import { useRef } from "react";
 import { fetchResponse } from "../../store/message/fetchResponse";
 import { isMessageStatusLoading } from "../../store/message/messageSlice";
 import { useAppDispatch, useAppSelector } from "../../store/store";
@@ -10,16 +10,16 @@ export const useSendRequest = () => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	// for mobile keyboard popup
 	const hiddenInputRef = useRef<HTMLInputElement>(null);
-	const message = inputRef.current?.value;
 
 	const sendRequest = async () => {
-		if (!canSend(isLoading, inputRef)) return;
 		if (!inputRef.current) return;
+		const text = inputRef.current.value;
+		if (!canSend(isLoading, text)) return;
 
 		hiddenInputRef.current?.focus({ preventScroll: true });
 
 		await dispatch(
-			fetchResponse({ message: inputRef.current.value, leaveMessage: true })
+			fetchResponse({ message: text, leaveMessage: true })
 		).unwrap();
 
 		inputRef.current.focus({ preventScroll: true });
@@ -27,11 +27,10 @@ export const useSendRequest = () => {
 
 	return { inputRef, hiddenInputRef, sendRequest };
 };
-const canSend = (isLoading: boolean, inputRef: RefObject<HTMLInputElement>) => {
-	if (isLoading) return false;
-	if (!inputRef || !inputRef.current) return false;
 
-	const text = inputRef.current.value;
+const canSend = (isLoading: boolean, text: string) => {
+	if (isLoading) return false;
+
 	if (text.length === 0) return false;
 
 	return true;
