@@ -10,7 +10,6 @@ export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<AnimationScope>
 			<Stack
-				className={ANIMATION_TARGET}
 				gap={"0.5rem"}
 				maxWidth={CHAT_MAX_WIDTH}
 				sx={{

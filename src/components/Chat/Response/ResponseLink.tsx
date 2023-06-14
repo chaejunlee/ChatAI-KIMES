@@ -13,11 +13,7 @@ export function ResponseLink({ messageContent }: { messageContent: string }) {
 					filter: "drop-shadow(rgba(150, 200, 150, 0.8) 0px 3px 3px)",
 				}}
 			>
-				<StyledLink
-					style={{ color: `${primaryColor}` }}
-					href={messageContent}
-					target="_blank"
-				>
+				<StyledLink href={messageContent} target="_blank">
 					<span>관련 링크로 바로가기</span>
 					<LinkSVG />
 				</StyledLink>
@@ -34,6 +30,8 @@ export const StyledLink = styled("a")`
 	justify-content: center;
 	gap: 5px;
 	width: fit-content;
+
+	color: ${primaryColor};
 
 	text-decoration: none;
 `;
