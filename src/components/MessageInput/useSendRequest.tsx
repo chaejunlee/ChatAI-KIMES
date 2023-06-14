@@ -16,6 +16,8 @@ export const useSendRequest = () => {
 		const text = inputRef.current.value;
 		if (!canSend(isLoading, text)) return;
 
+		inputRef.current.value = "";
+
 		hiddenInputRef.current?.focus({ preventScroll: true });
 
 		await dispatch(
