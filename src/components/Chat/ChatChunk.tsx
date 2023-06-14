@@ -18,7 +18,7 @@ export function ChatChunk({ messageId }: { messageId: EntityId }) {
 		case "response":
 			return (
 				<ResponseChat>
-					<ResponseChatChunk messageId={messageId} />
+					<ResponseChatChunk message={message.content} />
 				</ResponseChat>
 			);
 		default:
