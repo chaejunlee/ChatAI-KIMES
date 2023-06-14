@@ -18,7 +18,7 @@ export function useFocusedMessage(messageId: EntityId) {
 
 	const focusedStyle = isFocusedMessage
 		? {
-				filter: "drop-shadow(0 0.1rem 0.3rem rgba(0, 0, 0, 0.15))",
+				filter: "drop-shadow(0 0 .5vw rgba(30, 30, 30, 0.2))",
 				backdropFilter: "blur(0)",
 				transform: "translateZ(0)",
 				transition: "filter 0.5s ease-in-out",

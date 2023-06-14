@@ -8,6 +8,7 @@ import FocusableChatChunk from "../Chat/FocusableChatChunk";
 import { LoadingResponseMessage } from "./LoadingResponseMessage";
 import { ScrollButton } from "./ScrollButton";
 import { useScrollToBottom } from "./useScrollToBottom";
+import BeamworksLogo from "../../assets/BeamworksLogo.png";
 
 export default function Conversation() {
 	const isLoading = useAppSelector(isMessageStatusLoading);
@@ -16,6 +17,7 @@ export default function Conversation() {
 
 	return (
 		<>
+			<Beamworks />
 			<ConversationWrapper
 				ref={stackRef}
 				style={{ WebkitOverflowScrolling: "touch" }}
@@ -40,3 +42,20 @@ const ConversationWrapper = styled(Stack)`
 	padding-top: 4rem;
 	padding-bottom: 1.25rem;
 `;
+
+const Beamworks = () => (
+	<img
+		style={{
+			position: "fixed",
+			height: "auto",
+			marginBottom: "0.3rem",
+			inset: "0",
+			marginInline: "auto",
+			marginBlock: "auto",
+			opacity: "0.2",
+			width: "clamp(200px, 40%, 25rem)",
+		}}
+		src={BeamworksLogo}
+		alt="Beamworks"
+	/>
+);

@@ -1,38 +1,16 @@
-import BeamworksLogo from "../../assets/BeamworksLogo.png";
 import ChatAIDE from "../../assets/ChatAI-B.png";
 
 export const Logo = () => {
 	return (
-		<div
+		<img
 			style={{
-				position: "absolute",
-				display: "grid",
-				bottom: "-.5rem",
-				placeItems: "center",
-				left: "50%",
-				transform: "translateX(-50%)",
+				display: "block",
+				width: "150px",
+				height: "auto",
+				translate: "0rem -3px",
 			}}
-		>
-			<img
-				style={{
-					display: "block",
-					width: "10rem",
-					height: "auto",
-					marginBottom: "0.3rem",
-				}}
-				src={BeamworksLogo}
-				alt="Beamworks"
-			/>
-			<img
-				style={{
-					display: "block",
-					width: "6rem",
-					height: "auto",
-					translate: "0.3rem 0rem",
-				}}
-				src={ChatAIDE}
-				alt="Chat AIDE"
-			/>
-		</div>
+			src={ChatAIDE}
+			alt="Chat AIDE"
+		/>
 	);
 };
