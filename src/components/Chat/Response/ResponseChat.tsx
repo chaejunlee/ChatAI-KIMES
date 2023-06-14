@@ -1,8 +1,7 @@
 import { Avatar, Stack } from "@mui/material";
 import Logo from "../../../assets/logo.png";
-import AnimationScope, {
-	ANIMATION_TARGET,
-} from "../../../utils/Message/AnimationScope";
+import AnimationScope from "../../../utils/Message/AnimationScope";
+import { memo } from "react";
 
 export const CHAT_MAX_WIDTH = "85%";
 
@@ -19,12 +18,7 @@ export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 					},
 				}}
 			>
-				<Avatar
-					imgProps={{ style: { objectFit: "contain" } }}
-					alt={"ChatAI"}
-					src={Logo}
-					style={{ width: "2.2rem", height: "2.2rem" }}
-				/>
+				<MemoizedAvatar />
 				<Stack gap={"0.5rem"} width={"100%"} alignItems={"start"}>
 					{children}
 				</Stack>
@@ -32,3 +26,14 @@ export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 		</AnimationScope>
 	);
 };
+
+const MemoizedAvatar = memo(() => (
+	<Avatar
+		imgProps={{ style: { objectFit: "contain" } }}
+		alt={"ChatAI"}
+		src={Logo}
+		style={{ width: "2.2rem", height: "2.2rem" }}
+	/>
+));
+
+export default memo(ResponseChat);
