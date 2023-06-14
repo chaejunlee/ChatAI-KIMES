@@ -1,4 +1,5 @@
 import { EntityId } from "@reduxjs/toolkit";
+import { memo } from "react";
 import {
 	BasicResponseMessageType,
 	ContentResponseMessageType,
@@ -6,9 +7,9 @@ import {
 } from "../../../Interface/Message/ResponseMessageType";
 import { selectMessageById } from "../../../store/message/messageSlice";
 import { useAppSelector } from "../../../store/store";
+import { ErrorMessage } from "../ErrorMessage";
 import CardResponseMessage from "./Card/CardResponseMessage";
 import ContentResponseMessage from "./ContentResponseMessage";
-import { ErrorMessage } from "../ErrorMessage";
 
 export function ResponseChatChunk({ messageId }: { messageId: EntityId }) {
 	const message = useAppSelector((state) =>
@@ -16,7 +17,6 @@ export function ResponseChatChunk({ messageId }: { messageId: EntityId }) {
 	);
 	if (!message) return <ErrorMessage />;
 
-	// TODO: messageId로 prop 받아서 map 부분 지우기
 	const receivedResponse = message.type === "response" ? message.content : [];
 
 	return (
@@ -44,3 +44,5 @@ export function ResponseChatChunk({ messageId }: { messageId: EntityId }) {
 		</>
 	);
 }
+
+export default memo(ResponseChatChunk);
