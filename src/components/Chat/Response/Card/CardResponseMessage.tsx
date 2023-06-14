@@ -14,6 +14,12 @@ function CardResponseMessage({ data }: CardResponseMessageTypeProps) {
 	const message = data.imageResponseCard;
 	const clickedBtnListRef = useRef([] as string[]);
 
+	const addClickedBtn = (buttonIndentifier: string) => {
+		clickedBtnListRef.current.push(buttonIndentifier);
+	};
+	const checkBtnClicked = (buttonIndentifier: string) =>
+		clickedBtnListRef.current.includes(buttonIndentifier);
+
 	return (
 		<>
 			{message.imageUrl && <MessageImage message={message} />}
@@ -22,9 +28,10 @@ function CardResponseMessage({ data }: CardResponseMessageTypeProps) {
 				<MessageButtons>
 					{message.buttons.map((button) => (
 						<MessageButton
-							clickedBtnListRef={clickedBtnListRef}
 							key={button.toString()}
-							button={button as EntityId}
+							buttonId={button as EntityId}
+							checkBtnClicked={checkBtnClicked}
+							addClickedBtn={addClickedBtn}
 						/>
 					))}
 				</MessageButtons>
