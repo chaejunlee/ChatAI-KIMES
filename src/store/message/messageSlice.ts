@@ -142,6 +142,8 @@ export const selectFocusedMessageId =
 		const targetId = state.messages.focusedMessageId;
 		return targetId === messageId;
 	};
+export const isMessageStatusLoading = (state: RootState) =>
+	state.messages.status === "loading";
 
 export const {
 	selectAll: selectAllMessages,

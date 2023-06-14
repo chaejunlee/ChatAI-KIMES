@@ -1,11 +1,11 @@
 import { RefObject, useRef } from "react";
-import useMessageStatus from "../../hooks/Request/useMessageStatus";
 import { fetchResponse } from "../../store/message/fetchResponse";
-import { useAppDispatch } from "../../store/store";
+import { isMessageStatusLoading } from "../../store/message/messageSlice";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 
 export const useSendRequest = () => {
 	const dispatch = useAppDispatch();
-	const { status: isLoading } = useMessageStatus();
+	const isLoading = useAppSelector(isMessageStatusLoading);
 
 	const inputRef = useRef<HTMLInputElement>(null);
 	// for mobile keyboard popup
