@@ -7,8 +7,8 @@ import {
 	getPreviousMessage,
 	hasMessageReachedBottom,
 	hasMessageReachedTop,
-} from "../../store/message/messageSlice";
-import { useAppDispatch, useAppSelector } from "../../store/store";
+} from "../../../store/message/messageSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/store";
 import styled from "@emotion/styled";
 import { IconButton } from "@mui/material";
 import { ReactElement } from "react";

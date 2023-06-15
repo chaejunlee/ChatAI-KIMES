@@ -4,10 +4,10 @@ import {
 	selectMessageIds,
 } from "../../store/message/messageSlice";
 import { useAppSelector } from "../../store/store";
-import FocusableChatChunk from "../Chat/FocusableChatChunk";
+import FocusableChatChunk from "./Focus/FocusableChatChunk";
 import { LoadingResponseMessage } from "./LoadingResponseMessage";
-import { ScrollButton } from "./ScrollButton";
-import { useScrollToBottom } from "./useScrollToBottom";
+import { ScrollButton } from "./Scroll/ScrollButton";
+import { useScrollToBottom } from "./Scroll/useScrollToBottom";
 import BeamworksLogo from "../../assets/BeamworksLogo.png";
 
 export default function Conversation() {
