@@ -1,12 +1,12 @@
 import { styled, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { forwardRef, KeyboardEvent, memo } from "react";
-import { addKeyboardPopupListener } from "../../utils/Mobile/keyboard";
-import { SendComponent } from "./SendComponent";
-import { HomeButton } from "./HomeButton";
-import { useSendRequest } from "./useSendRequest";
-import { useAppSelector } from "../../store/store";
 import { isMessageStatusLoading } from "../../store/message/messageSlice";
+import { useAppSelector } from "../../store/store";
+import { addKeyboardPopupListener } from "../../utils/Mobile/keyboard";
+import { HomeButton } from "./HomeButton";
+import { SendComponent } from "./SendComponent";
+import { useSendRequest } from "./useSendRequest";
 
 const useStyles = makeStyles({
 	root: {
@@ -36,7 +36,7 @@ function MessageInput() {
 
 	return (
 		<>
-			<TextFiledWrapper className="message-input">
+			<TextFiledWrapper>
 				<HomeButton />
 				<TextField
 					inputRef={inputRef}
@@ -62,7 +62,7 @@ function MessageInput() {
 						borderRadius: "200px",
 						boxSizing: "border-box",
 						flexGrow: 1,
-						paddingLeft: "1rem",
+						paddingLeft: "0.6rem",
 					}}
 					variant={"standard"}
 					autoComplete={"off"}
@@ -77,11 +77,11 @@ function MessageInput() {
 }
 
 const TextFiledWrapper = styled("div")`
-	position: sticky;
+	position: fixed;
 	display: flex;
 	left: 0rem;
 	right: 0rem;
-	bottom: 0rem;
+	bottom: var(--keyboard-height);
 	padding-block: 0.5rem;
 	background: white;
 	border-top: #eee 2px solid;

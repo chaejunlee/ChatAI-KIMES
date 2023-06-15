@@ -7,7 +7,7 @@ const SURVEY_ACTION = "설문조사";
 
 // to the header
 const StyledHeader = styled("div")`
-	position: sticky;
+	position: fixed;
 	display: flex;
 	top: 0;
 	flex-shrink: 0;

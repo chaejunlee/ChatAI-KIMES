@@ -23,8 +23,8 @@ export const useScrollToBottom = () => {
 	}, [isBottom]);
 
 	const scrollToBottom = (stackRef: RefObject<HTMLDivElement>) => {
-		if (stackRef.current) {
-			stackRef.current.scrollTo({
+		if (stackRef.current && window) {
+			window.scrollTo({
 				top: stackRef.current.scrollHeight,
 				behavior: "smooth",
 			});

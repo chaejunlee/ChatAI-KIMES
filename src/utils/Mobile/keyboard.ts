@@ -18,8 +18,6 @@ export function getWindowViewportHeightDifference() {
 	return keyboardHeight;
 }
 
-export function setKeyboardHeight(e: Event) {}
-
 const mobileKeyboardHandler = (e: Event) => {
 	if (!root) return;
 	if (detectSamsungBrowser()) return;
@@ -34,16 +32,21 @@ const mobileKeyboardHandler = (e: Event) => {
 	const isKeyboardClosing = heightDiff < KEYBOARD_THRESHOLD * -1;
 
 	if (isKeyboardOpening) {
+		console.log("keyboard opening");
 		_keyboardHeight = currHeightDifference = newHeightDifference;
 		const viewportWithKeyboardOn = windowHeight - currHeightDifference;
-		root.style.height = `${viewportWithKeyboardOn}px`;
-		// root.style.transition = "none";
+		console.log("viewportWithKeyboardOn", viewportWithKeyboardOn);
+		root.style.setProperty(
+			"--keyboard-height",
+			`${currHeightDifference + 100}px`
+		);
+		// root.style.height = `${viewportWithKeyboardOn}px`;
 		addScrollEventListener();
 	}
 	if (isKeyboardClosing) {
 		_keyboardHeight = currHeightDifference = newHeightDifference;
 		root.style.height = bodyHeight;
-		root.style.transition = "";
+		root.style.setProperty("--keyboard-height", "0px");
 		removeScrollEventListener();
 		removeKeyboardPopupListener();
 	}

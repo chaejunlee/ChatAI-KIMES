@@ -41,7 +41,7 @@ export function ScrollButton() {
 }
 
 const IconButtonContainer = styled.div`
-	position: absolute;
+	position: fixed;
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;

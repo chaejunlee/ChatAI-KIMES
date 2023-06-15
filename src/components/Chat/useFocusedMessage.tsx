@@ -10,7 +10,7 @@ export function useFocusedMessage(messageId: EntityId) {
 	useEffect(() => {
 		requestAnimationFrame(() => {
 			if (isFocusedMessage && messageRef.current) {
-				messageRef.current.style.scrollMarginTop = "1rem";
+				messageRef.current.style.scrollMarginTop = "80px";
 				messageRef.current.scrollIntoView({ behavior: "smooth" });
 			}
 		});
