@@ -46,7 +46,7 @@ const ConversationWrapper = styled(Stack)`
 const Beamworks = () => (
 	<img
 		style={{
-			position: "fixed",
+			position: "absolute",
 			height: "auto",
 			marginBottom: "0.3rem",
 			inset: "0",
