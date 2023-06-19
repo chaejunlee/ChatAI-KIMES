@@ -21,5 +21,5 @@ export const BasicMessage = styled("div")<isResponseInterface>`
 	border: none;
 	box-shadow: none;
 
-	word-break: keep-all;
+	word-break: break-all;
 `;

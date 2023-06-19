@@ -1,7 +1,7 @@
 import { EntityId } from "@reduxjs/toolkit";
 import { useEffect, useRef } from "react";
-import { selectFocusedMessageId } from "../../store/message/messageSlice";
-import { useAppSelector } from "../../store/store";
+import { selectFocusedMessageId } from "../../../store/message/messageSlice";
+import { useAppSelector } from "../../../store/store";
 
 export function useFocusedMessage(messageId: EntityId) {
 	const isFocusedMessage = useAppSelector(selectFocusedMessageId(messageId));
@@ -16,14 +16,5 @@ export function useFocusedMessage(messageId: EntityId) {
 		});
 	}, [isFocusedMessage]);
 
-	const focusedStyle = isFocusedMessage
-		? {
-				filter: "drop-shadow(0 0.1rem 0.3rem rgba(0, 0, 0, 0.15))",
-				backdropFilter: "blur(0)",
-				transform: "translateZ(0)",
-				transition: "filter 0.5s ease-in-out",
-		  }
-		: { transition: "filter 0.5s ease-in-out" };
-
-	return { focusedStyle, messageRef };
+	return { isFocusedMessage, messageRef };
 }

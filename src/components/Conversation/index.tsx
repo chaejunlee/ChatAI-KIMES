@@ -4,10 +4,11 @@ import {
 	selectMessageIds,
 } from "../../store/message/messageSlice";
 import { useAppSelector } from "../../store/store";
-import FocusableChatChunk from "../Chat/FocusableChatChunk";
+import FocusableChatChunk from "./Focus/FocusableChatChunk";
 import { LoadingResponseMessage } from "./LoadingResponseMessage";
-import { ScrollButton } from "./ScrollButton";
-import { useScrollToBottom } from "./useScrollToBottom";
+import { ScrollButton } from "./Scroll/ScrollButton";
+import { useScrollToBottom } from "./Scroll/useScrollToBottom";
+import BeamworksLogo from "../../assets/BeamworksLogo.png";
 
 export default function Conversation() {
 	const isLoading = useAppSelector(isMessageStatusLoading);
@@ -16,6 +17,7 @@ export default function Conversation() {
 
 	return (
 		<>
+			<Beamworks />
 			<ConversationWrapper
 				ref={stackRef}
 				style={{ WebkitOverflowScrolling: "touch" }}
@@ -40,3 +42,20 @@ const ConversationWrapper = styled(Stack)`
 	padding-top: 4rem;
 	padding-bottom: 1.25rem;
 `;
+
+const Beamworks = () => (
+	<img
+		style={{
+			position: "absolute",
+			height: "auto",
+			marginBottom: "0.3rem",
+			inset: "0",
+			marginInline: "auto",
+			marginBlock: "auto",
+			opacity: "0.2",
+			width: "clamp(200px, 40%, 25rem)",
+		}}
+		src={BeamworksLogo}
+		alt="Beamworks"
+	/>
+);

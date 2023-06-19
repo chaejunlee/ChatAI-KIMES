@@ -2,8 +2,8 @@ import { RefObject, useEffect, useRef } from "react";
 import {
 	hasMessageReachedBottom,
 	isMessageStatusLoading,
-} from "../../store/message/messageSlice";
-import { useAppSelector } from "../../store/store";
+} from "../../../store/message/messageSlice";
+import { useAppSelector } from "../../../store/store";
 
 export const useScrollToBottom = () => {
 	const stackRef = useRef<HTMLDivElement>(null);

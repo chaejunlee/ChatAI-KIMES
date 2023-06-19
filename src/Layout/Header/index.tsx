@@ -1,8 +1,5 @@
 import { Stack, styled } from "@mui/material";
 
-import HeaderSVG from "../../assets/HeaderSVG";
-import { fetchResponse } from "../../store/message/fetchResponse";
-import { useAppDispatch } from "../../store/store";
 import HeaderButton from "./HeaderButton";
 import { Logo } from "./Logo";
 
@@ -28,23 +25,16 @@ const openLink = (url: string) => {
 };
 
 export default function Header() {
-	const dispatch = useAppDispatch();
-
-	const sendRequest = (value: string) => {
-		dispatch(fetchResponse({ message: value, leaveMessage: false }));
-	};
-
 	return (
 		<>
 			<StyledHeader>
-				<HeaderSVG />
 				<Stack
 					width="100%"
 					direction={"row"}
-					justifyContent={"flex-end"}
+					justifyContent={"space-between"}
 					alignItems={"center"}
 					paddingY={"1rem"}
-					paddingX={"0.65rem"}
+					paddingX={"1rem"}
 					sx={{
 						"@media (min-width: 600px)": { paddingInline: "1.5rem" },
 						isolation: "isolate",
