@@ -16,14 +16,5 @@ export function useFocusedMessage(messageId: EntityId) {
 		});
 	}, [isFocusedMessage]);
 
-	const focusedStyle = isFocusedMessage
-		? {
-				filter: "drop-shadow(0 0 0.2rem rgba(30, 30, 30, 0.2))",
-				backdropFilter: "blur(0)",
-				transform: "translateZ(0)",
-				transition: "filter 0.5s ease-in-out",
-		  }
-		: { transition: "filter 0.5s ease-in-out" };
-
-	return { focusedStyle, messageRef };
+	return { isFocusedMessage, messageRef };
 }

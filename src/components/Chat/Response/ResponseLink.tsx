@@ -5,20 +5,21 @@ import styled from "@emotion/styled";
 
 export function ResponseLink({ messageContent }: { messageContent: string }) {
 	return (
-		<div className={ANIMATION_TARGET} style={{ marginBottom: "8px" }}>
-			<StyledButton
-				disabled={false}
-				style={{
-					border: "none",
-					filter: "drop-shadow(rgba(150, 200, 150, 0.8) 0px 3px 3px)",
-				}}
-			>
-				<StyledLink href={messageContent} target="_blank">
-					<span>관련 링크로 바로가기</span>
-					<LinkSVG />
-				</StyledLink>
-			</StyledButton>
-		</div>
+		<StyledButton
+			disabled={false}
+			className={ANIMATION_TARGET}
+			style={{
+				border: "none",
+				filter: "drop-shadow(rgba(150, 200, 150, 0.8) 0px 3px 3px)",
+				borderRadius: "1.25rem",
+				marginBottom: "8px",
+			}}
+		>
+			<StyledLink href={messageContent} target="_blank">
+				<span>관련 링크로 바로가기</span>
+				<LinkSVG />
+			</StyledLink>
+		</StyledButton>
 	);
 }
 
@@ -30,6 +31,7 @@ export const StyledLink = styled("a")`
 	justify-content: center;
 	gap: 5px;
 	width: fit-content;
+	border-radius: 1.25rem;
 
 	color: ${primaryColor};
 
