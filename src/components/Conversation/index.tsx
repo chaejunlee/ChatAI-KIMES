@@ -40,7 +40,10 @@ const ConversationWrapper = styled(Stack)`
 	gap: 1rem;
 	padding-inline: 1rem;
 	padding-top: 4rem;
-	padding-bottom: 1.25rem;
+	padding-bottom: 1rem;
+
+	scroll-margin-inline: 1rem;
+	scroll-padding-inline: 1rem;
 `;
 
 const Beamworks = () => (

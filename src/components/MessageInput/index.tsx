@@ -1,7 +1,11 @@
 import { styled, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { forwardRef, KeyboardEvent, memo, useEffect } from "react";
-import { addKeyboardPopupListener } from "../../utils/Mobile/keyboard";
+import {
+	addKeyboardPopupListener,
+	setFullHeight,
+	setWithKeyboardHeight,
+} from "../../utils/Mobile/keyboard";
 import { SendComponent } from "./SendComponent";
 import { HomeButton } from "./HomeButton";
 import { useSendRequest } from "./useSendRequest";
@@ -44,7 +48,7 @@ function MessageInput() {
 
 	return (
 		<>
-			<TextFiledWrapper className="message-input">
+			<TextFieldWrapper>
 				<HomeButton />
 				<TextField
 					inputRef={inputRef}
@@ -54,6 +58,7 @@ function MessageInput() {
 					}
 					onKeyDown={(e) => handleTextFieldKey(e)}
 					onFocus={() => {
+						setWithKeyboardHeight();
 						addKeyboardPopupListener();
 					}}
 					inputProps={{
@@ -78,13 +83,14 @@ function MessageInput() {
 						root: classes.root,
 					}}
 				/>
-			</TextFiledWrapper>
+				<ResetButton onClick={setFullHeight}>키보드 내리기</ResetButton>
+			</TextFieldWrapper>
 			<InputFlush ref={hiddenInputRef} />
 		</>
 	);
 }
 
-const TextFiledWrapper = styled("div")`
+const TextFieldWrapper = styled("div")`
 	position: sticky;
 	display: flex;
 	left: 0rem;
@@ -117,5 +123,26 @@ const InputFlush = forwardRef<HTMLInputElement, unknown>((_, ref) => {
 		/>
 	);
 });
+
+const ResetButton = styled("div")`
+	position: absolute;
+	display: block;
+
+	top: 6rem;
+	left: 0;
+	right: 0;
+	margin-inline: auto;
+	text-align: center;
+
+	padding-inline: 1rem;
+	padding-block: 0.5rem;
+	width: 7rem;
+	border-radius: 100vh;
+
+	background: #eee;
+	color: #333;
+	font-weight: semi-bold;
+	z-index: 100;
+`;
 
 export default memo(MessageInput);
