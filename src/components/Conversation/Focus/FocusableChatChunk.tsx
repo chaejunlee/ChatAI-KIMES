@@ -14,7 +14,7 @@ const StyledDiv = styled("div")<{ focusedStyle: string | null }>`
 
 export function FocusableChatChunk({ messageId }: { messageId: EntityId }) {
 	const { messageRef, isFocusedMessage } = useFocusedMessage(messageId);
-	const borderWidth = isFocusedMessage ? "hsl(135 70% 50% / 0.3)" : null;
+	const borderWidth = isFocusedMessage ? "hsl(135 80% 90% / 0.8)" : null;
 
 	return (
 		<StyledDiv ref={messageRef} focusedStyle={borderWidth}>
