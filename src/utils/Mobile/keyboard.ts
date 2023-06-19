@@ -27,25 +27,32 @@ const mobileKeyboardHandler = (e: Event) => {
 	let currHeightDifference = _keyboardHeight;
 	let newHeightDifference = getWindowViewportHeightDifference();
 
-	const bodyHeight = document.body.style.height;
-
 	const heightDiff = newHeightDifference - currHeightDifference;
 	const isKeyboardOpening = heightDiff > KEYBOARD_THRESHOLD;
 	const isKeyboardClosing = heightDiff < KEYBOARD_THRESHOLD * -1;
 
 	if (isKeyboardOpening) {
 		_keyboardHeight = currHeightDifference = newHeightDifference;
-		const viewportWithKeyboardOn = windowHeight - currHeightDifference;
-		root.style.height = `${viewportWithKeyboardOn}px`;
+		setWithKeyboardHeight();
 		addScrollEventListener();
 	}
 	if (isKeyboardClosing) {
 		_keyboardHeight = currHeightDifference = newHeightDifference;
-		root.style.height = bodyHeight;
+		setFullHeight();
 		removeScrollEventListener();
 		removeKeyboardPopupListener();
 	}
 };
+
+export function setFullHeight() {
+	if (!root) return;
+	root.style.height = document.body.style.height;
+}
+
+export function setWithKeyboardHeight() {
+	if (!root) return;
+	root.style.height = `${windowHeight - _keyboardHeight}px`;
+}
 
 export function addKeyboardPopupListener() {
 	window.visualViewport?.addEventListener("resize", mobileKeyboardHandler);
