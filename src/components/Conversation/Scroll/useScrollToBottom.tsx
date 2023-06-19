@@ -11,16 +11,11 @@ export const useScrollToBottom = () => {
 	const isLoading = useAppSelector(isMessageStatusLoading);
 
 	useEffect(() => {
+		if (!isLoading && !isBottom) return;
 		requestAnimationFrame(() => {
-			if (isLoading) scrollToBottom(stackRef);
+			if (isLoading || isBottom) scrollToBottom(stackRef);
 		});
-	}, [isLoading]);
-
-	useEffect(() => {
-		requestAnimationFrame(() => {
-			if (isBottom) scrollToBottom(stackRef);
-		});
-	}, [isBottom]);
+	}, [isLoading, isBottom]);
 
 	const scrollToBottom = (stackRef: RefObject<HTMLDivElement>) => {
 		if (stackRef.current) {

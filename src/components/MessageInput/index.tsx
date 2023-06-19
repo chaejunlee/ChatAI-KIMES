@@ -44,7 +44,7 @@ function MessageInput() {
 
 	return (
 		<>
-			<TextFiledWrapper className="message-input">
+			<TextFieldWrapper>
 				<HomeButton />
 				<TextField
 					inputRef={inputRef}
@@ -78,13 +78,13 @@ function MessageInput() {
 						root: classes.root,
 					}}
 				/>
-			</TextFiledWrapper>
+			</TextFieldWrapper>
 			<InputFlush ref={hiddenInputRef} />
 		</>
 	);
 }
 
-const TextFiledWrapper = styled("div")`
+const TextFieldWrapper = styled("div")`
 	position: sticky;
 	display: flex;
 	left: 0rem;

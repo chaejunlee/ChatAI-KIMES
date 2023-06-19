@@ -37,13 +37,11 @@ const mobileKeyboardHandler = (e: Event) => {
 		_keyboardHeight = currHeightDifference = newHeightDifference;
 		const viewportWithKeyboardOn = windowHeight - currHeightDifference;
 		root.style.height = `${viewportWithKeyboardOn}px`;
-		// root.style.transition = "none";
 		addScrollEventListener();
 	}
 	if (isKeyboardClosing) {
 		_keyboardHeight = currHeightDifference = newHeightDifference;
 		root.style.height = bodyHeight;
-		root.style.transition = "";
 		removeScrollEventListener();
 		removeKeyboardPopupListener();
 	}
