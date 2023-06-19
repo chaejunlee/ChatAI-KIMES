@@ -22,6 +22,8 @@ interface MessageState {
 
 type MessageWithId = WithId<Message>;
 
+export const BOTTOM = "FOCUS_CHAT";
+
 const messageAdapter = createEntityAdapter<MessageWithId>();
 
 const initialState = messageAdapter.getInitialState<MessageState>({
@@ -85,7 +87,7 @@ export const messageSlice = createSlice({
 			});
 		},
 		getPreviousMessage: (state) => {
-			if (state.focusedMessageId === "bottom") {
+			if (state.focusedMessageId === BOTTOM) {
 				state.focusedMessageId = state.ids.at(-1)!;
 				return;
 			}
@@ -97,11 +99,11 @@ export const messageSlice = createSlice({
 			state.focusedMessageId = state.ids[targetMessageIndex - 1];
 		},
 		getNextMessage: (state) => {
-			const hasReachedBottom = state.focusedMessageId === "bottom";
+			const hasReachedBottom = state.focusedMessageId === BOTTOM;
 			if (hasReachedBottom) return;
 			const isLastMessage = state.focusedMessageId === state.ids.at(-1);
 			if (isLastMessage) {
-				state.focusedMessageId = "bottom";
+				state.focusedMessageId = BOTTOM;
 				return;
 			}
 			const targetMessageIndex = state.ids.indexOf(state.focusedMessageId);
@@ -139,7 +141,7 @@ export const { getResponse, addMessage, getNextMessage, getPreviousMessage } =
 	messageSlice.actions;
 
 export const hasMessageReachedBottom = (state: RootState) =>
-	state.messages.focusedMessageId === "bottom";
+	state.messages.focusedMessageId === BOTTOM;
 export const hasMessageReachedTop = (state: RootState) =>
 	state.messages.focusedMessageId === state.messages.ids[0];
 export const selectFocusedMessageId =

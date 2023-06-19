@@ -1,12 +1,15 @@
 import { styled, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { forwardRef, KeyboardEvent, memo } from "react";
+import { forwardRef, KeyboardEvent, memo, useEffect } from "react";
 import { addKeyboardPopupListener } from "../../utils/Mobile/keyboard";
 import { SendComponent } from "./SendComponent";
 import { HomeButton } from "./HomeButton";
 import { useSendRequest } from "./useSendRequest";
 import { useAppSelector } from "../../store/store";
-import { isMessageStatusLoading } from "../../store/message/messageSlice";
+import {
+	hasMessageReachedBottom,
+	isMessageStatusLoading,
+} from "../../store/message/messageSlice";
 
 const useStyles = makeStyles({
 	root: {
@@ -22,6 +25,7 @@ const INPUT_TYPE = "search";
 
 function MessageInput() {
 	const isLoading = useAppSelector(isMessageStatusLoading);
+	const didReachEnd = useAppSelector(hasMessageReachedBottom);
 	const classes = useStyles();
 
 	const { inputRef, hiddenInputRef, sendRequest } = useSendRequest();
@@ -33,6 +37,10 @@ function MessageInput() {
 	const handleTextFieldKey = (e: KeyboardEvent<HTMLDivElement>) => {
 		if (e.key === "Enter" || e.keyCode === 13) sendRequest();
 	};
+
+	useEffect(() => {
+		if (didReachEnd) inputRef.current?.focus();
+	}, [didReachEnd]);
 
 	return (
 		<>
