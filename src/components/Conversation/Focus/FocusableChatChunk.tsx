@@ -5,7 +5,13 @@ import { useFocusedMessage } from "./useFocusedMessage";
 import { styled } from "@mui/material";
 import { ANIMATION_TARGET } from "../../../utils/Message/AnimationScope";
 
-const FocusableDiv = styled("div")<{ focusedStyle: string | null }>`
+const setColor = (weight: number) => (props: { focusedStyle: boolean }) =>
+	props.focusedStyle ? `hsl(130 ${weight}% 70% / 0.6)` : "transparent";
+
+const FocusableDiv = styled("div")<{ focusedStyle: boolean }>`
+	--border-width: 0.1rem;
+	--border-width-negative: calc(var(--border-width) * -1);
+
 	& .${ANIMATION_TARGET}::after {
 		content: "";
 		position: absolute;
@@ -13,11 +19,14 @@ const FocusableDiv = styled("div")<{ focusedStyle: string | null }>`
 		height: 100%;
 		top: 0;
 		left: 0;
-		border: 0.2rem solid ${(props) => props.focusedStyle || "transparent"};
+		border: var(--border-width) solid ${setColor(10)};
 		border-radius: 1.5rem;
 		pointer-events: none;
 		padding: 0rem;
-		transform: translate(-0.2rem, -0.2rem);
+		transform: translate(
+			var(--border-width-negative),
+			var(--border-width-negative)
+		);
 		transition: border 0.3s ease-in-out;
 	}
 	& div.${ANIMATION_TARGET}::after {
@@ -25,12 +34,13 @@ const FocusableDiv = styled("div")<{ focusedStyle: string | null }>`
 	}
 	& button.${ANIMATION_TARGET}::after {
 		border-top-left-radius: 1.5rem;
+		border: 0.1rem solid ${setColor(70)};
 	}
 `;
 
 export function FocusableChatChunk({ messageId }: { messageId: EntityId }) {
 	const { messageRef, isFocusedMessage } = useFocusedMessage(messageId);
-	const borderWidth = isFocusedMessage ? "hsl(100 10% 70% / 0.6)" : null;
+	const borderWidth = isFocusedMessage ? "hsl(130 20% 70% / 0.6)" : null;
 
 	return (
 		<FocusableDiv ref={messageRef} focusedStyle={borderWidth}>
