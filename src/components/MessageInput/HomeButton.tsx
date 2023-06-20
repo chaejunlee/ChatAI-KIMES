@@ -6,7 +6,7 @@ import {
 } from "../../store/message/fetchResponse";
 import { useAppDispatch } from "../../store/store";
 import { primaryColor } from "../../utils/color";
-import { setFullHeight } from "../../utils/Mobile/keyboard";
+import { pullInputDown } from "../../store/keyboard/keyboardSlice";
 
 export const HomeButton = () => {
 	const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ export const HomeButton = () => {
 	return (
 		<IconButton
 			onClick={() => {
-				setFullHeight();
+				dispatch(pullInputDown());
 				dispatch(
 					fetchResponse({ message: DEFAULT_MESSAGE, leaveMessage: false })
 				);

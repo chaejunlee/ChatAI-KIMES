@@ -1,19 +1,15 @@
 import { styled, TextField } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { forwardRef, KeyboardEvent, memo, useEffect } from "react";
-import {
-	addKeyboardPopupListener,
-	setFullHeight,
-	setWithKeyboardHeight,
-} from "../../utils/Mobile/keyboard";
 import { SendComponent } from "./SendComponent";
 import { HomeButton } from "./HomeButton";
 import { useSendRequest } from "./useSendRequest";
-import { useAppSelector } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 import {
 	hasMessageReachedBottom,
 	isMessageStatusLoading,
 } from "../../store/message/messageSlice";
+import { addKeyboardPopupListener } from "../../store/keyboard/keyboardEventHandler";
+import { pushInputUp } from "../../store/keyboard/keyboardSlice";
 
 const ENTER_KEY_HINT = "send";
 const INPUT_TYPE = "search";
@@ -21,6 +17,7 @@ const INPUT_TYPE = "search";
 function MessageInput() {
 	const isLoading = useAppSelector(isMessageStatusLoading);
 	const didReachEnd = useAppSelector(hasMessageReachedBottom);
+	const dispatch = useAppDispatch();
 
 	const { inputRef, hiddenInputRef, sendRequest } = useSendRequest();
 
@@ -48,8 +45,8 @@ function MessageInput() {
 					}
 					onKeyDown={(e) => handleTextFieldKey(e)}
 					onFocus={() => {
-						setWithKeyboardHeight();
 						addKeyboardPopupListener();
+						dispatch(pushInputUp);
 					}}
 					inputProps={{
 						enterKeyHint: ENTER_KEY_HINT,
@@ -71,7 +68,6 @@ function MessageInput() {
 					variant={"standard"}
 					autoComplete={"off"}
 				/>
-				<ResetButton onClick={setFullHeight}>키보드 내리기</ResetButton>
 			</TextFieldWrapper>
 			<InputFlush ref={hiddenInputRef} />
 		</>
@@ -88,6 +84,7 @@ const TextFieldWrapper = styled("div")`
 	background: white;
 	border-top: #eee 2px solid;
 	padding-inline: 0.5rem;
+	overflow: visible;
 	gap: 0.5rem;
 	align-items: center;
 `;
@@ -111,26 +108,5 @@ const InputFlush = forwardRef<HTMLInputElement, unknown>((_, ref) => {
 		/>
 	);
 });
-
-const ResetButton = styled("div")`
-	position: absolute;
-	display: block;
-
-	top: 6rem;
-	left: 0;
-	right: 0;
-	margin-inline: auto;
-	text-align: center;
-
-	padding-inline: 1rem;
-	padding-block: 0.5rem;
-	width: 7rem;
-	border-radius: 100vh;
-
-	background: #eee;
-	color: #333;
-	font-weight: semi-bold;
-	z-index: 100;
-`;
 
 export default memo(MessageInput);

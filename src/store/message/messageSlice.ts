@@ -31,6 +31,8 @@ const initialState = messageAdapter.getInitialState<MessageState>({
 	focusedMessageId: "message0" as EntityId,
 });
 
+let buttonsId = 0;
+
 export const startingMessage = introMessage.content.map((cur) => {
 	if (cur.contentType !== "ImageResponseCard") return cur;
 
@@ -39,9 +41,12 @@ export const startingMessage = introMessage.content.map((cur) => {
 	const hasButtons = buttonArray.length > 0;
 	if (!hasButtons) return cur;
 
-	let buttonsId = 0;
-
-	const buttonsPayload = normalizeButtons(buttonsId, buttonArray);
+	const buttonsPayload = buttonArray.map((cur) => {
+		return {
+			id: ("button" + buttonsId++) as EntityId,
+			...(cur as ButtonResponseType),
+		};
+	});
 
 	const normalizedResponse = structuredClone(cur);
 	normalizedResponse.imageResponseCard.buttons = buttonsPayload.map(

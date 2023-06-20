@@ -8,7 +8,7 @@ body {
 	margin: 0;
 	display: flex;
 	place-items: center;
-	overflow: hidden;
+	overflow: clip;
 }
 
 #root {
@@ -20,7 +20,6 @@ body {
 	display: flex;
 	flex-direction: column;
 	overflow: visible;
-	/* transition: height 300ms ease-out, top 300ms ease-out; */
 }
 
 @media screen and (max-width: 600px) {
