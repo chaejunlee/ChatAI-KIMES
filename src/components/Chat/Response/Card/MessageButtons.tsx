@@ -10,20 +10,18 @@ import StyledButton from "./StyledButton";
 const MessageButton = ({
 	buttonId,
 	addClickedBtn,
-	checkBtnClicked,
 }: {
 	buttonId: EntityId;
 	addClickedBtn: (buttonIndentifier: string) => void;
-	checkBtnClicked: (buttonIndentifier: string) => boolean;
 }) => {
 	const dispatch = useAppDispatch();
 	const isLoading = useAppSelector(isMessageStatusLoading);
 	const buttonContent = useAppSelector((state) =>
 		selectById(state.buttons, buttonId)
-	);
+	)!;
 
 	const buttonIndentifier = buttonId.toString();
-	const isClicked = checkBtnClicked(buttonIndentifier);
+	const isClicked = buttonContent.pushed;
 
 	if (!buttonContent) return <ErrorMessage />;
 
