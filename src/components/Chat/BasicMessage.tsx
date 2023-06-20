@@ -10,6 +10,7 @@ export const Style =
 	};
 
 export const BasicMessage = styled("div")<isResponseInterface>`
+	position: relative;
 	padding: 0.5rem 0.7rem;
 	display: inline-block;
 

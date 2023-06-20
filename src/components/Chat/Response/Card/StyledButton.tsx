@@ -12,6 +12,7 @@ export const Style =
 	};
 
 export const StyledButton = styled("button")<IsSelectedInterface>`
+	position: relative;
 	display: flex;
 	justify-content: center;
 
