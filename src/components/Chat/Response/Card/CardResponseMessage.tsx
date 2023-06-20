@@ -45,7 +45,7 @@ function MessageSubtitle({ subtitle }: { subtitle: string }) {
 
 const MessageButtons = styled(Stack)`
 	spacing: 0.5rem;
-	direction: row;
+	flex-direction: row;
 	flex-wrap: wrap;
 	column-gap: 0.5rem;
 	row-gap: 0.5rem;

@@ -33,7 +33,7 @@ export default function Conversation() {
 }
 
 const ConversationWrapper = styled(Stack)`
-	direction: column;
+	flex-direction: column;
 	flex-grow: 1;
 	overflow: scroll;
 	position: relative;
