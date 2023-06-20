@@ -54,7 +54,7 @@ function MessageInput() {
 					inputProps={{
 						enterKeyHint: ENTER_KEY_HINT,
 						type: INPUT_TYPE,
-						style: { paddingBlock: "0.75rem" },
+						style: { paddingBlock: "0.6rem" },
 					}}
 					InputProps={{
 						disableUnderline: true,
@@ -87,7 +87,7 @@ const TextFieldWrapper = styled("div")`
 	padding-block: 0.5rem;
 	background: white;
 	border-top: #eee 2px solid;
-	padding-inline: 0.25rem;
+	padding-inline: 0.5rem;
 	gap: 0.5rem;
 	align-items: center;
 `;
