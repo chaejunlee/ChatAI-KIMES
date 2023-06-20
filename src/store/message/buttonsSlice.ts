@@ -14,6 +14,8 @@ type PushableButtonWithId = WithId<PushableButtonType>;
 
 const buttonAdapter = createEntityAdapter<PushableButtonWithId>();
 
+let buttonsId = 0;
+
 const buttons = introMessage.content.reduce((acc, cur) => {
 	if (cur.contentType !== "ImageResponseCard") return acc;
 
@@ -21,8 +23,6 @@ const buttons = introMessage.content.reduce((acc, cur) => {
 
 	const hasButtons = buttonArray.length > 0;
 	if (!hasButtons) return acc;
-
-	let buttonsId = 0;
 
 	const buttonsPayload = buttonArray.map((cur) => {
 		return {
@@ -32,7 +32,7 @@ const buttons = introMessage.content.reduce((acc, cur) => {
 		} as PushableButtonWithId;
 	});
 
-	return { ...acc, ...buttonsPayload };
+	return [...acc, ...buttonsPayload];
 }, [] as WithId<PushableButtonWithId>[]);
 
 const initialState = buttonAdapter.addMany(
