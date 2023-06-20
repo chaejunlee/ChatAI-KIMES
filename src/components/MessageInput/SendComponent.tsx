@@ -12,7 +12,7 @@ export const SendComponent = ({
 	const isLoading = useAppSelector(isMessageStatusLoading);
 
 	return (
-		<InputAdornment sx={{ paddingRight: "0.5rem" }} position={"end"}>
+		<InputAdornment sx={{ paddingRight: "0.3rem" }} position={"end"}>
 			<IconButton onClick={handleOnClick}>
 				{isLoading ? <RotatingRefreshIcon /> : <SendIcon />}
 			</IconButton>

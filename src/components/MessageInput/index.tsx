@@ -15,22 +15,12 @@ import {
 	isMessageStatusLoading,
 } from "../../store/message/messageSlice";
 
-const useStyles = makeStyles({
-	root: {
-		backgroundColor: "#F0F3F4",
-		"& .MuiInputBase-input": {
-			padding: "0.75rem 0.3rem",
-		},
-	},
-});
-
 const ENTER_KEY_HINT = "send";
 const INPUT_TYPE = "search";
 
 function MessageInput() {
 	const isLoading = useAppSelector(isMessageStatusLoading);
 	const didReachEnd = useAppSelector(hasMessageReachedBottom);
-	const classes = useStyles();
 
 	const { inputRef, hiddenInputRef, sendRequest } = useSendRequest();
 
@@ -64,7 +54,7 @@ function MessageInput() {
 					inputProps={{
 						enterKeyHint: ENTER_KEY_HINT,
 						type: INPUT_TYPE,
-						style: { paddingBlock: "0.5rem" },
+						style: { paddingBlock: "0.75rem" },
 					}}
 					InputProps={{
 						disableUnderline: true,
@@ -76,12 +66,10 @@ function MessageInput() {
 						boxSizing: "border-box",
 						flexGrow: 1,
 						paddingLeft: "1rem",
+						backgroundColor: "#F0F3F4",
 					}}
 					variant={"standard"}
 					autoComplete={"off"}
-					classes={{
-						root: classes.root,
-					}}
 				/>
 				<ResetButton onClick={setFullHeight}>키보드 내리기</ResetButton>
 			</TextFieldWrapper>
@@ -99,7 +87,7 @@ const TextFieldWrapper = styled("div")`
 	padding-block: 0.5rem;
 	background: white;
 	border-top: #eee 2px solid;
-	padding-inline: 0.75rem;
+	padding-inline: 0.25rem;
 	gap: 0.5rem;
 	align-items: center;
 `;
