@@ -20,7 +20,7 @@ const FocusableDiv = styled("div")<{ focusedStyle: boolean }>`
 		top: 0;
 		left: 0;
 		border: var(--border-width) solid ${setColor(10)};
-		border-radius: 1rem;
+		border-radius: 1.1rem;
 		pointer-events: none;
 		padding: 0rem;
 		transform: translate(
@@ -29,12 +29,15 @@ const FocusableDiv = styled("div")<{ focusedStyle: boolean }>`
 		);
 		transition: border 0.3s ease-in-out;
 	}
-	& div.${ANIMATION_TARGET}::after {
+	& div.response.${ANIMATION_TARGET}::after {
 		border-top-left-radius: 0;
 	}
 	& button.${ANIMATION_TARGET}::after {
 		border-radius: 1.25rem;
 		border: 0.1rem solid ${setColor(70)};
+	}
+	& div.request.${ANIMATION_TARGET}::after {
+		border-top-right-radius: 0;
 	}
 `;
 

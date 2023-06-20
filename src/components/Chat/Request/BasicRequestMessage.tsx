@@ -6,7 +6,7 @@ export const BasicRequestMessage: FC<{ children: ReactNode }> = ({
 	children,
 }) => {
 	return (
-		<BasicMessage className={ANIMATION_TARGET} isResponse={false}>
+		<BasicMessage className={ANIMATION_TARGET + " request"} isResponse={false}>
 			{children}
 		</BasicMessage>
 	);
