@@ -1,24 +1,24 @@
 import { Stack, styled } from "@mui/material";
 import { EntityId } from "@reduxjs/toolkit";
-import { memo, useRef } from "react";
+import { memo } from "react";
 import { ImageResponseCardType } from "../../../../Interface/Message/ResponseMessageType";
 import { BasicResponseMessage } from "../BasicResponseMessage";
 import { MessageImage } from "./MessageImage";
 import MessageButton from "./MessageButtons";
+import { useAppDispatch } from "../../../../store/store";
+import { pushButton } from "../../../../store/message/buttonsSlice";
 
 export interface CardResponseMessageTypeProps {
 	data: ImageResponseCardType;
 }
 
 function CardResponseMessage({ data }: CardResponseMessageTypeProps) {
+	const dispatch = useAppDispatch();
 	const message = data.imageResponseCard;
-	const clickedBtnListRef = useRef([] as string[]);
 
 	const addClickedBtn = (buttonIndentifier: string) => {
-		clickedBtnListRef.current.push(buttonIndentifier);
+		dispatch(pushButton(buttonIndentifier));
 	};
-	const checkBtnClicked = (buttonIndentifier: string) =>
-		clickedBtnListRef.current.includes(buttonIndentifier);
 
 	return (
 		<>
@@ -30,7 +30,6 @@ function CardResponseMessage({ data }: CardResponseMessageTypeProps) {
 						<MessageButton
 							key={button.toString()}
 							buttonId={button as EntityId}
-							checkBtnClicked={checkBtnClicked}
 							addClickedBtn={addClickedBtn}
 						/>
 					))}
