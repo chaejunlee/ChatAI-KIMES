@@ -48,10 +48,9 @@ const ConversationWrapper = styled(Stack)`
 	overflow: scroll;
 	position: relative;
 	gap: 1rem;
-	padding-inline: 0.75rem;
+	padding-inline: clamp(10px, 2rem, 16px);
 	padding-top: 4rem;
 	padding-bottom: 1rem;
-
 	scroll-margin-block: 2rem;
 	scroll-padding-block: 2rem;
 `;

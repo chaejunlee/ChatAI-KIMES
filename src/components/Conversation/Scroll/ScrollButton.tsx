@@ -44,10 +44,10 @@ const IconButtonContainer = styled.div`
 	position: absolute;
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: clamp(12px, 1rem, 30px);
 	left: auto;
-	right: 1rem;
-	bottom: 5rem;
+	right: clamp(8px, 0.5rem, 16px);
+	bottom: clamp(90px, 5rem, 160px);
 	z-index: 100;
 `;
 
@@ -63,8 +63,8 @@ export const IconButtonWrapper = ({
 	return (
 		<IconButton
 			style={{
-				width: "2.5rem",
-				height: "2.5rem",
+				width: "clamp(30px, 2.5rem, 60px)",
+				height: "clamp(30px, 2.5rem, 60px)",
 				background: "#fafafa",
 				filter: "drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2))",
 				borderRadius: "50%",

@@ -6,12 +6,12 @@ import { primaryColor } from "../../utils/color";
 const StyledSpan = styled("span")`
 	word-break: keep-all;
 	font-size: 1rem;
-	padding: 0.5rem 1rem;
+	padding: clamp(9px, 0.5rem, 15px) clamp(18px, 1rem, 30px);
 	font-size: 1rem;
 
 	@media (max-width: 600px) {
-		font-size: 0.9rem;
-		padding: 0.2rem 0.25rem;
+		font-size: ;
+		padding: clamp(4px, 0.25rem, 8px) clamp(8px, 0.5rem, 12px);
 	}
 `;
 

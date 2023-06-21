@@ -33,10 +33,9 @@ export default function Header() {
 					direction={"row"}
 					justifyContent={"space-between"}
 					alignItems={"center"}
-					paddingY={"1rem"}
-					paddingX={"1rem"}
+					paddingY={"clamp(18px, 1rem, 20px)"}
+					paddingX={"clamp(18px, 1rem, 20px)"}
 					sx={{
-						"@media (min-width: 600px)": { paddingInline: "1.5rem" },
 						isolation: "isolate",
 					}}
 					zIndex={2}

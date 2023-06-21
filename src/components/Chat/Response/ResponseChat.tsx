@@ -3,7 +3,7 @@ import Logo from "../../../assets/logo.png";
 import AnimationScope from "../../../utils/Message/AnimationScope";
 import { memo } from "react";
 
-export const CHAT_MAX_WIDTH = "85%";
+export const CHAT_MAX_WIDTH = "90%";
 
 export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 	return (
