@@ -51,7 +51,7 @@ function MessageInput() {
 					inputProps={{
 						enterKeyHint: ENTER_KEY_HINT,
 						type: INPUT_TYPE,
-						style: { paddingBlock: "0.6rem" },
+						style: { paddingBlock: "clamp(8px, 0.6rem, 14px)" },
 					}}
 					InputProps={{
 						disableUnderline: true,
@@ -62,7 +62,7 @@ function MessageInput() {
 						borderRadius: "200px",
 						boxSizing: "border-box",
 						flexGrow: 1,
-						paddingLeft: "1rem",
+						paddingLeft: "clamp(12px, 1rem, 26px)",
 						backgroundColor: "#F0F3F4",
 					}}
 					variant={"standard"}

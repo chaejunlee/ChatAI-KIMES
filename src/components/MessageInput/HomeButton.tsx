@@ -24,7 +24,7 @@ export const HomeButton = () => {
 				background: primaryColor,
 				borderRadius: "100vh",
 				aspectRatio: "1 / 1",
-				height: "2.5rem",
+				height: "100%",
 				placeItems: "center",
 				padding: 0,
 				minWidth: 0,

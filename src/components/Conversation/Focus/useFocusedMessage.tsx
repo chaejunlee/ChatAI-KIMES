@@ -11,8 +11,8 @@ export function useFocusedMessage(messageId: EntityId) {
 		if (isFocusedMessage && messageRef.current) {
 			messageRef.current.scrollIntoView({
 				behavior: "smooth",
-				block: "nearest",
-				inline: "start",
+				block: "start",
+				inline: "nearest",
 			});
 		}
 	}, [isFocusedMessage]);

@@ -19,8 +19,8 @@ export const StyledButton = styled("button")<IsSelectedInterface>`
 	min-width: 50px; !important;
 
 	margin: 0 !important;
-	padding-block: calc(0.6rem - ${Style("2px", "1px")});
-	padding-inline: calc(0.9rem - ${Style("2px", "1px")});
+	padding-block: clamp(6px, 0.5rem, 18px);
+	padding-inline: clamp(8px, 0.8rem, 22px);
 
 	background: ${Style(primaryColor, "white")};
 	color: ${Style("white", "#6a6a6a")};

@@ -11,7 +11,7 @@ export const Style =
 
 export const BasicMessage = styled("div")<isResponseInterface>`
 	position: relative;
-	padding: 0.5rem 0.7rem;
+	padding: clamp(6px, 0.5rem, 12px) clamp(10px, 0.75rem, 18px);
 	display: inline-block;
 
 	background: ${Style("#f6f8f8", "#12c670")};
