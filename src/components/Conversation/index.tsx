@@ -51,8 +51,8 @@ const ConversationWrapper = styled(Stack)`
 	padding-inline: clamp(10px, 2rem, 16px);
 	padding-top: 4rem;
 	padding-bottom: 1rem;
-	scroll-margin-block: 2rem;
-	scroll-padding-block: 2rem;
+	scroll-margin-block: clamp(20px, 2rem, 30px);
+	scroll-padding-block: clamp(20px, 2rem, 30px);
 `;
 
 const Beamworks = () => (
