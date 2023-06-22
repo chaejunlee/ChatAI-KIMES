@@ -44,11 +44,11 @@ function MessageSubtitle({ subtitle }: { subtitle: string }) {
 }
 
 const MessageButtons = styled(Stack)`
-	spacing: 0.5rem;
+	spacing: clamp(8px, 0.3rem, 16px);
 	flex-direction: row;
 	flex-wrap: wrap;
-	column-gap: 0.5rem;
-	row-gap: 0.5rem;
+	column-gap: clamp(8px, 0.3rem, 12px);
+	row-gap: clamp(8px, 0.3rem, 12px);
 	justify-content: flex-start;
 	align-items: flex-start;
 `;

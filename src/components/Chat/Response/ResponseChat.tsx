@@ -9,7 +9,7 @@ export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<AnimationScope>
 			<Stack
-				gap={"0.5rem"}
+				gap={"clamp(8px, 0.5rem, 16px)"}
 				maxWidth={CHAT_MAX_WIDTH}
 				sx={{
 					flexDirection: "row",
@@ -19,7 +19,11 @@ export const ResponseChat = ({ children }: { children: React.ReactNode }) => {
 				}}
 			>
 				<MemoizedAvatar />
-				<Stack gap={"0.5rem"} width={"100%"} alignItems={"start"}>
+				<Stack
+					gap={"clamp(12px, 0.5rem, 16px)"}
+					width={"100%"}
+					alignItems={"start"}
+				>
 					{children}
 				</Stack>
 			</Stack>
