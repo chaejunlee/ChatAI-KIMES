@@ -22,29 +22,29 @@ export const StyledButton = styled("button")<IsSelectedInterface>`
 	padding-block: clamp(6px, 0.5rem, 18px);
 	padding-inline: clamp(8px, 0.8rem, 22px);
 
-	background: ${Style(primaryColor, "white")};
-	color: ${Style("white", "#6a6a6a")};
+	background: ${Style("hsl(135 60% 75%)", "white")};
+	color: ${Style("hsl(135 20% 20%)", "#6a6a6a")};
 	text-align: start;
-	font-weight: ${Style("700", "500")};
+	font-weight: 500;
 	font-size: 1rem;
 
 	border-radius: 1.25rem;
-	border: ${Style("2px", "1px")} solid ${Style("#366344", "#cacfcf")};
+	border: clamp(1px, 0.1rem, 10px) solid ${Style("#366344", "#cacfcf")};
 
 	cursor: pointer;
 
 	transition: background 0.2s linear;
 
 	&:hover {
-		background: ${Style(primaryColor, "#f3f3f3")};
+		background: ${Style("hsl(135 50% 60%)", "#f3f3f3")};
 	}
 
 	&:focus {
-		background: ${Style(primaryColor, "#f3f3f3")};
+		background: ${Style("hsl(135 50% 60%)", "#f3f3f3")};
 	}
 
 	&:active {
-		background: ${Style(primaryColor, "#e1e1e1")};
+		background: ${Style("hsl(135 50% 60%)", "#e1e1e1")};
 	}
 `;
 
