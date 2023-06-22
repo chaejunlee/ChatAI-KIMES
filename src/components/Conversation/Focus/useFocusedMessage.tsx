@@ -6,15 +6,21 @@ import { useAppSelector } from "../../../store/store";
 export function useFocusedMessage(messageId: EntityId) {
 	const isFocusedMessage = useAppSelector(selectFocusedMessageId(messageId));
 	const messageRef = useRef<HTMLDivElement>(null);
+	const isKeyboardUp = useAppSelector(
+		(state) => state.keyboard.bottomPadding > 0
+	);
 
 	useEffect(() => {
-		if (isFocusedMessage && messageRef.current) {
-			messageRef.current.scrollIntoView({
-				behavior: "smooth",
-				block: "start",
-				inline: "nearest",
-			});
-		}
+		requestAnimationFrame(() => {
+			if (isFocusedMessage && messageRef.current) {
+				messageRef.current.style.scrollPaddingBottom = "80vh";
+				messageRef.current.scrollIntoView({
+					behavior: "smooth",
+					block: isKeyboardUp ? "nearest" : "start",
+					inline: "nearest",
+				});
+			}
+		});
 	}, [isFocusedMessage]);
 
 	return { isFocusedMessage, messageRef };
