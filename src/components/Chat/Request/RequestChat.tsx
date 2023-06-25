@@ -1,4 +1,5 @@
-import { Stack, Typography } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import RequestMessageType from "../../../Interface/Message/RequestMessageType";
 import AnimationScope from "../../../utils/Message/AnimationScope";
 import { CHAT_MAX_WIDTH } from "../Response/ResponseChat";

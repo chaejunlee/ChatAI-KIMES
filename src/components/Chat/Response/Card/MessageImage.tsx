@@ -1,8 +1,7 @@
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import styled from "@mui/system/styled";
-import { BasicResponseMessage } from "../BasicResponseMessage";
 import { imageResponseCardContentType } from "../../../../Interface/Message/ResponseMessageType";
-import { ANIMATION_TARGET } from "../../../../utils/Message/AnimationScope";
+import { BasicResponseMessage } from "../BasicResponseMessage";
 
 const StyledImg = styled("img")`
 	border-radius: 1rem;

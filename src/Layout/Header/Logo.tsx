@@ -1,6 +1,10 @@
-import { Box, ButtonBase, Modal, Slider, Typography } from "@mui/material";
-import ChatAIDE from "../../assets/ChatAI-B.png";
+import Box from "@mui/material/Box";
+import ButtonBase from "@mui/material/ButtonBase";
+import Modal from "@mui/material/Modal";
+import Slider from "@mui/material/Slider";
+import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import ChatAIDE from "../../assets/ChatAI-B.png";
 
 const html = document.querySelector("html");
 

@@ -1,7 +1,8 @@
-import { Avatar, Stack } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import { memo } from "react";
 import Logo from "../../../assets/logo.png";
 import AnimationScope from "../../../utils/Message/AnimationScope";
-import { memo } from "react";
 
 export const CHAT_MAX_WIDTH = "90%";
 

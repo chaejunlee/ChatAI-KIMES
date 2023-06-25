@@ -1,5 +1,5 @@
 import MenuIcon from "@mui/icons-material/Menu";
-import { IconButton } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 
 export default function MenuButton() {
 	return (

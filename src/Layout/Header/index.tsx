@@ -1,4 +1,5 @@
-import { Stack, styled } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import styled from "@mui/material/styles/styled";
 
 import HeaderButton from "./HeaderButton";
 import { Logo } from "./Logo";

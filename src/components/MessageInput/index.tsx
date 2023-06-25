@@ -1,15 +1,16 @@
-import { styled, TextField } from "@mui/material";
+import styled from "@mui/material/styles/styled";
+import TextField from "@mui/material/TextField";
 import { forwardRef, KeyboardEvent, memo, useEffect } from "react";
-import { SendComponent } from "./SendComponent";
-import { HomeButton } from "./HomeButton";
-import { useSendRequest } from "./useSendRequest";
-import { useAppDispatch, useAppSelector } from "../../store/store";
+import { addKeyboardPopupListener } from "../../store/keyboard/keyboardEventHandler";
+import { pushInputUp } from "../../store/keyboard/keyboardSlice";
 import {
 	hasMessageReachedBottom,
 	isMessageStatusLoading,
 } from "../../store/message/messageSlice";
-import { addKeyboardPopupListener } from "../../store/keyboard/keyboardEventHandler";
-import { pushInputUp } from "../../store/keyboard/keyboardSlice";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { HomeButton } from "./HomeButton";
+import { SendComponent } from "./SendComponent";
+import { useSendRequest } from "./useSendRequest";
 
 const ENTER_KEY_HINT = "send";
 const INPUT_TYPE = "search";

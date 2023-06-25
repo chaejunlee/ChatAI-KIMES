@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 import { ReactNode, useState } from "react";
 import { primaryColor } from "../../utils/color";
 

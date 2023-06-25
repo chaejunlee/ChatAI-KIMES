@@ -1,4 +1,5 @@
-import { Skeleton, Stack } from "@mui/material";
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
 import { ANIMATION_TARGET } from "../../utils/Message/AnimationScope";
 import ResponseChat from "../Chat/Response/ResponseChat";
 

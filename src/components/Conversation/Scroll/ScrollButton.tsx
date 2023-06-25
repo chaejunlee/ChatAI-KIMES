@@ -1,7 +1,8 @@
-import {
-	ArrowDownwardOutlined,
-	ArrowUpwardOutlined,
-} from "@mui/icons-material";
+import styled from "@emotion/styled";
+import ArrowDownwardOutlined from "@mui/icons-material/ArrowDownwardOutlined";
+import ArrowUpwardOutlined from "@mui/icons-material/ArrowUpwardOutlined";
+import IconButton from "@mui/material/IconButton";
+import { ReactElement } from "react";
 import {
 	getNextMessage,
 	getPreviousMessage,
@@ -9,9 +10,6 @@ import {
 	hasMessageReachedTop,
 } from "../../../store/message/messageSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
-import styled from "@emotion/styled";
-import { IconButton } from "@mui/material";
-import { ReactElement } from "react";
 
 export function ScrollButton() {
 	const dispatch = useAppDispatch();

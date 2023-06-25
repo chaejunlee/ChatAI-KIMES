@@ -1,11 +1,14 @@
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { keyframes, styled } from "@mui/material";
-
-export const rotate = keyframes`
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  `;
+import styled from "@mui/material/styles/styled";
 
 export const RotatingRefreshIcon = styled(RefreshIcon)`
-	animation: ${rotate} 1s linear infinite;
+	@keyframes rotate {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+	animation: rotate 1s linear infinite;
 `;

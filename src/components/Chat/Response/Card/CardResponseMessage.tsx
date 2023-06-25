@@ -1,12 +1,13 @@
-import { Stack, styled } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import styled from "@mui/material/styles/styled";
 import { EntityId } from "@reduxjs/toolkit";
 import { memo } from "react";
 import { ImageResponseCardType } from "../../../../Interface/Message/ResponseMessageType";
-import { BasicResponseMessage } from "../BasicResponseMessage";
-import { MessageImage } from "./MessageImage";
-import MessageButton from "./MessageButtons";
-import { useAppDispatch } from "../../../../store/store";
 import { pushButton } from "../../../../store/message/buttonsSlice";
+import { useAppDispatch } from "../../../../store/store";
+import { BasicResponseMessage } from "../BasicResponseMessage";
+import MessageButton from "./MessageButtons";
+import { MessageImage } from "./MessageImage";
 
 export interface CardResponseMessageTypeProps {
 	data: ImageResponseCardType;

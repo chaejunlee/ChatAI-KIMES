@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { memo, useMemo } from "react";
 import { ContentResponseMessageType } from "../../../Interface/Message/ResponseMessageType";
 import { containsUrl } from "../../../utils/chat";

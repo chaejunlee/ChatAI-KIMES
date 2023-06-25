@@ -1,12 +1,12 @@
-import { HomeRounded } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+import HomeRounded from "@mui/icons-material/HomeRounded";
+import IconButton from "@mui/material/IconButton";
+import { pullInputDown } from "../../store/keyboard/keyboardSlice";
 import {
 	DEFAULT_MESSAGE,
 	fetchResponse,
 } from "../../store/message/fetchResponse";
 import { useAppDispatch } from "../../store/store";
 import { primaryColor } from "../../utils/color";
-import { pullInputDown } from "../../store/keyboard/keyboardSlice";
 
 export const HomeButton = () => {
 	const dispatch = useAppDispatch();

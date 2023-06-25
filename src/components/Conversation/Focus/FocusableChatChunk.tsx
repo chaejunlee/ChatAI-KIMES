@@ -1,9 +1,9 @@
+import styled from "@mui/material/styles/styled";
 import { EntityId } from "@reduxjs/toolkit";
 import { memo } from "react";
+import { ANIMATION_TARGET } from "../../../utils/Message/AnimationScope";
 import { ChatChunk } from "../../Chat/ChatChunk";
 import { useFocusedMessage } from "./useFocusedMessage";
-import { styled } from "@mui/material";
-import { ANIMATION_TARGET } from "../../../utils/Message/AnimationScope";
 
 const setColor = (weight: number) => (props: { focusedStyle: boolean }) =>
 	props.focusedStyle ? `hsl(130 ${weight}% 70% / 0.6)` : "transparent";

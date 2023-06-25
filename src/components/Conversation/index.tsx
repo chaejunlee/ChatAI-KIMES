@@ -1,4 +1,7 @@
-import { Stack, styled } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import styled from "@mui/material/styles/styled";
+import BeamworksLogo from "../../assets/BeamworksLogo.png";
+import { pullInputDown } from "../../store/keyboard/keyboardSlice";
 import {
 	isMessageStatusLoading,
 	selectMessageIds,
@@ -8,8 +11,6 @@ import FocusableChatChunk from "./Focus/FocusableChatChunk";
 import { LoadingResponseMessage } from "./LoadingResponseMessage";
 import { ScrollButton } from "./Scroll/ScrollButton";
 import { useScrollToBottom } from "./Scroll/useScrollToBottom";
-import BeamworksLogo from "../../assets/BeamworksLogo.png";
-import { pullInputDown } from "../../store/keyboard/keyboardSlice";
 
 export default function Conversation() {
 	const isLoading = useAppSelector(isMessageStatusLoading);
