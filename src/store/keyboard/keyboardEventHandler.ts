@@ -1,19 +1,20 @@
-import store from "../store";
+import { AppDispatch } from "../store";
 import { handleKeyboardPopup, pushInputUp } from "./keyboardSlice";
 
 const root = document.getElementById("root");
 
-export const addKeyboardPopupListener = () => {
-	store.dispatch(pushInputUp());
-	visualViewport?.addEventListener("resize", mobileKeyboardHandler);
+export const addKeyboardPopupListener = () => (dispatch: AppDispatch) => {
+	dispatch(pushInputUp());
+	visualViewport?.addEventListener("resize", mobileKeyboardHandler(dispatch));
 };
 
 export const removeKeyboardPopupListener = () => {
-	visualViewport?.removeEventListener("resize", mobileKeyboardHandler);
+	visualViewport?.removeEventListener("resize", mobileKeyboardHandler(null));
 };
 
-const mobileKeyboardHandler = () => {
-	store.dispatch(handleKeyboardPopup());
+const mobileKeyboardHandler = (dispatch: AppDispatch | null) => () => {
+	if (!dispatch) return;
+	dispatch(handleKeyboardPopup());
 };
 
 export const addScrollEventListener = () => {

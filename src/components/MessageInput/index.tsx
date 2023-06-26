@@ -46,7 +46,7 @@ function MessageInput() {
 					}
 					onKeyDown={(e) => handleTextFieldKey(e)}
 					onFocus={() => {
-						addKeyboardPopupListener();
+						dispatch(addKeyboardPopupListener());
 						dispatch(pushInputUp);
 					}}
 					inputProps={{
